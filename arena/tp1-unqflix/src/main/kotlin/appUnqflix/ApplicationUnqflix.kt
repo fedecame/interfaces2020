@@ -1,11 +1,18 @@
 package appUnqflix
 
+import appUnqflix.appModel.UnqflixAppModel
+import appUnqflix.windows.WindowSeason
 import org.uqbar.arena.Application
 import org.uqbar.arena.windows.Window
 
-class ApplicationUnqflix : Application {
+class ApplicationUnqflix : Application() {
     override fun createMainWindow(): Window<*> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return WindowSeason(this, UnqflixAppModel().unaSerie)
     }
+
+}
+
+fun main(){
+    ApplicationUnqflix().start()
 }
 
