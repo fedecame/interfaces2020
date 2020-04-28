@@ -11,6 +11,7 @@ class SeasonAppModel (var season: Season){
     var poster: String = ""
     var chapters = initChapters()
     var cantchapter : Int = cantidadChapter()
+   var selectSeason : ChaptersAppModel? = null
 
     init {
         this.id = season.id
@@ -20,4 +21,9 @@ class SeasonAppModel (var season: Season){
     fun initChapters(){}
 
     fun cantidadChapter(): Int= season.chapters.size
+
+//    fun elegirSeason(seasonSeleccionada : SeasonAppModel): String{
+////        selectSeason?.numeroPrueba =
+//        return "algo"
+//    }
 }
