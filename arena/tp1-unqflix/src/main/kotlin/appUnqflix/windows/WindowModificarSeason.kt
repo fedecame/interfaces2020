@@ -20,7 +20,6 @@ class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<S
 
         TextBox(p0) with {
 
-
             fontSize = 10
             width = 200
             alignLeft()  // right, left, center
