@@ -6,7 +6,7 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 class SeasonAppModel (var season: Season){
     var id: String = ""
-    var title: String = ""
+    var tituloSeason: String = ""
     var description: String = ""
     var poster: String = ""
     var chapters = initChapters()
@@ -15,7 +15,7 @@ class SeasonAppModel (var season: Season){
 
     init {
         this.id = season.id
-        this.title = season.title
+        this.tituloSeason = season.title
     }
 
     fun initChapters(){}

@@ -11,7 +11,6 @@ class UnqflixAppModel {
 
     var unaSerie = initSeries().first()
 
-
         fun initSeries() = system.series.map { SerieAppModel(it) }.toMutableList()
 
 }
