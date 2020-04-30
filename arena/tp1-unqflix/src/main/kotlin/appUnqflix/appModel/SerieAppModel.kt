@@ -30,20 +30,13 @@ class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
     }
 
     fun initSeasons() = serie.seasons.map { SeasonAppModel(it) }.toMutableList()
-    //
-//        fun elegirSeason(seasonSeleccionada : SeasonAppModel){
-////        selectSeason?.numeroPrueba =
-//  }
+
     fun agregarSeason(title : String, description : String, poster : String): SeasonAppModel {
         val seasonAppModel = appModelCreator.createSeason(this.id, title, description, poster)
-//        this.initSeasons()
+
         myseasons.add(seasonAppModel)
         return seasonAppModel
     }
-
-//    fun modificarSeason(){
-//
-//    }
 
 
 }
