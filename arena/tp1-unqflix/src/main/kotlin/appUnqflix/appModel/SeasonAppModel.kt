@@ -17,6 +17,7 @@ class SeasonAppModel (var season: Season){
         this.id = season.id
         this.tituloSeason = season.title
         this.description = season.description
+        this.poster = season.poster
     }
 
     fun initChapters(){}

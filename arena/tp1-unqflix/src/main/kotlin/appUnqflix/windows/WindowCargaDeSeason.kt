@@ -28,7 +28,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
             alignLeft()  // right, left, center
 
             bgColor = Color.orange
-           bindTo("titulo")
+           bindTo("tituloSeason")
         }
         Label(p0) with {
             alignLeft()
