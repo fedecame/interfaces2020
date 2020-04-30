@@ -7,7 +7,7 @@ import org.uqbar.commons.model.annotations.Observable
 import support.getById
 
 @Observable
-class SerieAppModel(val serie: Serie) {
+class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
     var id: String = ""
     var title: String = ""
     var myseasons = initSeasons()

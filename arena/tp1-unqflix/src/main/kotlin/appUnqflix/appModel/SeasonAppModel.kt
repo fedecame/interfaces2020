@@ -32,4 +32,7 @@ class SeasonAppModel (var season: Season){
 ////        selectSeason?.numeroPrueba =
 //        return "algo"
 //    }
+    fun agregaChapter() {
+
+    }
 }
