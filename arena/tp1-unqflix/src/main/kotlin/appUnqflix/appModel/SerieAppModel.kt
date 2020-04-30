@@ -1,5 +1,9 @@
 package appUnqflix.appModel
 
+import data.idGenerator
+import domain.ContentState
+import domain.Season
+
 import domain.Serie
 import org.uqbar.commons.model.annotations.Observable
 
@@ -12,9 +16,15 @@ class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
     var tituloSeason = ""
     var descripcion = ""
     var poster = ""
+
     var appModelCreator = unqflixAppModel
 
+    var cantSeasons = 0
+    var state : ContentState? = null
+
+
     init {
+
         this.id = serie.id
         this.title = serie.title
     }
@@ -34,5 +44,6 @@ class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
 //    fun modificarSeason(){
 //
 //    }
+
 
 }

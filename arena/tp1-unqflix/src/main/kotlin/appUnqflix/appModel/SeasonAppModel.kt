@@ -1,13 +1,18 @@
 package appUnqflix.appModel
 
+
 import domain.Chapter
+
 import domain.Season
+
 import org.uqbar.commons.model.annotations.Observable
 
 @Observable
 class SeasonAppModel (var season: Season){
     var id: String = ""
+
     var tituloSeason: String = ""
+
     var description: String = ""
     var poster: String = ""
     var chapters = mutableListOf<ChaptersAppModel>()
@@ -19,7 +24,9 @@ class SeasonAppModel (var season: Season){
         this.tituloSeason = season.title
         this.description = season.description
         this.poster = season.poster
+
         initChapters(season.chapters)
+
     }
 
     fun initChapters(chapters: MutableList<Chapter>){

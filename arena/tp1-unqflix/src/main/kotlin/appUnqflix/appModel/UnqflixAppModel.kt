@@ -9,9 +9,10 @@ import org.uqbar.commons.model.annotations.Observable
 class UnqflixAppModel {
     var system : UNQFlix = getUNQFlix()
     var myseries = initSeries()
-    var unaSerie = myseries.last()
+
 
     fun initSeries() = system.series.map { SerieAppModel(it, this) }.toMutableList()
+
 
     fun createSerie(title: String, description: String, poster: String): SerieAppModel {
         var serie = Serie(
@@ -35,6 +36,9 @@ class UnqflixAppModel {
         system.addSeason(serieId, season)
         return SeasonAppModel(season)
     }
+
+
+
 
     fun createChapter(serieId: String, seasonId: String, title: String,
                       description: String, duration: Int, video: String, thumbnail: String): ChaptersAppModel {
