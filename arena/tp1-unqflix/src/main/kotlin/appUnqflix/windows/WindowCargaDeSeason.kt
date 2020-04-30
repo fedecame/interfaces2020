@@ -71,7 +71,9 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
             text = "Cancel"
             color = Color.BLUE
             fontSize = 10
-            onClick(Action { WindowsDePrueba(owner,modelObject.selected!!).open() })
+            onClick(Action {
+                close()
+            })
         }
 
     }

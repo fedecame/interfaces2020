@@ -4,7 +4,7 @@ import domain.Chapter
 import org.uqbar.commons.model.annotations.Observable
 
 @Observable
-class ChaptersAppModel (var chapter : Chapter) {
+class ChaptersAppModel (val chapter : Chapter) {
     var id: String = ""
     var title: String = ""
     var duration: Int = 0
