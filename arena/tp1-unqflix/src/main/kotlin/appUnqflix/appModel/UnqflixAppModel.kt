@@ -2,9 +2,7 @@ package appUnqflix.appModel
 
 import data.getUNQFlix
 import data.idGenerator
-import domain.Serie
-import domain.UNQFlix
-import domain.Unavailable
+import domain.*
 import org.uqbar.commons.model.annotations.Observable
 
 @Observable
@@ -27,4 +25,28 @@ class UnqflixAppModel {
         return SerieAppModel(serie, this)
     }
 
+    fun createSeason(serie: SerieAppModel, title: String, description: String, poster: String): SeasonAppModel {
+        var season = Season(
+            idGenerator.nextSeasonId(),
+            title,
+            description,
+            poster
+        )
+        system.addSeason(serie.id, season)
+        return SeasonAppModel(season)
+    }
+
+    fun createChapter(serie: SerieAppModel, season: SeasonAppModel, title: String,
+                      description: String, duration: Int, video: String, thumbnail: String): ChaptersAppModel {
+        var chapter = Chapter(
+            idGenerator.nextChapterId(),
+            title,
+            description,
+            duration,
+            video,
+            thumbnail
+        )
+        system.addChapter(serie.id, season.id, chapter)
+        return ChaptersAppModel(chapter)
+    }
 }
