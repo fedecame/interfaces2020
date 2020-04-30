@@ -33,10 +33,10 @@ class SerieAppModel(val serie: Serie) {
     }
 
     fun crearSeason(tituloSeason: String,descripcion: String, poster: String): Season{
-        var numberId = myseasons.size+1
-        var id = "sea_$numberId"
+//        var numberId = myseasons.size+1
+//        var id = "sea_$numberId"
 
-        return Season(id,tituloSeason,descripcion,poster)
+        return Season(idGenerator.nextSeasonId(),tituloSeason,descripcion,poster)
     }
 
     fun modificarSeason(){
