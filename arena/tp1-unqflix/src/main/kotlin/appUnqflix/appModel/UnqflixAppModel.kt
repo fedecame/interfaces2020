@@ -34,7 +34,7 @@ class UnqflixAppModel {
             poster
         )
         system.addSeason(serieId, season)
-        return SeasonAppModel(season)
+        return SeasonAppModel(season, this, serieId)
     }
 
 

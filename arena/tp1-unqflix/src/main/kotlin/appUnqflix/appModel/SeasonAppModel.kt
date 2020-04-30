@@ -8,11 +8,9 @@ import domain.Season
 import org.uqbar.commons.model.annotations.Observable
 
 @Observable
-class SeasonAppModel (var season: Season){
+class SeasonAppModel (var season: Season, val unqflixAppModel: UnqflixAppModel, val serieId: String){
     var id: String = ""
-
     var tituloSeason: String = ""
-
     var description: String = ""
     var poster: String = ""
     var chapters = mutableListOf<ChaptersAppModel>()
@@ -26,7 +24,6 @@ class SeasonAppModel (var season: Season){
         this.poster = season.poster
 
         initChapters(season.chapters)
-
     }
 
     fun initChapters(chapters: MutableList<Chapter>){
@@ -39,7 +36,13 @@ class SeasonAppModel (var season: Season){
 ////        selectSeason?.numeroPrueba =
 //        return "algo"
 //    }
-    fun agregaChapter() {
+    fun agregarChapter(title: String, description: String, duration: Int, video: String,
+                       thumbnail: String): ChaptersAppModel {
+        val chapterAppModel = unqflixAppModel.createChapter(serieId, this.id, title,
+            description, duration, video, thumbnail)
+        this.chapters.add(chapterAppModel)
+//        this.initChapters(season.chapters)
 
+        return chapterAppModel
     }
 }
