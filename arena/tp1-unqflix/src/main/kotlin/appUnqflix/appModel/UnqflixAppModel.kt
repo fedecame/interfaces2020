@@ -25,18 +25,18 @@ class UnqflixAppModel {
         return SerieAppModel(serie, this)
     }
 
-    fun createSeason(serie: SerieAppModel, title: String, description: String, poster: String): SeasonAppModel {
+    fun createSeason(serieId: String, title: String, description: String, poster: String): SeasonAppModel {
         var season = Season(
             idGenerator.nextSeasonId(),
             title,
             description,
             poster
         )
-        system.addSeason(serie.id, season)
+        system.addSeason(serieId, season)
         return SeasonAppModel(season)
     }
 
-    fun createChapter(serie: SerieAppModel, season: SeasonAppModel, title: String,
+    fun createChapter(serieId: String, seasonId: String, title: String,
                       description: String, duration: Int, video: String, thumbnail: String): ChaptersAppModel {
         var chapter = Chapter(
             idGenerator.nextChapterId(),
@@ -46,7 +46,7 @@ class UnqflixAppModel {
             video,
             thumbnail
         )
-        system.addChapter(serie.id, season.id, chapter)
+        system.addChapter(serieId, seasonId, chapter)
         return ChaptersAppModel(chapter)
     }
 }
