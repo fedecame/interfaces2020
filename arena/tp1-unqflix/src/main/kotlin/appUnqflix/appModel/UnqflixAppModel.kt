@@ -8,14 +8,20 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 class UnqflixAppModel {
     var system : UNQFlix = getUNQFlix()
-    var myseries = initSeries()
+    var myseries = mutableListOf<SerieAppModel>()
+    var selectedSerie : SerieAppModel? = null
 
 
-    fun initSeries() = system.series.map { SerieAppModel(it, this) }.toMutableList()
+    init {
+        this.initSeries()
+    }
 
+    fun initSeries() {
+        myseries = system.series.map { SerieAppModel(it, this) }.toMutableList()
+    }
 
     fun createSerie(title: String, description: String, poster: String): SerieAppModel {
-        var serie = Serie(
+        val serie = Serie(
             idGenerator.nextSerieId(),
             title,
             description,
@@ -27,22 +33,19 @@ class UnqflixAppModel {
     }
 
     fun createSeason(serieId: String, title: String, description: String, poster: String): SeasonAppModel {
-        var season = Season(
+        val season = Season(
             idGenerator.nextSeasonId(),
             title,
             description,
             poster
         )
         system.addSeason(serieId, season)
-        return SeasonAppModel(season)
+        return SeasonAppModel(season, this, serieId)
     }
-
-
-
 
     fun createChapter(serieId: String, seasonId: String, title: String,
                       description: String, duration: Int, video: String, thumbnail: String): ChaptersAppModel {
-        var chapter = Chapter(
+        val chapter = Chapter(
             idGenerator.nextChapterId(),
             title,
             description,
