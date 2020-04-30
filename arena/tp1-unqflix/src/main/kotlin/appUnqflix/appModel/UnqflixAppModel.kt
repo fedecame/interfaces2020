@@ -8,7 +8,9 @@ import org.uqbar.commons.model.annotations.Observable
 class UnqflixAppModel {
 
         var system : UNQFlix = getUNQFlix()
+
         var myseries = initSeries()
+
 
     var unaSerie = initSeries().first()
 

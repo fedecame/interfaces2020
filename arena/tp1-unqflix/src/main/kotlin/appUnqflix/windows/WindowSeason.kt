@@ -29,7 +29,9 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
 
         table<SeasonAppModel>(p0)with {
             bindItemsTo("myseasons")
-//            bindSelectionTo("selected")
+
+            bindSelectionTo("selected")
+
 
             column {
                 title = "#"
@@ -39,7 +41,9 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
             column {
                 title = "Title"
                 fixedSize = 100
-                bindContentsTo("title")
+
+                bindContentsTo("tituloSeason")
+
             }
             column {
                 title = "Chapters"
@@ -52,19 +56,31 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
             text = "Add new season"
             color = Color.green
             fontSize = 10
+
+            onClick(Action {
+                WindowCargaDeSeason(owner,modelObject).open()
+//                modelObject.initSeasons()
+            })
+
         }
 
         Button(p0) with {
             text = "Modified Season"
             color = Color.PINK
             fontSize = 10
+
+            onClick(Action { WindowModificarSeason(owner,modelObject.selected!!).open() })
+
         }
 
         Button(p0) with {
             text = "Show chapters"
             color = Color.BLUE
             fontSize = 10
-            onClick(Action { WindowsDePrueba(owner,modelObject).open() })
+
+            onClick(Action { WindowsDePrueba(owner,modelObject.selected!!).open() })
         }
+
+
     }
 }
