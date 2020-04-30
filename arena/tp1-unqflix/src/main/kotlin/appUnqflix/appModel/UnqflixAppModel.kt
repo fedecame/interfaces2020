@@ -9,7 +9,7 @@ class UnqflixAppModel {
 
         var system : UNQFlix = getUNQFlix()
 
-    var unaSerie = initSeries().first()
+    var unaSerie = initSeries().last()
 
         fun initSeries() = system.series.map { SerieAppModel(it) }.toMutableList()
 
