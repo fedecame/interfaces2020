@@ -3,12 +3,12 @@ package appUnqflix.appModel
 import data.idGenerator
 import domain.ContentState
 import domain.Season
+
 import domain.Serie
 import org.uqbar.commons.model.annotations.Observable
-import support.getById
 
 @Observable
-class SerieAppModel(val serie: Serie) {
+class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
     var id: String = ""
     var title: String = ""
     var myseasons = initSeasons()
@@ -16,8 +16,12 @@ class SerieAppModel(val serie: Serie) {
     var tituloSeason = ""
     var descripcion = ""
     var poster = ""
+
+    var appModelCreator = unqflixAppModel
+
     var cantSeasons = 0
     var state : ContentState? = null
+
 
     init {
 
@@ -30,22 +34,16 @@ class SerieAppModel(val serie: Serie) {
 //        fun elegirSeason(seasonSeleccionada : SeasonAppModel){
 ////        selectSeason?.numeroPrueba =
 //  }
-    fun agregarSeason(tituloSeason : String, descripcion : String, poster : String) {
-        var nuevaSeason = crearSeason(tituloSeason,descripcion,poster)
-        serie.addSeason(nuevaSeason)
-        myseasons.add(SeasonAppModel(nuevaSeason))
+    fun agregarSeason(title : String, description : String, poster : String): SeasonAppModel {
+        val seasonAppModel = appModelCreator.createSeason(this.id, title, description, poster)
+//        this.initSeasons()
+        myseasons.add(seasonAppModel)
+        return seasonAppModel
     }
 
-    fun crearSeason(tituloSeason: String,descripcion: String, poster: String): Season{
-//        var numberId = myseasons.size+1
-//        var id = "sea_$numberId"
-
-        return Season(idGenerator.nextSeasonId(),tituloSeason,descripcion,poster)
-    }
-
-    fun modificarSeason(){
-
-    }
+//    fun modificarSeason(){
+//
+//    }
 
 
 }
