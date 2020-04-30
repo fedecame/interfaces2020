@@ -69,7 +69,7 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
             text = "Show chapters"
             color = Color.BLUE
             fontSize = 10
-            onClick(Action { WindowsDePrueba(owner,modelObject.selected!!).open() })
+            onClick(Action { WindowChapters(thisWindow, modelObject.selected!!).open() })
         }
 
     }
