@@ -1,11 +1,8 @@
 package appUnqflix.appModel
 
 import data.idGenerator
-import domain.ContentState
-import domain.Season
+import domain.*
 
-import domain.Serie
-import domain.Unavailable
 import org.uqbar.commons.model.annotations.Observable
 
 @Observable
@@ -21,6 +18,7 @@ class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
 
     var cantSeasons = 0
     var state : ContentState = Unavailable()
+    //var traducido = traducir()
 
 
     init {
@@ -45,20 +43,9 @@ class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
     fun agregarSeason(title : String, description : String, poster : String): SeasonAppModel {
         val seasonAppModel = unqflixAppModel.createSeason(this.id, title, description, poster)
         myseasons.add(seasonAppModel)
-//        this.initSeasons()
 
         return seasonAppModel
     }
-
-    //
-//        fun elegirSeason(seasonSeleccionada : SeasonAppModel){
-////        selectSeason?.numeroPrueba =
-//  }
-
-
-//    fun modificarSeason(){
-//
-//    }
 
 
 }
