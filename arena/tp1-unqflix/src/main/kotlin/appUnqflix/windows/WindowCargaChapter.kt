@@ -67,6 +67,7 @@ class WindowCargaChapter(owner: WindowOwner, seasonAppModel: SeasonAppModel) : S
                     modelObject.videoNC,
                     modelObject.thumbnailNC
                 )
+                thisWindow.limpiarValoresNuevos()
                 thisWindow.close()
             }
         }
@@ -74,8 +75,17 @@ class WindowCargaChapter(owner: WindowOwner, seasonAppModel: SeasonAppModel) : S
         Button(mainPanel) with {
             caption = "Cancel"
             onClick {
+                thisWindow.limpiarValoresNuevos()
                 thisWindow.close()
             }
         }
+    }
+
+    fun limpiarValoresNuevos() {
+        modelObject.titleNC = ""
+        modelObject.descriptionNC = ""
+        modelObject.durationNC = 0
+        modelObject.videoNC = ""
+        modelObject.thumbnailNC = ""
     }
 }

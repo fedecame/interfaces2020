@@ -15,7 +15,9 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
     }
 
     override fun createFormPanel(p0: Panel) {
-    title = "agregar Season"
+        title = "agregar Season"
+        setMinHeight(400)
+        setMinWidth(200)
 
         Label(p0) with {
             alignLeft()
@@ -38,7 +40,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
         KeyWordTextArea(p0) with {
             height = 200
             bgColor = Color.orange
-            bindTo("descripcion")
+            bindTo("descripcionSeason")
 //            bindColorTo("blue")
 //            bindEnabledTo("enabled")
         }
@@ -54,7 +56,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
             alignLeft()  // right, left, center
 
             bgColor = Color.orange
-            bindTo("poster")
+            bindTo("posterSeason")
         }
 
         Button(p0) with {
@@ -64,6 +66,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
             onClick(Action {
                 agregarSeason()
 
+                limpiarValoresNuevos()
                 close() })
         }
 
@@ -72,6 +75,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
             color = Color.BLUE
             fontSize = 10
             onClick(Action {
+                limpiarValoresNuevos()
                 close()
             })
         }
@@ -80,6 +84,12 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
 
 
     fun agregarSeason() {
-        modelObject.agregarSeason(modelObject.tituloSeason, modelObject.descripcion, modelObject.poster)
+        modelObject.agregarSeason(modelObject.tituloSeason, modelObject.descripcionSeason, modelObject.posterSeason)
+    }
+
+    fun limpiarValoresNuevos() {
+        modelObject.tituloSeason = ""
+        modelObject.descripcionSeason = ""
+        modelObject.posterSeason = ""
     }
 }
