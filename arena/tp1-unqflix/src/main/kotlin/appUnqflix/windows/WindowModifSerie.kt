@@ -30,6 +30,7 @@ class WindowModifSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
 //
 //            bgColor = Color.orange
 //            bindTo("falta var")
+                    bindToModel(thisWindow.modelObject.selectedSerie!!, "title")
                 }
 
             }
@@ -46,6 +47,7 @@ class WindowModifSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
 //
 //            bgColor = Color.orange
 //            bindTo("falta var")
+                    bindToModel(thisWindow.modelObject.selectedSerie!!, "poster")
                 }
             }
         }
@@ -59,28 +61,41 @@ class WindowModifSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
                 }
 
                 KeyWordTextArea(it) with {
+                    this.isMultiLine = true
                     height = 100
-                    width = 150
+                    width = 208
+//                    this.selectFinalLine()
 //            bgColor = Color.orange
 //            bindTo("falta var")
 //            bindColorTo("blue")
 //            bindEnabledTo("enabled")
+                    bindToModel(thisWindow.modelObject.selectedSerie!!, "descripcion")
                 }
             }
 
             Panel(it) with {
-                asHorizontal()
                 Label(it) with {
-                    text = "State"
-                    alignLeft()
+                    text = ""
+                    setHeight(13)
                 }
 
-                CheckBox(it) with {
-                    //            bindTo("selected")
+                Panel(it) with {
+                    asHorizontal()
+                    Label(it) with {
+                        text = "Enabled"
+                        setWidth(55)
+//                    alignLeft()
+                    }
+
+                    CheckBox(it) with {
+                        //            bindTo("selected")
 //            bindEnabledTo("disabled")
 
-                }
+                        //OJO aca hay q ver que tipo de dato guardamos en "state" del SerieAppModel y probablemente necesitemos un Transformer (de arena)
+//                    bindToModel(thisWindow.modelObject.selectedSerie!!, "state")
+                    }
 
+                }
             }
         }
 
@@ -124,11 +139,19 @@ class WindowModifSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
             Button(it) with {
                 text = "Accept"
                 fontSize = 10
+                onClick {
+                    thisWindow.close()
+                }
             }
 
             Button(it) with {
                 text = "Cancel"
                 fontSize = 10
+                onClick {
+                    //setear los valores que tenia antes de editarse
+                    // para eso hay q hacer un SerieAppModel temporal
+                    thisWindow.close()
+                }
             }
         }
 
