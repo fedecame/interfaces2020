@@ -8,14 +8,13 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 class UnqflixAppModel {
     var system : UNQFlix = getUNQFlix()
-<<<<<<< HEAD
-    var myseries = initSeries()
+
     var serieSearch : String = ""
 
-=======
+
     var myseries = mutableListOf<SerieAppModel>()
     var selectedSerie : SerieAppModel? = null
->>>>>>> cab2922d3a5df92579fde0c04a2183c2e0fe30f8
+
 
 
     init {
@@ -62,7 +61,7 @@ class UnqflixAppModel {
         system.addChapter(serieId, seasonId, chapter)
         return ChaptersAppModel(chapter)
     }
-<<<<<<< HEAD
+
 
     fun buscarSeries(){
         var seriesEncontradas = listOf<Serie>()
@@ -72,6 +71,6 @@ class UnqflixAppModel {
 
     }
 }
-=======
-}
->>>>>>> cab2922d3a5df92579fde0c04a2183c2e0fe30f8
+
+
+
