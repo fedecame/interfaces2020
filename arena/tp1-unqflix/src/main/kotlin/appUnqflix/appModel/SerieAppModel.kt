@@ -14,7 +14,7 @@ class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
     var state : ContentState = Unavailable() // esto tmb se podria representar con un AppModel..preguntar si se justifica.
     var categories = mutableListOf<CategoryAppModel>()
     var myseasons = mutableListOf<SeasonAppModel>()
-    var relatedContet = mutableListOf<Content>() // preguntar si se justifica crear un ContentAppModel (similar a CategoryAppModel)
+    var relatedContent = mutableListOf<Content>() // preguntar si se justifica crear un ContentAppModel (similar a CategoryAppModel)
 
     var selected : SeasonAppModel? = null
 
@@ -32,7 +32,7 @@ class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
         this.poster = serie.poster
         this.state = serie.state
 
-        this.relatedContet = serie.relatedContent
+        this.relatedContent = serie.relatedContent
         this.initCategories()
         this.initSeasons()
     }

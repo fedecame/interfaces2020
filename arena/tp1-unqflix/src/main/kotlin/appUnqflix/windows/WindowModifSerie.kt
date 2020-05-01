@@ -92,6 +92,9 @@ class WindowModifSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
 //            bindEnabledTo("disabled")
 
                         //OJO aca hay q ver que tipo de dato guardamos en "state" del SerieAppModel y probablemente necesitemos un Transformer (de arena)
+
+
+
 //                    bindToModel(thisWindow.modelObject.selectedSerie!!, "state")
                     }
 
