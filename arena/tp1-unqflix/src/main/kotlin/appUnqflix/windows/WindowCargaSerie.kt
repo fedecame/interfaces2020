@@ -60,7 +60,7 @@ class WindowCargaSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
 
                 KeyWordTextArea(it) with {
                     height = 100
-                    width = 150
+                    width = 208
 //            bgColor = Color.orange
 //            bindTo("falta var")
 //            bindColorTo("blue")
@@ -69,18 +69,26 @@ class WindowCargaSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
             }
 
             Panel(it) with {
-                asHorizontal()
                 Label(it) with {
-                    text = "State"
-                    alignLeft()
+                    text = ""
+                    setHeight(13)
                 }
 
-                CheckBox(it) with {
-                    //            bindTo("selected")
+                Panel(it) with {
+                    asHorizontal()
+                    Label(it) with {
+                        text = "Enabled"
+                        setWidth(55)
+//                    alignLeft()
+                    }
+
+                    CheckBox(it) with {
+                        //            bindTo("selected")
 //            bindEnabledTo("disabled")
 
-                }
+                    }
 
+                }
             }
         }
 
