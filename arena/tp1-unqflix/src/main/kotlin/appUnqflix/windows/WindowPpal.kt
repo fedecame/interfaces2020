@@ -27,7 +27,7 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
 
         table<SerieAppModel>(p0) with {
             bindItemsTo("myseries")
-//            bindSelectionTo("selected")
+            bindSelectionTo("selectedSerie")
 
             column {
                 title = "#"
@@ -66,7 +66,10 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
             Button(p0) with {
                 text = "Show Serie"
                 fontSize = 10
-
+                onClick {
+//                    thisWindow.close()
+                    WindowSeason(thisWindow, modelObject.selectedSerie!!).open()
+                }
             }
         }
     }
