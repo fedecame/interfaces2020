@@ -78,7 +78,10 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
             color = Color.BLUE
             fontSize = 10
 
-            onClick(Action { WindowChapters(thisWindow, modelObject.selected!!).open() })
+            onClick(Action {
+                thisWindow.close()
+                WindowChapters(thisWindow, modelObject.selected!!).open()
+            })
 
         }
 

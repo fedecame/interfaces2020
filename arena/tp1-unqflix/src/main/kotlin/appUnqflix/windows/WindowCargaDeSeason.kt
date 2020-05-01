@@ -87,6 +87,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
         modelObject.agregarSeason(modelObject.tituloSeason, modelObject.descripcionSeason, modelObject.posterSeason)
     }
 
+    // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
     fun limpiarValoresNuevos() {
         modelObject.tituloSeason = ""
         modelObject.descripcionSeason = ""
