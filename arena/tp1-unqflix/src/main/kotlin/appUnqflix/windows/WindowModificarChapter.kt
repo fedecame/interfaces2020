@@ -55,8 +55,11 @@ class WindowModificarChapter(owner: WindowOwner, seasonAppModel: SeasonAppModel)
         Button(mainPanel) with {
             caption = "Cancel"
             onClick {
-                modelObject.selectedChapter = tempChapter
-                // Corregir, no funciona bien el cancel.
+                modelObject.selectedChapter!!.title = tempChapter.title
+                modelObject.selectedChapter!!.description = tempChapter.description
+                modelObject.selectedChapter!!.duration = tempChapter.duration
+                modelObject.selectedChapter!!.thumbnail = tempChapter.thumbnail
+                modelObject.selectedChapter!!.video = tempChapter.video
                 thisWindow.close()
             }
         }
