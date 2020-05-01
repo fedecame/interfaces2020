@@ -7,6 +7,7 @@ import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
+import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.lacar.ui.model.Action
@@ -18,12 +19,40 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
 
     override fun createFormPanel(p0: Panel) {
         title = "UnqFlix"
-        Label(p0) with {
-            text = "Search:"
+
+        Panel(p0) with {
+            asHorizontal()
+            Label(it) with {
+                text = "Search:"
+            }
+
+            TextBox(it) with {
+
+                fontSize = 10
+                width = 100
+                alignLeft()  // right, left, center
+
+
+           bindTo("serieSearch")
+
+            }
+
+            Button(it) with {
+                text = "Buscar"
+                fontSize = 10
+                width =70
+                onClick(Action {
+                    buscarSeries()
+                })
+            }
         }
+
         Label(p0) with {
             text = "Series:"
+
         }
+
+
 
         table<SerieAppModel>(p0) with {
             bindItemsTo("myseries")
@@ -42,7 +71,8 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
             column {
                 title = "Seasons"
                 fixedSize = 100
-                bindContentsTo("cantSeasons")
+//                bindContentsTo("cantSeasons")
+                bindContentsTo("myseasons.size")
             }
             column {
                 title = "State"
@@ -69,5 +99,9 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
 
             }
         }
+    }
+
+    fun buscarSeries(){
+        modelObject.buscarSeries()
     }
 }
