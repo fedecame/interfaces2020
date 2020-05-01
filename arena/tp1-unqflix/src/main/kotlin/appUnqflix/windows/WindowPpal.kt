@@ -41,6 +41,7 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 text = "Buscar"
                 fontSize = 10
                 width =70
+                setAsDefault()
                 onClick(Action {
                     buscarSeries()
                 })
@@ -85,7 +86,7 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 onClick(Action { WindowCargaSerie(owner,modelObject).open() })
             }
             Button(p0) with {
-                text = "Modified Serie"
+                text = "Modify Serie"
                 fontSize = 10
                 onClick(Action { WindowModifSerie(owner,modelObject).open() })
             }

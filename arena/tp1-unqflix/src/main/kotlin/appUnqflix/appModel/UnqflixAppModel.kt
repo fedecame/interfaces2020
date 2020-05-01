@@ -8,13 +8,9 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 class UnqflixAppModel {
     var system : UNQFlix = getUNQFlix()
-
     var serieSearch : String = ""
-
-
     var myseries = mutableListOf<SerieAppModel>()
     var selectedSerie : SerieAppModel? = null
-
 
 
     init {
