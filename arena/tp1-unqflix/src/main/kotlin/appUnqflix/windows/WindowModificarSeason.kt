@@ -70,7 +70,7 @@ class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<S
             text = "Cancel"
             color = Color.BLUE
             fontSize = 10
-            onClick(Action { WindowsDePrueba(owner ,modelObject).open() })
+            onClick(Action { close() })
         }
     }
 

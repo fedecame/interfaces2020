@@ -14,17 +14,15 @@ class WindowChapters (owner: WindowOwner, seasonAppModel: SeasonAppModel) : Simp
     override fun addActions(actionsPanel: Panel?) {
     }
     override fun createFormPanel(mainPanel: Panel) {
-        var title = "${modelObject.tituloSeason}'s Chapters"
-        title = title
+        this.title = "${modelObject.tituloSeason}'s Chapters"
         Label (mainPanel) with {
             text = title
         }
         table<ChaptersAppModel>(mainPanel) {
             bindItemsTo("chapters")
             bindSelectionTo("selectedChapter")
-            visibleRows = 7
             column {
-                title = "ID"
+                title = "#"
                 fixedSize = 30
                 bindContentsTo("id")
             }
@@ -55,7 +53,7 @@ class WindowChapters (owner: WindowOwner, seasonAppModel: SeasonAppModel) : Simp
 //                bindEnabledTo("selectedChapter")
                 onClick {
                     //abrir ventana para editar chapter
-
+                    WindowModificarChapter(thisWindow, thisWindow.modelObject).open()
                 }
             }
             Button(it) with {
