@@ -9,6 +9,7 @@ import org.uqbar.arena.widgets.Label
 import org.uqbar.arena.widgets.Panel
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
+import org.uqbar.lacar.ui.model.Action
 import java.awt.Color
 
 class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<UnqflixAppModel>(owner,model) {
@@ -51,10 +52,12 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
             Button(p0) with {
                 text = "Add new Serie"
                 fontSize = 10
+                onClick(Action { WindowCargaSerie(owner,modelObject).open() })
             }
             Button(p0) with {
                 text = "Modified Serie"
                 fontSize = 10
+                onClick(Action { WindowModifSerie(owner,modelObject).open() })
             }
             Button(p0) with {
                 text = "Delete Serie"
