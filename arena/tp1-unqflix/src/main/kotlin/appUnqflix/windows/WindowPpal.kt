@@ -29,7 +29,7 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
             TextBox(it) with {
 
                 fontSize = 10
-                width = 100
+                width = 300
                 alignLeft()  // right, left, center
 
 
@@ -50,7 +50,7 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
 
         Label(p0) with {
             text = "Series:"
-
+            alignLeft()
         }
 
 
@@ -61,47 +61,61 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
 
             column {
                 title = "#"
-                fixedSize = 100
+                fixedSize = 70
                 bindContentsTo("id")
             }
             column {
                 title = "Title"
-                fixedSize = 100
+                fixedSize = 200
                 bindContentsTo("title")
             }
             column {
                 title = "Seasons"
-                fixedSize = 100
+                fixedSize = 80
 //                bindContentsTo("cantSeasons")
                 bindContentsTo("myseasons.size")
             }
             column {
                 title = "State"
-                fixedSize = 100
+                fixedSize = 50
                 bindContentsTo("state")
             }
-            Button(p0) with {
+            Panel(p0) with {
+                asHorizontal()
+            Button(it) with {
                 text = "Add new Serie"
                 fontSize = 10
-                onClick(Action { WindowCargaSerie(owner,modelObject).open() })
+                width = 100
+                onClick(Action { WindowCargaSerie(owner,thisWindow.modelObject).open() })
             }
-            Button(p0) with {
+            Button(it) with {
                 text = "Modify Serie"
                 fontSize = 10
-                onClick(Action { WindowModifSerie(owner,modelObject).open() })
+                width = 100
+                onClick(Action { WindowModifSerie(owner,thisWindow.modelObject).open() })
             }
-            Button(p0) with {
+            Button(it) with {
                 text = "Delete Serie"
                 fontSize = 10
+                width = 100
+                onClick {
+                    val acepta = ConfirmDelete(thisWindow,thisWindow.modelObject!!)
+                         acepta.onAccept {
+                             thisWindow.modelObject.borrarSerie(thisWindow.modelObject.selectedSerie!!)
+                         }
+                       acepta.open()
+
+                     }
             }
-            Button(p0) with {
+            Button(it) with {
                 text = "Show Serie"
                 fontSize = 10
+                width = 100
                 onClick {
 //                    thisWindow.close()
-                    WindowSeason(thisWindow, modelObject.selectedSerie!!).open()
+                    WindowSeason(thisWindow, thisWindow.modelObject.selectedSerie!!).open()
                 }
-            }
+            }}
         }
     }
 

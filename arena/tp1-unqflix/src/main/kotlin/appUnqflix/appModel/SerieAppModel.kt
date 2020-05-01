@@ -24,7 +24,6 @@ class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
 
     var cantSeasons = 0
 
-
     init {
         this.id = serie.id
         this.title = serie.title
