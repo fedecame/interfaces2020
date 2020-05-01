@@ -14,7 +14,9 @@ class WindowModificarChapter(owner: WindowOwner, seasonAppModel: SeasonAppModel)
 
     override fun createFormPanel(mainPanel: Panel?) {
         this.title = "Modify chapter: ${modelObject.selectedChapter!!.title}"
+        // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
         val tempChapter = ChaptersAppModel(modelObject.selectedChapter!!.chapter)
+
         Label(mainPanel) withText "Title"
 
         TextBox(mainPanel) with {
@@ -55,6 +57,7 @@ class WindowModificarChapter(owner: WindowOwner, seasonAppModel: SeasonAppModel)
         Button(mainPanel) with {
             caption = "Cancel"
             onClick {
+                // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
                 modelObject.selectedChapter!!.title = tempChapter.title
                 modelObject.selectedChapter!!.description = tempChapter.description
                 modelObject.selectedChapter!!.duration = tempChapter.duration

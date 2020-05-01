@@ -31,22 +31,24 @@ class UnqflixAppModel {
             poster,
             Unavailable()
         )
+        val serieAppModel = SerieAppModel(serie, this)
         system.addSerie(serie)
-        return SerieAppModel(serie, this)
+        myseries.add(serieAppModel)
+        return serieAppModel
     }
 
-    fun createSeason(serieId: String, title: String, description: String, poster: String): SeasonAppModel {
+    fun createSeason(serieAppModel: SerieAppModel, title: String, description: String, poster: String): SeasonAppModel {
         val season = Season(
             idGenerator.nextSeasonId(),
             title,
             description,
             poster
         )
-        system.addSeason(serieId, season)
-        return SeasonAppModel(season, this, serieId)
+        system.addSeason(serieAppModel.id, season)
+        return SeasonAppModel(season, this, serieAppModel)
     }
 
-    fun createChapter(serieId: String, seasonId: String, title: String,
+    fun createChapter(seasonAppModel: SeasonAppModel, serieId: String, title: String,
                       description: String, duration: Int, video: String, thumbnail: String): ChaptersAppModel {
         val chapter = Chapter(
             idGenerator.nextChapterId(),
@@ -56,8 +58,8 @@ class UnqflixAppModel {
             video,
             thumbnail
         )
-        system.addChapter(serieId, seasonId, chapter)
-        return ChaptersAppModel(chapter)
+        system.addChapter(serieId, seasonAppModel.id, chapter)
+        return ChaptersAppModel(chapter, seasonAppModel)
     }
 
     fun buscarSeries(){
@@ -70,6 +72,7 @@ class UnqflixAppModel {
 
     fun borrarSerie(serie: SerieAppModel){
         system.deleteSerie(serie.id)
+        myseries.remove(serie)
     }
 }
 
