@@ -57,9 +57,10 @@ class WindowChapters (owner: WindowOwner, seasonAppModel: SeasonAppModel) : Simp
                 }
             }
             Button(it) with {
-                caption = "Back to Seasons"
+                caption = "Back to ${thisWindow.modelObject.serieAppModel!!.title}'s Seasons"
                 onClick {
                     thisWindow.close()
+                    WindowSeason(thisWindow, thisWindow.modelObject.serieAppModel!!).open()
                 }
             }
         }

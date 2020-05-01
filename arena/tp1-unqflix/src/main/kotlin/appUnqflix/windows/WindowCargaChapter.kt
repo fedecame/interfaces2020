@@ -81,6 +81,7 @@ class WindowCargaChapter(owner: WindowOwner, seasonAppModel: SeasonAppModel) : S
         }
     }
 
+    // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
     fun limpiarValoresNuevos() {
         modelObject.titleNC = ""
         modelObject.descriptionNC = ""
