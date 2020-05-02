@@ -1,5 +1,6 @@
 package appUnqflix.windows
 
+import appUnqflix.appModel.SerieAppModel
 import appUnqflix.appModel.UnqflixAppModel
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
@@ -7,7 +8,7 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import java.awt.Color
 
-class WindowCargaSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWindow<UnqflixAppModel>(owner, model){
+class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow<SerieAppModel>(owner, model){
 
     override fun addActions(p0: Panel?) {
 

@@ -1,5 +1,6 @@
 package appUnqflix.windows
 
+import appUnqflix.appModel.SerieAppModel
 import appUnqflix.appModel.UnqflixAppModel
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
@@ -7,7 +8,7 @@ import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import java.awt.Color
 
-class WindowModifSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWindow<UnqflixAppModel>(owner, model){
+class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow<SerieAppModel>(owner, model){
 
     override fun addActions(p0: Panel?) {
 
@@ -30,7 +31,7 @@ class WindowModifSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
 //
 //            bgColor = Color.orange
 //            bindTo("falta var")
-                    bindToModel(thisWindow.modelObject.selectedSerie!!, "title")
+                    bindToModel(thisWindow.modelObject, "title")
                 }
 
             }
@@ -47,7 +48,7 @@ class WindowModifSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
 //
 //            bgColor = Color.orange
 //            bindTo("falta var")
-                    bindToModel(thisWindow.modelObject.selectedSerie!!, "poster")
+                    bindToModel(thisWindow.modelObject, "poster")
                 }
             }
         }
@@ -69,7 +70,7 @@ class WindowModifSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
 //            bindTo("falta var")
 //            bindColorTo("blue")
 //            bindEnabledTo("enabled")
-                    bindToModel(thisWindow.modelObject.selectedSerie!!, "descripcion")
+                    bindToModel(thisWindow.modelObject, "descripcion")
                 }
             }
 

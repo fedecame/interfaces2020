@@ -86,13 +86,18 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 text = "Add new Serie"
                 fontSize = 10
                 width = 100
-                onClick(Action { WindowCargaSerie(owner,thisWindow.modelObject).open() })
+                onClick(Action {
+                    val serieAppModel = SerieAppModel(unqflixAppModel = thisWindow.modelObject)
+                    WindowCargaSerie(owner, serieAppModel).open()
+                })
             }
             Button(it) with {
                 text = "Modify Serie"
                 fontSize = 10
                 width = 100
-                onClick(Action { WindowModifSerie(owner,thisWindow.modelObject).open() })
+                onClick(Action {
+                    WindowModifSerie(owner, thisWindow.modelObject.selectedSerie!!).open()
+                })
             }
             Button(it) with {
                 text = "Delete Serie"
