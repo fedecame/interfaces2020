@@ -6,82 +6,104 @@ import org.uqbar.arena.widgets.*
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 
-class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel) : SimpleWindow<ChaptersAppModel>(owner, chaptersAppModel) {
+class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel) :
+    SimpleWindow<ChaptersAppModel>(owner, chaptersAppModel) {
     override fun addActions(actionsPanel: Panel?) {
+
     }
 
     override fun createFormPanel(mainPanel: Panel?) {
+
         this.title = "Create new chapter"
-        setMinHeight(400)
-        setMinWidth(200)
-        Label(mainPanel) withText "Title"
 
-        TextBox(mainPanel) with {
-            bindToModel(modelObject, "title")
-            setWidth(200)
-        }
 
-        Label(mainPanel) withText "Description"
+        Panel(mainPanel) with {
 
-        KeyWordTextArea(mainPanel) with {
-            bindToModel(modelObject, "description")
-            setWidth(200)
-            setHeight(100)
-            isMultiLine = true
+            Panel(it) with {
+                Label(it) with {
+                    text = "Title"
+                    alignLeft()
+                }
+
+                TextBox(it) with {
+                    bindToModel(modelObject, "title")
+                    width= 50
+                }
+            }
+
+            Panel(it) with {
+                Label(it) with {
+                    text = "Description"
+                    alignLeft()
+                }
+                KeyWordTextArea(it) with {
+                    bindToModel(modelObject, "description")
+                    width = 50
+
+//                    isMultiLine = true
 //            selectFinalLine()
-        }
+                }
 
-        Label(mainPanel) withText "Duration"
-
-        NumericField(mainPanel) with {
-            bindToModel(modelObject, "duration")
-            setWidth(200)
-        }
-
-        Label(mainPanel) withText "Thumbnail"
-
-        TextBox(mainPanel) with {
-            bindToModel(modelObject, "thumbnail")
-            setWidth(200)
-        }
-
-        Label(mainPanel) withText "Video"
-
-        TextBox(mainPanel) with {
-            bindToModel(modelObject, "video")
-            setWidth(200)
-        }
-
-        Button(mainPanel) with {
-            caption = "Accept"
-            onClick {
-                modelObject.seasonAppModel.agregarChapter(
-                    modelObject.title,
-                    modelObject.description,
-                    modelObject.duration,
-                    modelObject.thumbnail,
-                    modelObject.video
-                )
-                thisWindow.limpiarValoresNuevos()
-                thisWindow.close()
             }
-        }
 
-        Button(mainPanel) with {
-            caption = "Cancel"
-            onClick {
-                thisWindow.limpiarValoresNuevos()
-                thisWindow.close()
+            Panel(it) with {
+                Label(it) with {
+                    text = "Duration"
+                    alignLeft()
+                }
+                NumericField(it) with {
+                    bindToModel(modelObject, "duration")
+                    width = 50
+                }
+            }
+
+            Panel(it) with {
+                Label(it) with {
+                    text = "Thumbnail"
+                    alignLeft()
+                }
+                TextBox(it) with {
+                    bindToModel(modelObject, "thumbnail")
+                    width = 50
+                }
+            }
+
+            Panel(it) with {
+                Label(it) with {
+                    text = "Video"
+                    alignLeft()
+                }
+                TextBox(it) with {
+                    bindToModel(modelObject, "video")
+                    width = 50
+                }
+            }
+
+            Panel(it) with {
+                asHorizontal()
+                Button(it) with {
+                    caption = "Accept"
+                    onClick {
+                        thisWindow.modelObject.seasonAppModel.agregarChapter(
+                            thisWindow.modelObject.title,
+                            thisWindow.modelObject.description,
+                            thisWindow.modelObject.duration,
+                            thisWindow.modelObject.thumbnail,
+                            thisWindow.modelObject.video
+                        )
+                        thisWindow.close()
+                    }
+                }
+
+                Button(it) with {
+                    caption = "Cancel"
+                    onClick {
+                        thisWindow.close()
+                    }
+                }
+
             }
         }
     }
 
-    // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
-    fun limpiarValoresNuevos() {
-        modelObject.title = ""
-        modelObject.description = ""
-        modelObject.duration = 0
-        modelObject.video = ""
-        modelObject.thumbnail = ""
-    }
 }
