@@ -32,10 +32,15 @@ class UnqflixAppModel {
             poster,
             Unavailable()
         )
-        val serieAppModel = SerieAppModel(serie, this)
-        system.addSerie(serie)
-        myseries.add(serieAppModel)
-        return serieAppModel
+        try {
+            val serieAppModel = SerieAppModel(serie, this)
+            system.addSerie(serie)
+            myseries.add(serieAppModel)
+            return serieAppModel
+        }catch (e: ExistsException){
+            throw UserException(e.message)
+        }
+
     }
 
     fun createSeason(serieAppModel: SerieAppModel, title: String, description: String, poster: String): SeasonAppModel {
@@ -47,10 +52,11 @@ class UnqflixAppModel {
         )
         try {
             system.addSeason(serieAppModel.id, season)
-        } catch (e: NotFoundException) {
+            return SeasonAppModel(season, this, serieAppModel)
+        }catch (e: ExistsException){
             throw UserException(e.message)
         }
-        return SeasonAppModel(season, this, serieAppModel)
+
     }
 
     fun createChapter(seasonAppModel: SeasonAppModel, serieId: String, title: String,
@@ -63,8 +69,13 @@ class UnqflixAppModel {
             video,
             thumbnail
         )
-        system.addChapter(serieId, seasonAppModel.id, chapter)
-        return ChaptersAppModel(chapter, seasonAppModel)
+        try {
+            system.addChapter(serieId, seasonAppModel.id, chapter)
+            return ChaptersAppModel(chapter, seasonAppModel)
+        }catch (e: ExistsException){
+            throw UserException(e.message)
+        }
+
     }
 
     fun buscarSeries(){
