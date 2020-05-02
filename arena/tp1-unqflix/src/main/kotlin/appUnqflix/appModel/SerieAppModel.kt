@@ -18,9 +18,7 @@ class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
 
     var selected : SeasonAppModel? = null
 
-    var tituloSeason = ""
-    var descripcionSeason = ""
-    var posterSeason = ""
+
 
     var cantSeasons = 0
 
