@@ -1,7 +1,10 @@
 package appUnqflix.windows
 
+import appUnqflix.appModel.CategoryAppModel
+import appUnqflix.appModel.ContentAppModel
 import appUnqflix.appModel.SerieAppModel
 import appUnqflix.appModel.UnqflixAppModel
+import domain.Unavailable
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.windows.SimpleWindow
@@ -15,6 +18,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
     }
 
     override fun createFormPanel(p0: Panel?) {
+        this.title = "Create new serie"
 
         Panel(p0) with {
             asHorizontal()
@@ -31,6 +35,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 //
 //            bgColor = Color.orange
 //            bindTo("falta var")
+                    bindToModel(thisWindow.modelObject, "title")
                 }
 
             }
@@ -47,6 +52,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 //
 //            bgColor = Color.orange
 //            bindTo("falta var")
+                    bindToModel(thisWindow.modelObject, "poster")
                 }
             }
         }
@@ -60,12 +66,15 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 }
 
                 KeyWordTextArea(it) with {
+                    this.isMultiLine = true
                     height = 100
                     width = 208
+//                    this.selectFinalLine()
 //            bgColor = Color.orange
 //            bindTo("falta var")
 //            bindColorTo("blue")
 //            bindEnabledTo("enabled")
+                    bindToModel(thisWindow.modelObject, "descripcion")
                 }
             }
 
@@ -87,6 +96,11 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                         //            bindTo("selected")
 //            bindEnabledTo("disabled")
 
+                        //OJO aca hay q ver que tipo de dato guardamos en "state" del SerieAppModel y probablemente necesitemos un Transformer (de arena)
+
+
+
+//                    bindToModel(thisWindow.modelObject.selectedSerie!!, "state")
                     }
 
                 }
@@ -101,30 +115,100 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 alignLeft()
             }
 
-            KeyWordTextArea(it) with {
-                height = 100
-                width = 50
-//            bgColor = Color.orange
-//            bindTo("falta var")
-//            bindColorTo("blue")
-//            bindEnabledTo("enabled")
+            Panel(it) with {
+                asHorizontal()
+                //listaIzq
+                List<CategoryAppModel>(it) with {
+                    bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
+                    bindSelectedTo("ownCategorySelected")
+//                    bindBackgroundTo("color")
+                    setHeight(300)
+                    setWidth(110)
+                }
+
+                Panel(it) with {
+                    //botonArriba
+                    Button(it) with {
+                        caption = "<"
+                        fontSize = 10
+//                        width =70
+                        onClick {
+                            thisWindow.modelObject.setNewCategory()
+                        }
+                    }
+
+                    //botonAbajo
+                    Button(it) with {
+                        caption = ">"
+                        fontSize = 10
+//                        width =70
+                        onClick {
+                            thisWindow.modelObject.removeCategory()
+                        }
+                    }
+
+                }
+
+                //listaDer
+                List<CategoryAppModel>(it) with {
+                    bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
+                    bindSelectedTo("otherCategorySelected")
+//                    bindBackgroundTo("color")
+                    setHeight(300)
+                    setWidth(110)
+                }
             }
         }
 
 
         Panel(p0) with {
             Label(it) with {
-                text = "Related content:"
+                text = "Related Content:"
                 alignLeft()
             }
 
-            KeyWordTextArea(it) with {
-                height = 100
-                width = 50
-//            bgColor = Color.orange
-//            bindTo("falta var")
-//            bindColorTo("blue")
-//            bindEnabledTo("enabled")
+            Panel(it) with {
+                asHorizontal()
+                //listaIzq
+                List<ContentAppModel>(it) with {
+                    bindItemsTo("relatedContent").adaptWithProp<ContentAppModel>("title")
+                    bindSelectedTo("ownContentSelected")
+//                    bindBackgroundTo("color")
+                    setHeight(300)
+                    setWidth(110)
+                }
+
+                Panel(it) with {
+                    //botonArriba
+                    Button(it) with {
+                        caption = "<"
+                        fontSize = 10
+//                        width =70
+                        onClick {
+                            thisWindow.modelObject.setNewContent()
+                        }
+                    }
+
+                    //botonAbajo
+                    Button(it) with {
+                        caption = ">"
+                        fontSize = 10
+//                        width =70
+                        onClick {
+                            thisWindow.modelObject.removeContent()
+                        }
+                    }
+
+                }
+
+                //listaDer
+                List<ContentAppModel>(it) with {
+                    bindItemsTo("otherContents").adaptWithProp<ContentAppModel>("title")
+                    bindSelectedTo("otherContentSelected")
+//                    bindBackgroundTo("color")
+                    setHeight(300)
+                    setWidth(250)
+                }
             }
         }
 
@@ -133,15 +217,27 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
             Button(it) with {
                 text = "Accept"
                 fontSize = 10
+                onClick {
+                    thisWindow.modelObject.unqflixAppModel.createSerie(
+                        thisWindow.modelObject.title,
+                        thisWindow.modelObject.descripcion,
+                        thisWindow.modelObject.poster,
+                        Unavailable(),
+                        thisWindow.modelObject.categories,
+                        thisWindow.modelObject.relatedContent
+                    )
+                    thisWindow.close()
+                }
             }
 
             Button(it) with {
                 text = "Cancel"
                 fontSize = 10
+                onClick {
+                    thisWindow.close()
+                }
             }
         }
-
-
     }
 
 }

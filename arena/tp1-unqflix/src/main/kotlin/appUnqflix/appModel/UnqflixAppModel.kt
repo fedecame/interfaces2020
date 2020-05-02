@@ -24,14 +24,22 @@ class UnqflixAppModel {
         myseries = system.series.map { SerieAppModel(it, this) }.toMutableList()
     }
 
-    fun createSerie(title: String, description: String, poster: String): SerieAppModel {
+    fun createSerie(title: String, description: String, poster: String, state: ContentState,
+                    categories: MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>): SerieAppModel {
+
+        val categories = categories.map { Category(it.id, it.name) }.toMutableList()
+        val relatedContent = relatedContent.map { it.content }.toMutableList()
+
         val serie = Serie(
             idGenerator.nextSerieId(),
             title,
             description,
             poster,
-            Unavailable()
+            state,
+            categories,
+            relatedContent = relatedContent
         )
+
         val serieAppModel = SerieAppModel(serie, this)
         system.addSerie(serie)
         myseries.add(serieAppModel)
@@ -78,6 +86,18 @@ class UnqflixAppModel {
     fun borrarSerie(serie: SerieAppModel){
         system.deleteSerie(serie.id)
         myseries.remove(serie)
+    }
+
+    fun getAllCategories(): MutableList<CategoryAppModel> {
+        return system.categories.map { CategoryAppModel(it) }.toMutableList()
+    }
+
+    fun getAllContents(): MutableList<Content> {
+        val allContents = mutableListOf<Content>()
+        allContents.addAll(system.movies)
+        allContents.addAll(system.series)
+//        return myseries.last().relatedContent.toMutableList()
+        return allContents
     }
 }
 
