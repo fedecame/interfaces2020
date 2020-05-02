@@ -58,8 +58,8 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
             fontSize = 10
 
             onClick(Action {
-                WindowCargaDeSeason(owner,modelObject).open()
-//                modelObject.initSeasons()
+                WindowCargaDeSeason(owner,modelObject.selected!!).open()
+
             })
 
         }
