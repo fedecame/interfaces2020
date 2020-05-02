@@ -4,6 +4,7 @@ import data.getUNQFlix
 import data.idGenerator
 import domain.*
 import org.uqbar.commons.model.annotations.Observable
+import org.uqbar.commons.model.exceptions.UserException
 
 @Observable
 class UnqflixAppModel {
@@ -44,7 +45,11 @@ class UnqflixAppModel {
             description,
             poster
         )
-        system.addSeason(serieAppModel.id, season)
+        try {
+            system.addSeason(serieAppModel.id, season)
+        } catch (e: NotFoundException) {
+            throw UserException(e.message)
+        }
         return SeasonAppModel(season, this, serieAppModel)
     }
 
