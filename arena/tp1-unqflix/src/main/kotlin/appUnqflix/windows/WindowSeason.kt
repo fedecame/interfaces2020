@@ -85,6 +85,16 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
 
         }
 
+        Button(p0) with {
+            text = "Back to Unqflix"
+            fontSize = 10
+
+            onClick {
+                thisWindow.close()
+                WindowPpal(thisWindow, modelObject.unqflixAppModel).open()
+            }
+        }
+
 
     }
 }

@@ -112,7 +112,7 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 fontSize = 10
                 width = 100
                 onClick {
-//                    thisWindow.close()
+                    thisWindow.close()
                     WindowSeason(thisWindow, thisWindow.modelObject.selectedSerie!!).open()
                 }
             }}
