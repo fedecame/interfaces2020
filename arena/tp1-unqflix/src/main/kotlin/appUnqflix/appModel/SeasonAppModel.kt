@@ -17,11 +17,9 @@ class SeasonAppModel (var season: Season, val unqflixAppModel: UnqflixAppModel, 
     var selectedChapter : ChaptersAppModel? = null
     var cantchapter : Int = cantidadChapter()
 
-    var titleNC = ""
-    var descriptionNC = ""
-    var durationNC = 0
-    var thumbnailNC = ""
-    var videoNC = ""
+    var titleSeason = ""
+    var descripcionSeason = ""
+    var posterSeason = ""
 
     init {
         this.id = season.id

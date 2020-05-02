@@ -60,13 +60,13 @@ class WindowCargaChapter(owner: WindowOwner, seasonAppModel: SeasonAppModel) : S
         Button(mainPanel) with {
             caption = "Accept"
             onClick {
-                modelObject.agregarChapter(
-                    modelObject.titleNC,
-                    modelObject.descriptionNC,
-                    modelObject.durationNC,
-                    modelObject.videoNC,
-                    modelObject.thumbnailNC
-                )
+//                modelObject.agregarChapter(
+//                    modelObject.titleNC,
+//                    modelObject.descriptionNC,
+//                    modelObject.durationNC,
+//                    modelObject.videoNC,
+//                    modelObject.thumbnailNC
+//                )
                 thisWindow.limpiarValoresNuevos()
                 thisWindow.close()
             }
@@ -83,10 +83,10 @@ class WindowCargaChapter(owner: WindowOwner, seasonAppModel: SeasonAppModel) : S
 
     // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
     fun limpiarValoresNuevos() {
-        modelObject.titleNC = ""
-        modelObject.descriptionNC = ""
-        modelObject.durationNC = 0
-        modelObject.videoNC = ""
-        modelObject.thumbnailNC = ""
+//        modelObject.titleNC = ""
+//        modelObject.descriptionNC = ""
+//        modelObject.durationNC = 0
+//        modelObject.videoNC = ""
+//        modelObject.thumbnailNC = ""
     }
 }
