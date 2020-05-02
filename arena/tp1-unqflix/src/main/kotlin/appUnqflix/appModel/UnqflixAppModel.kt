@@ -56,6 +56,7 @@ class UnqflixAppModel {
         }catch (e: ExistsException){
             throw UserException(e.message)
         }
+
     }
 
     fun createChapter(seasonAppModel: SeasonAppModel, serieId: String, title: String,
