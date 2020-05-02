@@ -3,6 +3,7 @@ package appUnqflix.windows
 import appUnqflix.appModel.SeasonAppModel
 import appUnqflix.appModel.SerieAppModel
 import appUnqflix.appModel.UnqflixAppModel
+import domain.ContentState
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.Button
 import org.uqbar.arena.widgets.Label
@@ -42,9 +43,9 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 text = "Buscar"
                 fontSize = 10
                 width =70
-                onClick(Action {
-                    buscarSeries()
-                })
+               // onClick(Action {
+               //     buscarSeries()
+                //})
             }
         }
 
@@ -78,7 +79,8 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
             column {
                 title = "State"
                 fixedSize = 50
-                bindContentsTo("state")
+                bindContentsTo("adaptar")
+
             }
             Panel(p0) with {
                 asHorizontal()

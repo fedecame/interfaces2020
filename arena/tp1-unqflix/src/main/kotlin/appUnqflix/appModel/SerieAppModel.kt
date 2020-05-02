@@ -17,8 +17,8 @@ class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
     var categories = mutableListOf<CategoryAppModel>()
 
     var cantSeasons = 0
-    var state : ContentState = Unavailable()
-    //var traducido = traducir()
+     var state :ContentState = Unavailable()
+
 
 
     init {
@@ -26,7 +26,7 @@ class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
         this.title = serie.title
         this.descripcion = serie.description
         this.poster = serie.poster
-        this.state = serie.state
+         this.state = serie.state
 
         this.initCategories()
         this.initSeasons()
@@ -45,6 +45,14 @@ class SerieAppModel(val serie: Serie, val unqflixAppModel: UnqflixAppModel) {
         myseasons.add(seasonAppModel)
 
         return seasonAppModel
+    }
+
+    fun adaptar():String{
+        if(serie.state is Available){
+            return "OK"
+        }else{
+            return "X"
+        }
     }
 
 
