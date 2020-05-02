@@ -1,7 +1,10 @@
 package appUnqflix.windows
 
+import appUnqflix.appModel.CategoryAppModel
+import appUnqflix.appModel.ContentAppModel
 import appUnqflix.appModel.SerieAppModel
 import appUnqflix.appModel.UnqflixAppModel
+import domain.Content
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
 import org.uqbar.arena.windows.SimpleWindow
@@ -15,6 +18,9 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
     }
 
     override fun createFormPanel(p0: Panel?) {
+        this.title = "Modify serie: ${modelObject.title}"
+        // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
+        val tempSerie = SerieAppModel(modelObject.serie, modelObject.unqflixAppModel)
 
         Panel(p0) with {
             asHorizontal()
@@ -111,30 +117,100 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 alignLeft()
             }
 
-            KeyWordTextArea(it) with {
-                height = 100
-                width = 50
-//            bgColor = Color.orange
-//            bindTo("falta var")
-//            bindColorTo("blue")
-//            bindEnabledTo("enabled")
+            Panel(it) with {
+                asHorizontal()
+                //listaIzq
+                List<CategoryAppModel>(it) with {
+                    bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
+                    bindSelectedTo("ownCategorySelected")
+//                    bindBackgroundTo("color")
+                    setHeight(300)
+                    setWidth(110)
+                }
+
+                Panel(it) with {
+                    //botonArriba
+                    Button(it) with {
+                        caption = "<"
+                        fontSize = 10
+//                        width =70
+                        onClick {
+                            thisWindow.modelObject.setNewCategory()
+                        }
+                    }
+
+                    //botonAbajo
+                    Button(it) with {
+                        caption = ">"
+                        fontSize = 10
+//                        width =70
+                        onClick {
+                            thisWindow.modelObject.removeCategory()
+                        }
+                    }
+
+                }
+
+                //listaDer
+                List<CategoryAppModel>(it) with {
+                    bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
+                    bindSelectedTo("otherCategorySelected")
+//                    bindBackgroundTo("color")
+                    setHeight(300)
+                    setWidth(110)
+                }
             }
         }
 
 
         Panel(p0) with {
             Label(it) with {
-                text = "Related content:"
+                text = "Related Content:"
                 alignLeft()
             }
 
-            KeyWordTextArea(it) with {
-                height = 100
-                width = 50
-//            bgColor = Color.orange
-//            bindTo("falta var")
-//            bindColorTo("blue")
-//            bindEnabledTo("enabled")
+            Panel(it) with {
+                asHorizontal()
+                //listaIzq
+                List<ContentAppModel>(it) with {
+                    bindItemsTo("relatedContent").adaptWithProp<ContentAppModel>("title")
+                    bindSelectedTo("ownContentSelected")
+//                    bindBackgroundTo("color")
+                    setHeight(300)
+                    setWidth(110)
+                }
+
+                Panel(it) with {
+                    //botonArriba
+                    Button(it) with {
+                        caption = "<"
+                        fontSize = 10
+//                        width =70
+                        onClick {
+                            thisWindow.modelObject.setNewContent()
+                        }
+                    }
+
+                    //botonAbajo
+                    Button(it) with {
+                        caption = ">"
+                        fontSize = 10
+//                        width =70
+                        onClick {
+                            thisWindow.modelObject.removeContent()
+                        }
+                    }
+
+                }
+
+                //listaDer
+                List<ContentAppModel>(it) with {
+                    bindItemsTo("otherContents").adaptWithProp<ContentAppModel>("title")
+                    bindSelectedTo("otherContentSelected")
+//                    bindBackgroundTo("color")
+                    setHeight(300)
+                    setWidth(250)
+                }
             }
         }
 
@@ -154,6 +230,21 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 onClick {
                     //setear los valores que tenia antes de editarse
                     // para eso hay q hacer un SerieAppModel temporal
+                    thisWindow.modelObject.title = tempSerie.title
+                    thisWindow.modelObject.descripcion = tempSerie.descripcion
+                    thisWindow.modelObject.poster = tempSerie.poster
+                    thisWindow.modelObject.state = tempSerie.state
+                    thisWindow.modelObject.categories = tempSerie.categories
+                    thisWindow.modelObject.myseasons = tempSerie.myseasons
+                    thisWindow.modelObject.relatedContent = tempSerie.relatedContent
+
+                    thisWindow.modelObject.otherCategories = tempSerie.otherCategories
+                    thisWindow.modelObject.ownCategorySelected = tempSerie.ownCategorySelected
+                    thisWindow.modelObject.otherCategorySelected = tempSerie.otherCategorySelected
+                    thisWindow.modelObject.otherContents = tempSerie.otherContents
+                    thisWindow.modelObject.ownContentSelected = tempSerie.ownContentSelected
+                    thisWindow.modelObject.otherContentSelected = tempSerie.otherContentSelected
+
                     thisWindow.close()
                 }
             }
