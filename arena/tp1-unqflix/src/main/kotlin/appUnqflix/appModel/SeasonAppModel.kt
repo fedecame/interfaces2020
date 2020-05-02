@@ -17,12 +17,6 @@ class SeasonAppModel (var season: Season, val unqflixAppModel: UnqflixAppModel, 
     var selectedChapter : ChaptersAppModel? = null
     var cantchapter : Int = cantidadChapter()
 
-    var titleNC = ""
-    var descriptionNC = ""
-    var durationNC = 0
-    var thumbnailNC = ""
-    var videoNC = ""
-
     init {
         this.id = season.id
         this.tituloSeason = season.title
@@ -33,7 +27,7 @@ class SeasonAppModel (var season: Season, val unqflixAppModel: UnqflixAppModel, 
     }
 
     fun initChapters(chapters: MutableList<Chapter>){
-        this.chapters = chapters.map { ChaptersAppModel(it) }.toMutableList()
+        this.chapters = chapters.map { ChaptersAppModel(it, this) }.toMutableList()
     }
 
     fun cantidadChapter(): Int= season.chapters.size
