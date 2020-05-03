@@ -13,6 +13,7 @@ import java.awt.Color
 
 class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow<SerieAppModel>(owner, model){
 
+
     override fun addActions(p0: Panel?) {
 
     }
@@ -31,6 +32,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
+       //             bindToModel(thisWindow.modelObject.bufferSerie!!, "title")
 //            alignLeft()  // right, left, center
 //
 //            bgColor = Color.orange
@@ -48,6 +50,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
+         //           bindToModel(thisWindow.modelObject.bufferSerie!!, "Poster")
 //            alignLeft()  // right, left, center
 //
 //            bgColor = Color.orange
@@ -56,18 +59,18 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 }
             }
         }
-
-        Panel(p0)with {
+        Label(p0) with {
+            text = "Description:"
+            alignLeft()
+        }
+        Panel(p0) with {
             asHorizontal()
             Panel(it) with {
-                Label(it) with {
-                    text = "Desciption:"
-                    alignLeft()
-                }
 
                 KeyWordTextArea(it) with {
                     this.isMultiLine = true
                     height = 100
+            //        bindToModel(thisWindow.modelObject.bufferSerie!!, "descripcion")
                     width = 208
 //                    this.selectFinalLine()
 //            bgColor = Color.orange
@@ -83,7 +86,6 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     text = ""
                     setHeight(13)
                 }
-
                 Panel(it) with {
                     asHorizontal()
                     Label(it) with {
@@ -102,17 +104,16 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
 //                    bindToModel(thisWindow.modelObject.selectedSerie!!, "state")
                     }
-
                 }
             }
-        }
 
+//////////Panel Categorias//////
 
-
-        Panel(p0) with {
-            Label(it) with {
-                text = "Categories:"
-                alignLeft()
+            Panel(p0) with {
+                Label(it) with {
+                    text = "Categories:"
+                    alignLeft()
+                }
             }
 
             Panel(it) with {
@@ -210,7 +211,6 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     setWidth(250)
                 }
             }
-        }
 
         Panel(p0) with {
             asHorizontal()
@@ -240,4 +240,4 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
         }
     }
 
-}
+    }}

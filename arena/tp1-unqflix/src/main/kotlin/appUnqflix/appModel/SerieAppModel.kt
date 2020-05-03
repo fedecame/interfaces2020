@@ -20,7 +20,7 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
 //    var relatedContent = mutableListOf<Content>() // preguntar si se justifica crear un ContentAppModel (similar a CategoryAppModel)
 
     var selected : SeasonAppModel? = null
-
+  
     var otherCategories = mutableListOf<CategoryAppModel>()
     var ownCategorySelected: CategoryAppModel? = null
     var otherCategorySelected: CategoryAppModel? = null
@@ -35,7 +35,7 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
 //        this.descripcion = serie.description
 //        this.poster = serie.poster
 //        this.state = serie.state
-
+      
         this.id = serie?.id ?: ""
         this.title = serie?.title ?: ""
         this.descripcion = serie?.description ?: ""
@@ -72,6 +72,14 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
         val seasonAppModel = unqflixAppModel.createSeason(this, title, description, poster)
         myseasons.add(seasonAppModel)
         return seasonAppModel
+    }
+
+    fun adaptar():String{
+        if(serie.state is Available){
+            return "OK"
+        }else{
+            return "X"
+        }
     }
 
     fun setNewCategory() {
