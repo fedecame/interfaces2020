@@ -10,9 +10,6 @@ import org.uqbar.arena.widgets.*
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import java.awt.Color
-import java.awt.SystemColor.text
-
-
 
 class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow<SerieAppModel>(owner, model){
 
@@ -36,7 +33,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
-                 //   bindToModel(thisWindow.modelObject.selectedSerie!!, "title")
 //            alignLeft()  // right, left, center
 //
 //            bgColor = Color.orange
@@ -54,7 +50,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
-              //      bindToModel(thisWindow.modelObject.selectedSerie!!, "poster")
 //            alignLeft()  // right, left, center
 //
 //            bgColor = Color.orange
@@ -63,18 +58,18 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 }
             }
         }
-        Label(p0) with {
-            text = "Description:"
-            alignLeft()
-        }
-        Panel(p0) with {
+
+        Panel(p0)with {
             asHorizontal()
             Panel(it) with {
+                Label(it) with {
+                    text = "Desciption:"
+                    alignLeft()
+                }
 
                 KeyWordTextArea(it) with {
                     this.isMultiLine = true
                     height = 100
-                  //  bindToModel(thisWindow.modelObject.selectedSerie!!, "descripcion")
                     width = 208
 //                    this.selectFinalLine()
 //            bgColor = Color.orange
@@ -109,16 +104,17 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
 //                    bindToModel(thisWindow.modelObject.selectedSerie!!, "state")
                     }
+
                 }
             }
+        }
 
-//////////Panel Categorias//////
 
-            Panel(p0) with {
-                Label(it) with {
-                    text = "Categories:"
-                    alignLeft()
-                }
+
+        Panel(p0) with {
+            Label(it) with {
+                text = "Categories:"
+                alignLeft()
             }
 
             Panel(it) with {
@@ -216,6 +212,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     setWidth(250)
                 }
             }
+        }
 
         Panel(p0) with {
             asHorizontal()
@@ -251,8 +248,9 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     thisWindow.close()
                 }
             }
-
-
         }
 
-    }}
+
+    }
+
+}

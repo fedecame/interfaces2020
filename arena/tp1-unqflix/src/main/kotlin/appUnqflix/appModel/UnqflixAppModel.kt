@@ -13,8 +13,6 @@ class UnqflixAppModel {
   
     var myseries = mutableListOf<SerieAppModel>()
     var selectedSerie : SerieAppModel? = null
-    var bufferSerie : SerieAppModel?=null
-
 
     init {
         this.initSeries()
@@ -48,11 +46,6 @@ class UnqflixAppModel {
         }catch (e: ExistsException){
             throw UserException(e.message)
         }
-    }
-    fun agregarSerie(){
-        this.createSerie(this.bufferSerie!!.title , this.bufferSerie!!.descripcion!!, this.bufferSerie!!.poster)
-        //myseries.add(this.bufferSerie)
-        this.bufferSerie = null
     }
 
     fun createSeason(serieAppModel: SerieAppModel, title: String, description: String, poster: String): SeasonAppModel {
