@@ -12,6 +12,8 @@ import java.awt.Color
 class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<SeasonAppModel>(owner, model){
     override fun createFormPanel(p0: Panel?) {
         title = "modificar Season"
+        // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
+        val tempSeason = SeasonAppModel(modelObject.season, modelObject.unqflixAppModel, modelObject.serieAppModel)
 
         Label(p0) with  {
             alignLeft()
@@ -70,7 +72,13 @@ class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<S
             text = "Cancel"
             color = Color.BLUE
             fontSize = 10
-            onClick(Action { close() })
+            onClick(Action {
+                // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
+                modelObject.tituloSeason = tempSeason.tituloSeason
+                modelObject.description = tempSeason.description
+                modelObject.poster = tempSeason.poster
+                close()
+            })
         }
     }
 

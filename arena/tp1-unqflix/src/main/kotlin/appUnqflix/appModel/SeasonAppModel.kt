@@ -8,7 +8,7 @@ import domain.Season
 import org.uqbar.commons.model.annotations.Observable
 
 @Observable
-class SeasonAppModel (var season: Season, val unqflixAppModel: UnqflixAppModel, val serieId: String){
+class SeasonAppModel (var season: Season, val unqflixAppModel: UnqflixAppModel, val serieAppModel: SerieAppModel? = null){
     var id: String = ""
     var tituloSeason: String = ""
     var description: String = ""
@@ -17,12 +17,10 @@ class SeasonAppModel (var season: Season, val unqflixAppModel: UnqflixAppModel, 
     var selectedChapter : ChaptersAppModel? = null
     var cantchapter : Int = cantidadChapter()
 
-    var titleNC = ""
-    var descriptionNC = ""
-    var durationNC = 0
-    var thumbnailNC = ""
-    var videoNC = ""
-
+    var titleSeason = ""
+    var descripcionSeason = ""
+    var posterSeason = ""
+  
     init {
         this.id = season.id
         this.tituloSeason = season.title
@@ -33,21 +31,16 @@ class SeasonAppModel (var season: Season, val unqflixAppModel: UnqflixAppModel, 
     }
 
     fun initChapters(chapters: MutableList<Chapter>){
-        this.chapters = chapters.map { ChaptersAppModel(it) }.toMutableList()
+        this.chapters = chapters.map { ChaptersAppModel(it, this) }.toMutableList()
     }
 
     fun cantidadChapter(): Int= season.chapters.size
 
-//    fun elegirSeason(seasonSeleccionada : SeasonAppModel): String{
-////        selectSeason?.numeroPrueba =
-//        return "algo"
-//    }
     fun agregarChapter(title: String, description: String, duration: Int, video: String,
                        thumbnail: String): ChaptersAppModel {
-        val chapterAppModel = unqflixAppModel.createChapter(serieId, this.id, title,
+        val chapterAppModel = unqflixAppModel.createChapter(this, serieAppModel!!.id, title,
             description, duration, video, thumbnail)
         this.chapters.add(chapterAppModel)
-//        this.initChapters(season.chapters)
 
         return chapterAppModel
     }

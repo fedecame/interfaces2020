@@ -12,7 +12,6 @@ import org.uqbar.arena.widgets.TextBox
 import org.uqbar.arena.windows.SimpleWindow
 import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.lacar.ui.model.Action
-
 import java.awt.Color
 
 class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<UnqflixAppModel>(owner,model) {
@@ -43,9 +42,10 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 text = "Buscar"
                 fontSize = 10
                 width =70
-               // onClick(Action {
-               //     buscarSeries()
-                //})
+                setAsDefault()
+                onClick(Action {
+                    buscarSeries()
+                })
             }
         }
 
@@ -88,13 +88,18 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 text = "Add new Serie"
                 fontSize = 10
                 width = 100
-                onClick(Action { WindowCargaSerie(owner,thisWindow.modelObject).open() })
+                onClick(Action {
+                    val serieAppModel = SerieAppModel(unqflixAppModel = thisWindow.modelObject)
+                    WindowCargaSerie(owner, serieAppModel).open()
+                })
             }
             Button(it) with {
-                text = "Modified Serie"
+                text = "Modify Serie"
                 fontSize = 10
                 width = 100
-                onClick(Action { WindowModifSerie(owner,thisWindow.modelObject).open() })
+                onClick(Action {
+                    WindowModifSerie(owner, thisWindow.modelObject.selectedSerie!!).open()
+                })
             }
             Button(it) with {
                 text = "Delete Serie"
@@ -114,7 +119,7 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 fontSize = 10
                 width = 100
                 onClick {
-//                    thisWindow.close()
+                    thisWindow.close()
                     WindowSeason(thisWindow, thisWindow.modelObject.selectedSerie!!).open()
                 }
             }}

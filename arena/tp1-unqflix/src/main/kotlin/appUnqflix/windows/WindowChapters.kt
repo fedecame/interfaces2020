@@ -45,7 +45,8 @@ class WindowChapters (owner: WindowOwner, seasonAppModel: SeasonAppModel) : Simp
                 onClick {
                     //abrir ventana para crear chapter
 //                    thisWindow.close()
-                    WindowCargaChapter(thisWindow, thisWindow.modelObject).open()
+                    val chaptersAppModel = ChaptersAppModel(seasonAppModel = thisWindow.modelObject)
+                    WindowCargaChapter(thisWindow, chaptersAppModel).open()
                 }
             }
             Button(it) with {
@@ -53,13 +54,14 @@ class WindowChapters (owner: WindowOwner, seasonAppModel: SeasonAppModel) : Simp
 //                bindEnabledTo("selectedChapter")
                 onClick {
                     //abrir ventana para editar chapter
-                    WindowModificarChapter(thisWindow, thisWindow.modelObject).open()
+                    WindowModificarChapter(thisWindow, thisWindow.modelObject.selectedChapter!!).open()
                 }
             }
             Button(it) with {
-                caption = "Back to Season: ${thisWindow.modelObject.tituloSeason}"
+                caption = "Back to ${thisWindow.modelObject.serieAppModel!!.title}'s Seasons"
                 onClick {
                     thisWindow.close()
+                    WindowSeason(thisWindow, thisWindow.modelObject.serieAppModel!!).open()
                 }
             }
         }

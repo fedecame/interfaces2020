@@ -1,5 +1,6 @@
 package appUnqflix.windows
 
+import appUnqflix.appModel.SeasonAppModel
 import appUnqflix.appModel.SerieAppModel
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
@@ -9,13 +10,15 @@ import org.uqbar.arena.windows.WindowOwner
 import org.uqbar.lacar.ui.model.Action
 import java.awt.Color
 
-class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<SerieAppModel>(owner,model) {
+class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<SeasonAppModel>(owner,model) {
     override fun addActions(p0: Panel?) {
 
     }
 
     override fun createFormPanel(p0: Panel) {
-    title = "agregar Season"
+        title = "agregar Season"
+        setMinHeight(400)
+        setMinWidth(200)
 
         Label(p0) with {
             alignLeft()
@@ -28,7 +31,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
             alignLeft()  // right, left, center
 
             bgColor = Color.orange
-           bindTo("tituloSeason")
+           bindTo("titleSeason")
         }
         Label(p0) with {
             alignLeft()
@@ -38,7 +41,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
         KeyWordTextArea(p0) with {
             height = 200
             bgColor = Color.orange
-            bindTo("descripcion")
+            bindTo("descripcionSeason")
 //            bindColorTo("blue")
 //            bindEnabledTo("enabled")
         }
@@ -54,7 +57,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
             alignLeft()  // right, left, center
 
             bgColor = Color.orange
-            bindTo("poster")
+            bindTo("posterSeason")
         }
 
         Button(p0) with {
@@ -64,7 +67,10 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
             onClick(Action {
                 agregarSeason()
 
-                close() })
+
+                close()
+                limpiarValoresNuevos()
+            })
         }
 
         Button(p0) with {
@@ -72,6 +78,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
             color = Color.BLUE
             fontSize = 10
             onClick(Action {
+                limpiarValoresNuevos()
                 close()
             })
         }
@@ -80,6 +87,13 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SerieAppModel) : Dialog<S
 
 
     fun agregarSeason() {
-        modelObject.agregarSeason(modelObject.tituloSeason, modelObject.descripcion, modelObject.poster)
+        modelObject.serieAppModel?.agregarSeason(modelObject.titleSeason, modelObject.descripcionSeason, modelObject.posterSeason)
+    }
+
+    // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
+    fun limpiarValoresNuevos() {
+        modelObject.titleSeason = ""
+        modelObject.descripcionSeason = ""
+        modelObject.posterSeason = ""
     }
 }

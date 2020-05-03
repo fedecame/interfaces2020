@@ -58,8 +58,8 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
             fontSize = 10
 
             onClick(Action {
-                WindowCargaDeSeason(owner,modelObject).open()
-//                modelObject.initSeasons()
+                WindowCargaDeSeason(owner,modelObject.selected!!).open()
+
             })
 
         }
@@ -78,8 +78,21 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
             color = Color.BLUE
             fontSize = 10
 
-            onClick(Action { WindowChapters(thisWindow, modelObject.selected!!).open() })
+            onClick(Action {
+                thisWindow.close()
+                WindowChapters(thisWindow, modelObject.selected!!).open()
+            })
 
+        }
+
+        Button(p0) with {
+            text = "Back to Unqflix"
+            fontSize = 10
+
+            onClick {
+                thisWindow.close()
+                WindowPpal(thisWindow, modelObject.unqflixAppModel).open()
+            }
         }
 
 
