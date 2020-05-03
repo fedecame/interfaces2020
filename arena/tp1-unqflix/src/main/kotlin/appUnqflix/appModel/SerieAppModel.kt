@@ -75,7 +75,7 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
     }
 
     fun adaptar():String{
-        if(serie.state is Available){
+        if(serie!!.state is Available){
             return "OK"
         }else{
             return "X"
