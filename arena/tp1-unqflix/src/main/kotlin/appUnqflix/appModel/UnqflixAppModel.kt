@@ -14,7 +14,7 @@ class UnqflixAppModel {
 
     var myseries = mutableListOf<SerieAppModel>()
     var selectedSerie : SerieAppModel? = null
-
+    var bufferSerie : SerieAppModel?=null
 
 
     init {
@@ -35,6 +35,11 @@ class UnqflixAppModel {
         )
         system.addSerie(serie)
         return SerieAppModel(serie, this)
+    }
+    fun agregarSerie(){
+        this.createSerie(this.bufferSerie!!.title , this.bufferSerie!!.descripcion!!, this.bufferSerie!!.poster)
+        //myseries.add(this.bufferSerie)
+        this.bufferSerie = null
     }
 
     fun createSeason(serieId: String, title: String, description: String, poster: String): SeasonAppModel {
@@ -72,7 +77,10 @@ class UnqflixAppModel {
     }
     fun borrarSerie(serie: SerieAppModel){
         system.deleteSerie(serie.id)
+        myseries.remove(serie)
+
     }
+
 }
 
 

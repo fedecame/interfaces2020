@@ -27,7 +27,7 @@ class WindowCargaSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
-                    //   bindToModel(thisWindow.modelObject.selectedSerie!!, "title")
+       //             bindToModel(thisWindow.modelObject.bufferSerie!!, "title")
                 }
 
             }
@@ -40,7 +40,7 @@ class WindowCargaSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
-                    //      bindToModel(thisWindow.modelObject.selectedSerie!!, "poster")
+         //           bindToModel(thisWindow.modelObject.bufferSerie!!, "Poster")
                 }
             }
         }
@@ -55,8 +55,7 @@ class WindowCargaSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
                 KeyWordTextArea(it) with {
                     height = 100
                     width = 150
-
-                    //  bindToModel(thisWindow.modelObject.selectedSerie!!, "descripcion")
+            //        bindToModel(thisWindow.modelObject.bufferSerie!!, "descripcion")
                 }
             }
 
@@ -160,11 +159,15 @@ class WindowCargaSerie (owner: WindowOwner, model: UnqflixAppModel) : SimpleWind
                 Button(it) with {
                     text = "Accept"
                     fontSize = 10
+                    onClick {  thisWindow.modelObject.agregarSerie() }
+
                 }
 
                 Button(it) with {
                     text = "Cancel"
                     fontSize = 10
+                    onClick {       thisWindow.modelObject.bufferSerie = null }
+
                 }
             }
 
