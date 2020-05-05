@@ -14,6 +14,11 @@ class UnqflixAppModel {
   
     var myseries = mutableListOf<SerieAppModel>()
     var selectedSerie : SerieAppModel? = null
+        set(value) {
+            field = value
+            hasSelection = field !== null
+        }
+    var hasSelection : Boolean = false
 
     init {
         this.initSeries()
