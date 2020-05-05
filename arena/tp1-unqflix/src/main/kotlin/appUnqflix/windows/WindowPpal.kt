@@ -97,6 +97,7 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 text = "Modify Serie"
                 fontSize = 10
                 width = 100
+               // bindEnabledToModel(modelObject,"selectedIsEmpty")
                 onClick(Action {
                     WindowModifSerie(owner, thisWindow.modelObject.selectedSerie!!).open()
                 })
@@ -105,6 +106,7 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 text = "Delete Serie"
                 fontSize = 10
                 width = 100
+               // bindEnabledToModel(modelObject,"selectedIsEmpty")
                 onClick {
                     val acepta = ConfirmDelete(thisWindow,thisWindow.modelObject!!)
                          acepta.onAccept {
@@ -118,6 +120,7 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 text = "Show Serie"
                 fontSize = 10
                 width = 100
+               // bindEnabledToModel(modelObject,"selectedIsEmpty")
                 onClick {
                     thisWindow.close()
                     WindowSeason(thisWindow, thisWindow.modelObject.selectedSerie!!).open()
