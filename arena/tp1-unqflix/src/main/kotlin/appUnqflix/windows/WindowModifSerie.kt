@@ -96,7 +96,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
                     CheckBox(it) with {
                         //            bindTo("selected")
-//            bindEnabledTo("disabled")
+                       bindEnabledTo("availableSerie")
 
                         //OJO aca hay q ver que tipo de dato guardamos en "state" del SerieAppModel y probablemente necesitemos un Transformer (de arena)
 
@@ -143,7 +143,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Button(it) with {
                         caption = ">"
                         fontSize = 10
-                        bindEnabledTo("isEmptyCategory")
+                        bindEnabledTo("emptyCategory")
 //                        width =70
                         onClick {
                             thisWindow.modelObject.removeCategory()
