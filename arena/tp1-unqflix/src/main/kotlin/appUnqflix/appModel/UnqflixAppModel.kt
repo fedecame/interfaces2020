@@ -116,8 +116,6 @@ class UnqflixAppModel {
 //        return myseries.last().relatedContent.toMutableList()
         return allContents
     }
-    fun selectedIsEmpty():Boolean=this.selectedSerie != null
-
 }
 
 

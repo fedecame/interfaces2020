@@ -143,7 +143,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Button(it) with {
                         caption = ">"
                         fontSize = 10
-                        bindEnabledTo("emptyCategory")
+//                        bindEnabledTo("emptyCategory")
 //                        width =70
                         onClick {
                             thisWindow.modelObject.removeCategory()
