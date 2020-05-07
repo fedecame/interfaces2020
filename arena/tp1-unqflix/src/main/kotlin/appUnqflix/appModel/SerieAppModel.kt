@@ -119,4 +119,6 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
         var ids = this.relatedContent.map { it.id }
         return ids.contains(id)
     }
+    fun emptyCategory():Boolean = this.otherCategorySelected != null
+    fun availableSerie():Boolean = this.state is Available
 }

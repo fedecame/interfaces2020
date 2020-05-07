@@ -3,6 +3,7 @@ package appUnqflix.appModel
 import data.getUNQFlix
 import data.idGenerator
 import domain.*
+import org.apache.commons.collections.functors.FalsePredicate
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
 
@@ -13,6 +14,11 @@ class UnqflixAppModel {
   
     var myseries = mutableListOf<SerieAppModel>()
     var selectedSerie : SerieAppModel? = null
+        set(value) {
+            field = value
+            hasSelection = field !== null
+        }
+    var hasSelection : Boolean = false
 
     init {
         this.initSeries()
@@ -24,6 +30,9 @@ class UnqflixAppModel {
 
     fun createSerie(title: String, description: String, poster: String, state: ContentState,
                     categories: MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>): SerieAppModel {
+
+
+
 
         val categories = categories.map { Category(it.id, it.name) }.toMutableList()
         val relatedContent = relatedContent.map { it.content }.toMutableList()
@@ -107,7 +116,6 @@ class UnqflixAppModel {
 //        return myseries.last().relatedContent.toMutableList()
         return allContents
     }
-
 }
 
 
