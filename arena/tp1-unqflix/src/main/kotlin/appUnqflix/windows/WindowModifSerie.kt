@@ -63,7 +63,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
             asHorizontal()
             Panel(it) with {
                 Label(it) with {
-                    text = "Desciption:"
+                    text = "Description:"
                     alignLeft()
                 }
 
@@ -119,47 +119,68 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
             Panel(it) with {
                 asHorizontal()
-                //listaIzq
-                List<CategoryAppModel>(it) with {
-                    bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
-                    bindSelectedTo("ownCategorySelected")
+                Panel(it) with {
+                    Label(it) with {
+                        text = "Categories selected"
+                        fontSize = 8
+                    }
+
+                    //listaIzq
+                    List<CategoryAppModel>(it) with {
+                        bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
+                        bindSelectedTo("ownCategorySelected")
 //                    bindBackgroundTo("color")
-                    setHeight(300)
-                    setWidth(110)
+                        setHeight(100)
+                        setWidth(110)
+                    }
                 }
 
                 Panel(it) with {
-                    //botonArriba
-                    Button(it) with {
-                        caption = "<"
-                        fontSize = 10
-                        bindEnabledTo("hasOtherCategorySelection")
-//                        width =70
-                        onClick {
-                            thisWindow.modelObject.setNewCategory()
-                        }
+                    Label(it) with {
+                        text = ""
+                        setHeight(14)
                     }
 
-                    //botonAbajo
-                    Button(it) with {
-                        caption = ">"
-                        fontSize = 10
-                        bindEnabledTo("hasOwnCategorySelection")
+                    Panel(it) with {
+                        //botonArriba
+                        Button(it) with {
+                            caption = "<"
+                            fontSize = 10
+                            bindEnabledTo("hasOtherCategorySelection")
 //                        width =70
-                        onClick {
-                            thisWindow.modelObject.removeCategory()
+                            onClick {
+                                thisWindow.modelObject.setNewCategory()
+                            }
+                        }
+
+                        //botonAbajo
+                        Button(it) with {
+                            caption = ">"
+                            fontSize = 10
+                            bindEnabledTo("hasOwnCategorySelection")
+//                        width =70
+                            onClick {
+                                thisWindow.modelObject.removeCategory()
+                            }
                         }
                     }
                 }
 
-                //listaDer
-                List<CategoryAppModel>(it) with {
-                    bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
-                    bindSelectedTo("otherCategorySelected")
-                    bindVisibleTo("visible")
+                Panel(it) with {
+                    Label(it) with {
+                        text = "Categories to choose"
+                        fontSize = 8
+                    }
+
+                    //listaDer
+                    List<CategoryAppModel>(it) with {
+                        bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
+                        bindSelectedTo("otherCategorySelected")
+                        bindVisibleTo("visible")
 //                    bindBackgroundTo("color")
-                    setHeight(300)
-                    setWidth(110)
+                        setHeight(100)
+                        setWidth(110)
+                    }
                 }
             }
         }
@@ -173,48 +194,68 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
             Panel(it) with {
                 asHorizontal()
-                //listaIzq
-                List<ContentAppModel>(it) with {
-                    bindItemsTo("relatedContent").adaptWithProp<ContentAppModel>("title")
-                    bindSelectedTo("ownContentSelected")
+                Panel(it) with {
+                    Label(it) with {
+                        text = "Related selected"
+                        fontSize = 8
+                    }
+
+                    //listaIzq
+                    List<ContentAppModel>(it) with {
+                        bindItemsTo("relatedContent").adaptWithProp<ContentAppModel>("title")
+                        bindSelectedTo("ownContentSelected")
 //                    bindBackgroundTo("color")
-                    setHeight(300)
-                    setWidth(110)
+                        setHeight(100)
+                        setWidth(110)
+                    }
                 }
 
                 Panel(it) with {
-                    //botonArriba
-                    Button(it) with {
-                        caption = "<"
-                        fontSize = 10
-                        bindEnabledTo("hasOtherContentSelection")
-//                        width =70
-                        onClick {
-                            thisWindow.modelObject.setNewContent()
-                        }
+                    Label(it) with {
+                        text = ""
+                        setHeight(14)
                     }
 
-                    //botonAbajo
-                    Button(it) with {
-                        caption = ">"
-                        fontSize = 10
-                        bindEnabledTo("hasOwnContentSelection")
+                    Panel(it) with {
+                        //botonArriba
+                        Button(it) with {
+                            caption = "<"
+                            fontSize = 10
+                            bindEnabledTo("hasOtherContentSelection")
 //                        width =70
-                        onClick {
-                            thisWindow.modelObject.removeContent()
+                            onClick {
+                                thisWindow.modelObject.setNewContent()
+                            }
+                        }
+
+                        //botonAbajo
+                        Button(it) with {
+                            caption = ">"
+                            fontSize = 10
+                            bindEnabledTo("hasOwnContentSelection")
+//                        width =70
+                            onClick {
+                                thisWindow.modelObject.removeContent()
+                            }
                         }
                     }
-
                 }
 
-                //listaDer
-                List<ContentAppModel>(it) with {
-                    bindItemsTo("otherContents").adaptWithProp<ContentAppModel>("title")
-                    bindSelectedTo("otherContentSelected")
-                    bindVisibleTo("visible")
+                Panel(it) with {
+                    Label(it) with {
+                        text = "Related to choose"
+                        fontSize = 8
+                    }
+
+                    //listaDer
+                    List<ContentAppModel>(it) with {
+                        bindItemsTo("otherContents").adaptWithProp<ContentAppModel>("title")
+                        bindSelectedTo("otherContentSelected")
+                        bindVisibleTo("visible")
 //                    bindBackgroundTo("color")
-                    setHeight(300)
-                    setWidth(250)
+                        setHeight(100)
+                        setWidth(250)
+                    }
                 }
             }
         }
