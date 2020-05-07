@@ -96,7 +96,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
                     CheckBox(it) with {
                         //            bindTo("selected")
-                       bindEnabledTo("availableSerie")
+//                       bindEnabledTo("availableSerie")
 
                         //OJO aca hay q ver que tipo de dato guardamos en "state" del SerieAppModel y probablemente necesitemos un Transformer (de arena)
 
@@ -133,6 +133,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Button(it) with {
                         caption = "<"
                         fontSize = 10
+                        bindEnabledTo("hasOtherCategorySelection")
 //                        width =70
                         onClick {
                             thisWindow.modelObject.setNewCategory()
@@ -143,19 +144,19 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Button(it) with {
                         caption = ">"
                         fontSize = 10
-//                        bindEnabledTo("emptyCategory")
+                        bindEnabledTo("hasOwnCategorySelection")
 //                        width =70
                         onClick {
                             thisWindow.modelObject.removeCategory()
                         }
                     }
-
                 }
 
                 //listaDer
                 List<CategoryAppModel>(it) with {
                     bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
                     bindSelectedTo("otherCategorySelected")
+                    bindVisibleTo("visible")
 //                    bindBackgroundTo("color")
                     setHeight(300)
                     setWidth(110)
@@ -186,6 +187,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Button(it) with {
                         caption = "<"
                         fontSize = 10
+                        bindEnabledTo("hasOtherContentSelection")
 //                        width =70
                         onClick {
                             thisWindow.modelObject.setNewContent()
@@ -196,6 +198,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Button(it) with {
                         caption = ">"
                         fontSize = 10
+                        bindEnabledTo("hasOwnContentSelection")
 //                        width =70
                         onClick {
                             thisWindow.modelObject.removeContent()
@@ -208,6 +211,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 List<ContentAppModel>(it) with {
                     bindItemsTo("otherContents").adaptWithProp<ContentAppModel>("title")
                     bindSelectedTo("otherContentSelected")
+                    bindVisibleTo("visible")
 //                    bindBackgroundTo("color")
                     setHeight(300)
                     setWidth(250)
