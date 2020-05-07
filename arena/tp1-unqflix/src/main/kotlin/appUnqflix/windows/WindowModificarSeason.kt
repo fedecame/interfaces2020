@@ -11,66 +11,69 @@ import java.awt.Color
 
 class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<SeasonAppModel>(owner, model){
     override fun createFormPanel(p0: Panel?) {
-        title = "modificar Season"
+        title = "modify Season"
+        val tempSeason = SeasonAppModel(modelObject.season, modelObject.unqflixAppModel, modelObject.serieAppModel)
 
-        Label(p0) with  {
-            alignLeft()
-            text = "Title:"
-        }
+        Panel(p0) with {
+            Label(it) with {
+                alignLeft()
+                text = "Title:"
+            }
 
-        TextBox(p0) with {
+            TextBox(it) with {
 
-            fontSize = 10
-            width = 200
-            alignLeft()  // right, left, center
+                fontSize = 10
+                width = 200
+                alignLeft()
+                bindTo("tituloSeason")
 
-            bgColor = Color.GRAY
-            bindTo("tituloSeason")
+            }
+            Label(it) with {
+                alignLeft()
+                text = "Description:"
+            }
 
-        }
-        Label(p0) with {
-            alignLeft()
-            text = "Description:"
-        }
+            KeyWordTextArea(it) with {
+                height = 100
+                width = 100
+                bindTo("description")
+            }
 
-        KeyWordTextArea(p0) with {
+            Label(it) with {
+                alignLeft()
+                text = "Poster:"
+            }
 
-            height = 200
-            bgColor = Color.GRAY
-          bindTo("description")
-//            bindColorTo("blue")
+            TextBox(it) with {
+                fontSize = 10
+                width = 100
+                alignLeft()
+                bindTo("poster")
+            }
 
-        }
+            Panel(it) with {
+                asHorizontal()
+                Button(it) with {
+                    text = "Accept"
+                    fontSize = 10
+                    onClick(Action {
 
-        Label(p0) with {
-            alignLeft()
-            text = "Poster:"
-        }
+                        close()
+                    })
+                }
 
-        TextBox(p0) with {
-
-            fontSize = 10
-            width = 200
-            alignLeft()  // right, left, center
-
-            bgColor = Color.GRAY
-           bindTo("poster")
-        }
-
-        Button(p0) with {
-            text = "Accept"
-            color = Color.BLUE
-            fontSize = 10
-            onClick(Action {
-
-                close() })
-        }
-
-        Button(p0) with {
-            text = "Cancel"
-            color = Color.BLUE
-            fontSize = 10
-            onClick(Action { WindowsDePrueba(owner ,modelObject).open() })
+                Button(it) with {
+                    text = "Cancel"
+                    fontSize = 10
+                    onClick(Action {
+                        // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
+                        thisWindow.modelObject.tituloSeason = tempSeason.tituloSeason
+                        thisWindow.modelObject.description = tempSeason.description
+                        thisWindow.modelObject.poster = tempSeason.poster
+                        close()
+                    })
+                }
+            }
         }
     }
 

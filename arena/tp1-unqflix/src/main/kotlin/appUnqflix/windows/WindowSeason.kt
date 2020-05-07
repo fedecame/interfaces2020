@@ -20,68 +20,83 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
 
     override fun createFormPanel(p0: Panel) {
         title = "temporadas"
-        Label(p0) with {
-            bindTo("title")
-        }
-        Label(p0) with  {
-            text = "Seasons:"
-        }
-
-        table<SeasonAppModel>(p0)with {
-            bindItemsTo("myseasons")
-
-            bindSelectionTo("selected")
-
-
-            column {
-                title = "#"
-                fixedSize = 100
-                bindContentsTo("id")
+        Panel(p0) with {
+            Label(it) with {
+                bindTo("title")
+                alignLeft()
             }
-            column {
-                title = "Title"
-                fixedSize = 100
-
-                bindContentsTo("tituloSeason")
-
+            Label(it) with {
+                text = "Seasons:"
             }
-            column {
-                title = "Chapters"
-                fixedSize = 100
-                bindContentsTo("cantidadChapter")
+
+            table<SeasonAppModel>(it) with {
+                bindItemsTo("myseasons")
+
+                bindSelectionTo("selected")
+
+
+                column {
+                    title = "#"
+                    fixedSize = 100
+                    bindContentsTo("id")
+                }
+                column {
+                    title = "Title"
+                    fixedSize = 100
+
+                    bindContentsTo("tituloSeason")
+
+                }
+                column {
+                    title = "Chapters"
+                    fixedSize = 100
+                    bindContentsTo("cantidadChapter")
+                }
+            }
+
+
+            Panel(it) with {
+                asHorizontal()
+                Button(it) with {
+                    text = "Add new season"
+                    fontSize = 10
+
+                    onClick(Action {
+                        WindowCargaDeSeason(owner, thisWindow.modelObject.selected!!).open()
+
+                    })
+
+                }
+
+                Button(it) with {
+                    text = "Modified Season"
+                    fontSize = 10
+
+                    onClick(Action { WindowModificarSeason(owner, thisWindow.modelObject.selected!!).open() })
+
+                }
+
+                Button(it) with {
+                    text = "Show chapters"
+                    fontSize = 10
+
+                    onClick(Action {
+                        thisWindow.close()
+                        WindowChapters(thisWindow, thisWindow.modelObject.selected!!).open()
+                    })
+
+                }
+
+                Button(it) with {
+                    text = "Back to Unqflix"
+                    fontSize = 10
+
+                    onClick {
+                        thisWindow.close()
+                        WindowPpal(thisWindow, thisWindow.modelObject.unqflixAppModel).open()
+                    }
+                }
             }
         }
-
-        Button(p0) with {
-            text = "Add new season"
-            color = Color.green
-            fontSize = 10
-
-            onClick(Action {
-                WindowCargaDeSeason(owner,modelObject).open()
-//                modelObject.initSeasons()
-            })
-
-        }
-
-        Button(p0) with {
-            text = "Modified Season"
-            color = Color.PINK
-            fontSize = 10
-
-            onClick(Action { WindowModificarSeason(owner,modelObject.selected!!).open() })
-
-        }
-
-        Button(p0) with {
-            text = "Show chapters"
-            color = Color.BLUE
-            fontSize = 10
-
-            onClick(Action { WindowChapters(thisWindow, modelObject.selected!!).open() })
-
-        }
-
-
     }
 }
