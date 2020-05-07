@@ -16,7 +16,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
 
         this.title = "Create new chapter"
 
-
+        setMinWidth(100)
         Panel(mainPanel) with {
 
             Panel(it) with {
@@ -27,7 +27,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
 
                 TextBox(it) with {
                     bindToModel(modelObject, "title")
-                    width= 50
+                    width= 200
                 }
             }
 
@@ -38,10 +38,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                 }
                 KeyWordTextArea(it) with {
                     bindToModel(modelObject, "description")
-                    width = 50
-
-//                    isMultiLine = true
-//            selectFinalLine()
+                    width = 200
                 }
 
             }
@@ -53,7 +50,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                 }
                 NumericField(it) with {
                     bindToModel(modelObject, "duration")
-                    width = 50
+                    width = 200
                 }
             }
 
@@ -64,7 +61,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                 }
                 TextBox(it) with {
                     bindToModel(modelObject, "thumbnail")
-                    width = 50
+                    width = 200
                 }
             }
 
@@ -75,7 +72,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                 }
                 TextBox(it) with {
                     bindToModel(modelObject, "video")
-                    width = 50
+                    width = 200
                 }
             }
 

@@ -14,8 +14,8 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
 
     override fun createFormPanel(mainPanel: Panel?) {
         this.title = "Modify chapter: ${modelObject.title}"
-        // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
         val tempChapter = ChaptersAppModel(modelObject.chapter, modelObject.seasonAppModel)
+        setMinWidth(100)
         Panel(mainPanel) with {
             Label(it) with {
                 text = "Title"
@@ -23,6 +23,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
             }
             TextBox(it) with {
                 bindToModel(modelObject, "title")
+                width = 200
             }
 
         }
@@ -35,6 +36,8 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
             KeyWordTextArea(it) with {
                 
                 bindToModel(modelObject, "description")
+                width = 200
+                height = 50
             }
         }
 
@@ -45,6 +48,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
             }
             NumericField(it) with {
                 bindToModel(modelObject, "duration")
+                width = 200
             }
         }
 
@@ -54,7 +58,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
                 alignLeft()
             }
             TextBox(it) with {
-                width=100
+                width=200
                 bindToModel(modelObject, "thumbnail")
             }
         }
@@ -66,6 +70,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
             }
             TextBox(it) with {
                 bindToModel(modelObject, "video")
+                width = 200
             }
         }
 
