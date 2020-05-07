@@ -20,14 +20,39 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
 //    var relatedContent = mutableListOf<Content>() // preguntar si se justifica crear un ContentAppModel (similar a CategoryAppModel)
 
     var selected : SeasonAppModel? = null
-  
+
+    // necesaria por bugs de arena que al deshabilitar elementos en un panel, deshabilita los siguientes dentro del panel padre...
+    var visible = true
+
+    // Categories
     var otherCategories = mutableListOf<CategoryAppModel>()
     var ownCategorySelected: CategoryAppModel? = null
+        set(value) {
+            this.hasOwnCategorySelection = value !== null
+            field = value
+        }
+    var hasOwnCategorySelection: Boolean = false
     var otherCategorySelected: CategoryAppModel? = null
+        set(value) {
+            this.hasOtherCategorySelection = value !== null
+            field = value
+        }
+    var hasOtherCategorySelection: Boolean = false
 
+    // Contents
     var otherContents = mutableListOf<ContentAppModel>()
     var ownContentSelected: ContentAppModel? = null
+        set(value) {
+            field = value
+            this.hasOwnContentSelection = value !== null
+        }
+    var hasOwnContentSelection: Boolean = false
     var otherContentSelected: ContentAppModel? = null
+        set(value) {
+            field = value
+            this.hasOtherContentSelection = value !== null
+        }
+    var hasOtherContentSelection: Boolean = false
 
     init {
 //        this.id = serie.id
@@ -119,6 +144,6 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
         var ids = this.relatedContent.map { it.id }
         return ids.contains(id)
     }
-    fun emptyCategory():Boolean = this.otherCategorySelected != null
+
     fun availableSerie():Boolean = this.state is Available
 }

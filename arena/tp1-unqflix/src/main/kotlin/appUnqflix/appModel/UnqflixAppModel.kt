@@ -16,7 +16,7 @@ class UnqflixAppModel {
     var selectedSerie : SerieAppModel? = null
         set(value) {
             field = value
-            hasSelection = field !== null
+            this.hasSelection = field !== null
         }
     var hasSelection : Boolean = false
 
