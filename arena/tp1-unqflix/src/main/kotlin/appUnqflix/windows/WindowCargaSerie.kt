@@ -32,10 +32,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
-//            alignLeft()  // right, left, center
-//
-//            bgColor = Color.orange
-//            bindTo("falta var")
+
                     bindToModel(thisWindow.modelObject, "title")
                 }
 
@@ -49,10 +46,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
-//            alignLeft()  // right, left, center
-//
-//            bgColor = Color.orange
-//            bindTo("falta var")
+
                     bindToModel(thisWindow.modelObject, "poster")
                 }
             }
@@ -70,11 +64,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     this.isMultiLine = true
                     height = 100
                     width = 208
-//                    this.selectFinalLine()
-//            bgColor = Color.orange
-//            bindTo("falta var")
-//            bindColorTo("blue")
-//            bindEnabledTo("enabled")
+
                     bindToModel(thisWindow.modelObject, "descripcion")
                 }
             }
@@ -90,18 +80,11 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Label(it) with {
                         text = "Enabled"
                         setWidth(55)
-//                    alignLeft()
+
                     }
 
                     CheckBox(it) with {
-                        //            bindTo("selected")
-//            bindEnabledTo("disabled")
 
-                        //OJO aca hay q ver que tipo de dato guardamos en "state" del SerieAppModel y probablemente necesitemos un Transformer (de arena)
-
-
-
-//                    bindToModel(thisWindow.modelObject.selectedSerie!!, "state")
                     }
 
                 }
@@ -127,7 +110,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     List<CategoryAppModel>(it) with {
                         bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
                         bindSelectedTo("ownCategorySelected")
-//                    bindBackgroundTo("color")
+
                         setHeight(100)
                         setWidth(110)
                     }
@@ -144,7 +127,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                         Button(it) with {
                             caption = "<"
                             fontSize = 10
-//                        width =70
+
                             onClick {
                                 thisWindow.modelObject.setNewCategory()
                             }
@@ -154,7 +137,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                         Button(it) with {
                             caption = ">"
                             fontSize = 10
-//                        width =70
+
                             onClick {
                                 thisWindow.modelObject.removeCategory()
                             }
@@ -172,7 +155,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     List<CategoryAppModel>(it) with {
                         bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
                         bindSelectedTo("otherCategorySelected")
-//                    bindBackgroundTo("color")
+
                         setHeight(100)
                         setWidth(110)
                     }
@@ -198,7 +181,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     List<ContentAppModel>(it) with {
                         bindItemsTo("relatedContent").adaptWithProp<ContentAppModel>("title")
                         bindSelectedTo("ownContentSelected")
-//                    bindBackgroundTo("color")
+
                         setHeight(100)
                         setWidth(110)
                     }
@@ -214,7 +197,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                         Button(it) with {
                             caption = "<"
                             fontSize = 10
-//                        width =70
+
                             onClick {
                                 thisWindow.modelObject.setNewContent()
                             }
@@ -224,7 +207,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                         Button(it) with {
                             caption = ">"
                             fontSize = 10
-//                        width =70
+
                             onClick {
                                 thisWindow.modelObject.removeContent()
                             }

@@ -113,7 +113,7 @@ class UnqflixAppModel {
         val allContents = mutableListOf<Content>()
         allContents.addAll(system.movies)
         allContents.addAll(system.series)
-//        return myseries.last().relatedContent.toMutableList()
+
         return allContents
     }
 }

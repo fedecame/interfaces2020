@@ -86,7 +86,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
             Button(it) with {
                 caption = "Cancel"
                 onClick {
-                    // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
+
                     thisWindow.modelObject.title = tempChapter.title
                     thisWindow.modelObject.description = tempChapter.description
                     thisWindow.modelObject.duration = tempChapter.duration

@@ -33,10 +33,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
-//            alignLeft()  // right, left, center
-//
-//            bgColor = Color.orange
-//            bindTo("falta var")
                     bindToModel(thisWindow.modelObject, "title")
                 }
 
@@ -50,10 +46,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
-//            alignLeft()  // right, left, center
-//
-//            bgColor = Color.orange
-//            bindTo("falta var")
                     bindToModel(thisWindow.modelObject, "poster")
                 }
             }
@@ -71,11 +63,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     this.isMultiLine = true
                     height = 100
                     width = 208
-//                    this.selectFinalLine()
-//            bgColor = Color.orange
-//            bindTo("falta var")
-//            bindColorTo("blue")
-//            bindEnabledTo("enabled")
                     bindToModel(thisWindow.modelObject, "descripcion")
                 }
             }
@@ -91,18 +78,13 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Label(it) with {
                         text = "Enabled"
                         setWidth(55)
-//                    alignLeft()
+
                     }
 
                     CheckBox(it) with {
-                        //            bindTo("selected")
+
                        bindEnabledTo("availableSerie")
 
-                        //OJO aca hay q ver que tipo de dato guardamos en "state" del SerieAppModel y probablemente necesitemos un Transformer (de arena)
-
-
-
-//                    bindToModel(thisWindow.modelObject.selectedSerie!!, "state")
                     }
 
                 }
@@ -123,7 +105,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 List<CategoryAppModel>(it) with {
                     bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
                     bindSelectedTo("ownCategorySelected")
-//                    bindBackgroundTo("color")
+
                     setHeight(300)
                     setWidth(110)
                 }
@@ -133,7 +115,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Button(it) with {
                         caption = "<"
                         fontSize = 10
-//                        width =70
+
                         onClick {
                             thisWindow.modelObject.setNewCategory()
                         }
@@ -143,8 +125,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Button(it) with {
                         caption = ">"
                         fontSize = 10
-//                        bindEnabledTo("emptyCategory")
-//                        width =70
+
                         onClick {
                             thisWindow.modelObject.removeCategory()
                         }
@@ -156,7 +137,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 List<CategoryAppModel>(it) with {
                     bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
                     bindSelectedTo("otherCategorySelected")
-//                    bindBackgroundTo("color")
+
                     setHeight(300)
                     setWidth(110)
                 }
@@ -176,7 +157,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 List<ContentAppModel>(it) with {
                     bindItemsTo("relatedContent").adaptWithProp<ContentAppModel>("title")
                     bindSelectedTo("ownContentSelected")
-//                    bindBackgroundTo("color")
+
                     setHeight(300)
                     setWidth(110)
                 }
@@ -186,7 +167,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Button(it) with {
                         caption = "<"
                         fontSize = 10
-//                        width =70
+
                         onClick {
                             thisWindow.modelObject.setNewContent()
                         }
@@ -196,7 +177,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Button(it) with {
                         caption = ">"
                         fontSize = 10
-//                        width =70
+
                         onClick {
                             thisWindow.modelObject.removeContent()
                         }
@@ -208,7 +189,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 List<ContentAppModel>(it) with {
                     bindItemsTo("otherContents").adaptWithProp<ContentAppModel>("title")
                     bindSelectedTo("otherContentSelected")
-//                    bindBackgroundTo("color")
+
                     setHeight(300)
                     setWidth(250)
                 }
@@ -229,8 +210,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 text = "Cancel"
                 fontSize = 10
                 onClick {
-                    //setear los valores que tenia antes de editarse
-                    // para eso hay q hacer un SerieAppModel temporal
                     thisWindow.modelObject.title = tempSerie.title
                     thisWindow.modelObject.descripcion = tempSerie.descripcion
                     thisWindow.modelObject.poster = tempSerie.poster
