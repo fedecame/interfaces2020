@@ -20,14 +20,39 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
 
 
     var selected : SeasonAppModel? = null
-  
+
+    // necesaria por bugs de arena que al deshabilitar elementos en un panel, deshabilita los siguientes dentro del panel padre...
+    var visible = true
+
+    // Categories
     var otherCategories = mutableListOf<CategoryAppModel>()
     var ownCategorySelected: CategoryAppModel? = null
+        set(value) {
+            field = value
+            this.hasOwnCategorySelection = value !== null
+        }
+    var hasOwnCategorySelection: Boolean = false
     var otherCategorySelected: CategoryAppModel? = null
+        set(value) {
+            field = value
+            this.hasOtherCategorySelection = value !== null
+        }
+    var hasOtherCategorySelection: Boolean = false
 
+    // Contents
     var otherContents = mutableListOf<ContentAppModel>()
     var ownContentSelected: ContentAppModel? = null
+        set(value) {
+            field = value
+            this.hasOwnContentSelection = value !== null
+        }
+    var hasOwnContentSelection: Boolean = false
     var otherContentSelected: ContentAppModel? = null
+        set(value) {
+            field = value
+            this.hasOtherContentSelection = value !== null
+        }
+    var hasOtherContentSelection: Boolean = false
 
     init {
 
@@ -69,13 +94,13 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
         return seasonAppModel
     }
 
-    fun adaptar():String{
-        if(serie!!.state is Available){
-            return "OK"
-        }else{
-            return "X"
-        }
-    }
+//    fun adaptar():String{
+//        if(this.state is Available){
+//            return "OK"
+//        }else{
+//            return "X"
+//        }
+//    }
 
     fun setNewCategory() {
         categories.add(this.otherCategorySelected!!)
@@ -114,6 +139,6 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
         var ids = this.relatedContent.map { it.id }
         return ids.contains(id)
     }
-    fun emptyCategory():Boolean = this.otherCategorySelected != null
-    fun availableSerie():Boolean = this.state is Available
+
+//    fun availableSerie():Boolean = this.state is Available
 }

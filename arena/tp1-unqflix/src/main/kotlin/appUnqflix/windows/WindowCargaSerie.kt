@@ -4,6 +4,7 @@ import appUnqflix.appModel.CategoryAppModel
 import appUnqflix.appModel.ContentAppModel
 import appUnqflix.appModel.SerieAppModel
 import appUnqflix.appModel.UnqflixAppModel
+import appUnqflix.appModel.transformers.StateTransformer
 import domain.Unavailable
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
@@ -32,7 +33,6 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
-
                     bindToModel(thisWindow.modelObject, "title")
                 }
 
@@ -46,7 +46,6 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
-
                     bindToModel(thisWindow.modelObject, "poster")
                 }
             }
@@ -56,7 +55,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
             asHorizontal()
             Panel(it) with {
                 Label(it) with {
-                    text = "Desciption:"
+                    text = "Description:"
                     alignLeft()
                 }
 
@@ -64,7 +63,6 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     this.isMultiLine = true
                     height = 100
                     width = 208
-
                     bindToModel(thisWindow.modelObject, "descripcion")
                 }
             }
@@ -80,13 +78,11 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Label(it) with {
                         text = "Enabled"
                         setWidth(55)
-
                     }
 
                     CheckBox(it) with {
-
+                        bindTo("state").setTransformer(StateTransformer())
                     }
-
                 }
             }
         }
@@ -104,30 +100,30 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 Panel(it) with {
                     Label(it) with {
                         text = "Categories selected"
-                        fontSize = 7
+                        fontSize = 8
                     }
+
                     //listaIzq
                     List<CategoryAppModel>(it) with {
                         bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
                         bindSelectedTo("ownCategorySelected")
-
                         setHeight(100)
                         setWidth(110)
                     }
                 }
-
 
                 Panel(it) with {
                     Label(it) with {
                         text = ""
                         setHeight(14)
                     }
+
                     Panel(it) with {
                         //botonArriba
                         Button(it) with {
                             caption = "<"
                             fontSize = 10
-
+                            bindEnabledTo("hasOtherCategorySelection")
                             onClick {
                                 thisWindow.modelObject.setNewCategory()
                             }
@@ -137,7 +133,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                         Button(it) with {
                             caption = ">"
                             fontSize = 10
-
+                            bindEnabledTo("hasOwnCategorySelection")
                             onClick {
                                 thisWindow.modelObject.removeCategory()
                             }
@@ -145,17 +141,17 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     }
                 }
 
-
                 Panel(it) with {
                     Label(it) with {
                         text = "Categories to choose"
-                        fontSize = 7
+                        fontSize = 8
                     }
+
                     //listaDer
                     List<CategoryAppModel>(it) with {
                         bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
                         bindSelectedTo("otherCategorySelected")
-
+                        bindVisibleTo("visible")
                         setHeight(100)
                         setWidth(110)
                     }
@@ -169,19 +165,19 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 text = "Related Content:"
                 alignLeft()
             }
+
             Panel(it) with {
                 asHorizontal()
                 Panel(it)with {
                     Label(it) with {
                         text = "Related selected"
-                        fontSize = 7
+                        fontSize = 8
                     }
 
                     //listaIzq
                     List<ContentAppModel>(it) with {
                         bindItemsTo("relatedContent").adaptWithProp<ContentAppModel>("title")
                         bindSelectedTo("ownContentSelected")
-
                         setHeight(100)
                         setWidth(110)
                     }
@@ -192,12 +188,13 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                         text = ""
                         setHeight(14)
                     }
+
                     Panel(it) with {
                         //botonArriba
                         Button(it) with {
                             caption = "<"
                             fontSize = 10
-
+                            bindEnabledTo("hasOtherContentSelection")
                             onClick {
                                 thisWindow.modelObject.setNewContent()
                             }
@@ -207,25 +204,25 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                         Button(it) with {
                             caption = ">"
                             fontSize = 10
-
+                            bindEnabledTo("hasOwnContentSelection")
                             onClick {
                                 thisWindow.modelObject.removeContent()
                             }
                         }
-
                     }
                 }
 
                 Panel(it) with {
                     Label(it) with {
                         text = "Related to choose"
-                        fontSize = 7
+                        fontSize = 8
                     }
+
                     //listaDer
                     List<ContentAppModel>(it) with {
                         bindItemsTo("otherContents").adaptWithProp<ContentAppModel>("title")
                         bindSelectedTo("otherContentSelected")
-//                    bindBackgroundTo("color")
+                        bindVisibleTo("visible")
                         setHeight(100)
                         setWidth(250)
                     }
@@ -243,7 +240,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                         thisWindow.modelObject.title,
                         thisWindow.modelObject.descripcion,
                         thisWindow.modelObject.poster,
-                        Unavailable(),
+                        thisWindow.modelObject.state,
                         thisWindow.modelObject.categories,
                         thisWindow.modelObject.relatedContent
                     )

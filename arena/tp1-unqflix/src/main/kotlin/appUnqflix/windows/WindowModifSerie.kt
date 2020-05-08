@@ -4,6 +4,7 @@ import appUnqflix.appModel.CategoryAppModel
 import appUnqflix.appModel.ContentAppModel
 import appUnqflix.appModel.SerieAppModel
 import appUnqflix.appModel.UnqflixAppModel
+import appUnqflix.appModel.transformers.StateTransformer
 import domain.Content
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
@@ -19,8 +20,8 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
     override fun createFormPanel(p0: Panel?) {
         this.title = "Modify serie: ${modelObject.title}"
-        // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
         val tempSerie = SerieAppModel(modelObject.serie, modelObject.unqflixAppModel)
+        modelObject.unqflixAppModel.selectedSerie = tempSerie
 
         Panel(p0) with {
             asHorizontal()
@@ -55,7 +56,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
             asHorizontal()
             Panel(it) with {
                 Label(it) with {
-                    text = "Desciption:"
+                    text = "Description:"
                     alignLeft()
                 }
 
@@ -78,15 +79,11 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Label(it) with {
                         text = "Enabled"
                         setWidth(55)
-
                     }
 
                     CheckBox(it) with {
-
-                       bindEnabledTo("availableSerie")
-
+                        bindTo("state").setTransformer(StateTransformer())
                     }
-
                 }
             }
         }
@@ -101,45 +98,64 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
             Panel(it) with {
                 asHorizontal()
-                //listaIzq
-                List<CategoryAppModel>(it) with {
-                    bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
-                    bindSelectedTo("ownCategorySelected")
+                Panel(it) with {
+                    Label(it) with {
+                        text = "Categories selected"
+                        fontSize = 8
+                    }
 
-                    setHeight(300)
-                    setWidth(110)
+                    //listaIzq
+                    List<CategoryAppModel>(it) with {
+                        bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
+                        bindSelectedTo("ownCategorySelected")
+                        setHeight(100)
+                        setWidth(110)
+                    }
                 }
 
                 Panel(it) with {
-                    //botonArriba
-                    Button(it) with {
-                        caption = "<"
-                        fontSize = 10
-
-                        onClick {
-                            thisWindow.modelObject.setNewCategory()
-                        }
+                    Label(it) with {
+                        text = ""
+                        setHeight(14)
                     }
 
-                    //botonAbajo
-                    Button(it) with {
-                        caption = ">"
-                        fontSize = 10
+                    Panel(it) with {
+                        //botonArriba
+                        Button(it) with {
+                            caption = "<"
+                            fontSize = 10
+                            bindEnabledTo("hasOtherCategorySelection")
+                            onClick {
+                                thisWindow.modelObject.setNewCategory()
+                            }
+                        }
 
-                        onClick {
-                            thisWindow.modelObject.removeCategory()
+                        //botonAbajo
+                        Button(it) with {
+                            caption = ">"
+                            fontSize = 10
+                            bindEnabledTo("hasOwnCategorySelection")
+                            onClick {
+                                thisWindow.modelObject.removeCategory()
+                            }
                         }
                     }
-
                 }
+              
+                Panel(it) with {
+                    Label(it) with {
+                        text = "Categories to choose"
+                        fontSize = 8
+                    }
 
-                //listaDer
-                List<CategoryAppModel>(it) with {
-                    bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
-                    bindSelectedTo("otherCategorySelected")
-
-                    setHeight(300)
-                    setWidth(110)
+                    //listaDer
+                    List<CategoryAppModel>(it) with {
+                        bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
+                        bindSelectedTo("otherCategorySelected")
+                        bindVisibleTo("visible")
+                        setHeight(100)
+                        setWidth(110)
+                    }
                 }
             }
         }
@@ -153,45 +169,64 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
             Panel(it) with {
                 asHorizontal()
-                //listaIzq
-                List<ContentAppModel>(it) with {
-                    bindItemsTo("relatedContent").adaptWithProp<ContentAppModel>("title")
-                    bindSelectedTo("ownContentSelected")
+                Panel(it) with {
+                    Label(it) with {
+                        text = "Related selected"
+                        fontSize = 8
+                    }
 
-                    setHeight(300)
-                    setWidth(110)
+                    //listaIzq
+                    List<ContentAppModel>(it) with {
+                        bindItemsTo("relatedContent").adaptWithProp<ContentAppModel>("title")
+                        bindSelectedTo("ownContentSelected")
+                        setHeight(100)
+                        setWidth(110)
+                    }
                 }
 
                 Panel(it) with {
-                    //botonArriba
-                    Button(it) with {
-                        caption = "<"
-                        fontSize = 10
-
-                        onClick {
-                            thisWindow.modelObject.setNewContent()
-                        }
+                    Label(it) with {
+                        text = ""
+                        setHeight(14)
                     }
 
-                    //botonAbajo
-                    Button(it) with {
-                        caption = ">"
-                        fontSize = 10
+                    Panel(it) with {
+                        //botonArriba
+                        Button(it) with {
+                            caption = "<"
+                            fontSize = 10
+                            bindEnabledTo("hasOtherContentSelection")
+                            onClick {
+                                thisWindow.modelObject.setNewContent()
+                            }
+                        }
 
-                        onClick {
-                            thisWindow.modelObject.removeContent()
+                        //botonAbajo
+                        Button(it) with {
+                            caption = ">"
+                            fontSize = 10
+                            bindEnabledTo("hasOwnContentSelection")
+                            onClick {
+                                thisWindow.modelObject.removeContent()
+                            }
                         }
                     }
-
                 }
 
-                //listaDer
-                List<ContentAppModel>(it) with {
-                    bindItemsTo("otherContents").adaptWithProp<ContentAppModel>("title")
-                    bindSelectedTo("otherContentSelected")
+                Panel(it) with {
+                    Label(it) with {
+                        text = "Related to choose"
+                        fontSize = 8
+                    }
 
-                    setHeight(300)
-                    setWidth(250)
+                    //listaDer
+                    List<ContentAppModel>(it) with {
+                        bindItemsTo("otherContents").adaptWithProp<ContentAppModel>("title")
+                        bindSelectedTo("otherContentSelected")
+                        bindVisibleTo("visible")
+                        setHeight(100)
+                        setWidth(250)
+                    }
                 }
             }
         }
@@ -219,11 +254,11 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     thisWindow.modelObject.relatedContent = tempSerie.relatedContent
 
                     thisWindow.modelObject.otherCategories = tempSerie.otherCategories
-                    thisWindow.modelObject.ownCategorySelected = tempSerie.ownCategorySelected
-                    thisWindow.modelObject.otherCategorySelected = tempSerie.otherCategorySelected
+                    thisWindow.modelObject.ownCategorySelected = null
+                    thisWindow.modelObject.otherCategorySelected = null
                     thisWindow.modelObject.otherContents = tempSerie.otherContents
-                    thisWindow.modelObject.ownContentSelected = tempSerie.ownContentSelected
-                    thisWindow.modelObject.otherContentSelected = tempSerie.otherContentSelected
+                    thisWindow.modelObject.ownContentSelected = null
+                    thisWindow.modelObject.otherContentSelected = null
 
                     thisWindow.close()
                 }
