@@ -18,7 +18,7 @@ class ConfirmDelete(owner: WindowOwner , model: UnqflixAppModel): Dialog<Unqflix
         title = "Confirm Delete"
 
         Label(mainPanel) with {
-            // var nombre:String = modelObject.selectedSerie!!.title
+
             text = "Confirm Delete of ${modelObject.selectedSerie!!.title}"
         }
         Panel(mainPanel) with {

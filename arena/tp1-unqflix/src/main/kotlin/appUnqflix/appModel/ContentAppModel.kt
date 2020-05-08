@@ -21,11 +21,8 @@ class ContentAppModel (val content: Content) {
         this.state = content.state
 
         this.relatedContent = content.relatedContent
-//        this.initRelatedContent()
+
     }
 
-    fun initRelatedContent() {
-//        relatedContent = content.relatedContent.map { ContentAppModel(it) }.toMutableList()
-    }
 
 }

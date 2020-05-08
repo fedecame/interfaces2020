@@ -66,7 +66,7 @@ class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<S
                     text = "Cancel"
                     fontSize = 10
                     onClick(Action {
-                        // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
+
                         thisWindow.modelObject.tituloSeason = tempSeason.tituloSeason
                         thisWindow.modelObject.description = tempSeason.description
                         thisWindow.modelObject.poster = tempSeason.poster

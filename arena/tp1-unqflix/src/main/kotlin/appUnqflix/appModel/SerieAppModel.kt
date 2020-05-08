@@ -13,11 +13,11 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
     var title: String
     var descripcion: String
     var poster: String
-    var state: ContentState // esto tmb se podria representar con un AppModel..preguntar si se justifica.
+    var state: ContentState
     var categories = mutableListOf<CategoryAppModel>()
     var myseasons = mutableListOf<SeasonAppModel>()
     var relatedContent = mutableListOf<ContentAppModel>()
-//    var relatedContent = mutableListOf<Content>() // preguntar si se justifica crear un ContentAppModel (similar a CategoryAppModel)
+
 
     var selected : SeasonAppModel? = null
 
@@ -55,11 +55,7 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
     var hasOtherContentSelection: Boolean = false
 
     init {
-//        this.id = serie.id
-//        this.title = serie.title
-//        this.descripcion = serie.description
-//        this.poster = serie.poster
-//        this.state = serie.state
+
       
         this.id = serie?.id ?: ""
         this.title = serie?.title ?: ""
@@ -67,8 +63,7 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
         this.poster = serie?.poster ?: ""
         this.state = serie?.state ?: Unavailable()
 
-//        this.relatedContent = serie.relatedContent
-//        this.relatedContent = serie?.relatedContent ?: mutableListOf<Content>()
+
         this.initContents()
         this.initOtherContents()
         this.initCategories()
