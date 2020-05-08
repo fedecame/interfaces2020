@@ -72,7 +72,9 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
                     text = "Modified Season"
                     fontSize = 10
 
-                    onClick(Action { WindowModificarSeason(owner, thisWindow.modelObject.selected!!).open() })
+                    onClick(Action {
+                        WindowModificarSeason(owner, thisWindow.modelObject.selected!!).open()
+                    })
 
                 }
 

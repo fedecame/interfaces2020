@@ -4,6 +4,7 @@ import appUnqflix.appModel.CategoryAppModel
 import appUnqflix.appModel.ContentAppModel
 import appUnqflix.appModel.SerieAppModel
 import appUnqflix.appModel.UnqflixAppModel
+import appUnqflix.appModel.transformers.StateTransformer
 import domain.Content
 import org.uqbar.arena.kotlin.extensions.*
 import org.uqbar.arena.widgets.*
@@ -19,8 +20,8 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
     override fun createFormPanel(p0: Panel?) {
         this.title = "Modify serie: ${modelObject.title}"
-        // Preguntar si tiene sentido delegar lo siguiente al appModel/viewModel
         val tempSerie = SerieAppModel(modelObject.serie, modelObject.unqflixAppModel)
+        modelObject.unqflixAppModel.selectedSerie = tempSerie
 
         Panel(p0) with {
             asHorizontal()
@@ -33,10 +34,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
-//            alignLeft()  // right, left, center
-//
-//            bgColor = Color.orange
-//            bindTo("falta var")
                     bindToModel(thisWindow.modelObject, "title")
                 }
 
@@ -50,10 +47,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 TextBox(it) with {
                     fontSize = 10
                     width = 200
-//            alignLeft()  // right, left, center
-//
-//            bgColor = Color.orange
-//            bindTo("falta var")
                     bindToModel(thisWindow.modelObject, "poster")
                 }
             }
@@ -71,11 +64,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     this.isMultiLine = true
                     height = 100
                     width = 208
-//                    this.selectFinalLine()
-//            bgColor = Color.orange
-//            bindTo("falta var")
-//            bindColorTo("blue")
-//            bindEnabledTo("enabled")
                     bindToModel(thisWindow.modelObject, "descripcion")
                 }
             }
@@ -91,18 +79,11 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     Label(it) with {
                         text = "Enabled"
                         setWidth(55)
-//                    alignLeft()
                     }
 
                     CheckBox(it) with {
-                        //            bindTo("selected")
-//                       bindEnabledTo("availableSerie")
-
-                        //OJO aca hay q ver que tipo de dato guardamos en "state" del SerieAppModel y probablemente necesitemos un Transformer (de arena)
-
-
-
-//                    bindToModel(thisWindow.modelObject.selectedSerie!!, "state")
+                        bindTo("state").setTransformer(StateTransformer())
+//                        bindTo("enabled")
                     }
 
                 }
@@ -129,7 +110,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     List<CategoryAppModel>(it) with {
                         bindItemsTo("categories").adaptWithProp<CategoryAppModel>("name")
                         bindSelectedTo("ownCategorySelected")
-//                    bindBackgroundTo("color")
                         setHeight(100)
                         setWidth(110)
                     }
@@ -147,7 +127,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                             caption = "<"
                             fontSize = 10
                             bindEnabledTo("hasOtherCategorySelection")
-//                        width =70
                             onClick {
                                 thisWindow.modelObject.setNewCategory()
                             }
@@ -158,7 +137,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                             caption = ">"
                             fontSize = 10
                             bindEnabledTo("hasOwnCategorySelection")
-//                        width =70
                             onClick {
                                 thisWindow.modelObject.removeCategory()
                             }
@@ -177,7 +155,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                         bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
                         bindSelectedTo("otherCategorySelected")
                         bindVisibleTo("visible")
-//                    bindBackgroundTo("color")
                         setHeight(100)
                         setWidth(110)
                     }
@@ -204,7 +181,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     List<ContentAppModel>(it) with {
                         bindItemsTo("relatedContent").adaptWithProp<ContentAppModel>("title")
                         bindSelectedTo("ownContentSelected")
-//                    bindBackgroundTo("color")
                         setHeight(100)
                         setWidth(110)
                     }
@@ -222,7 +198,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                             caption = "<"
                             fontSize = 10
                             bindEnabledTo("hasOtherContentSelection")
-//                        width =70
                             onClick {
                                 thisWindow.modelObject.setNewContent()
                             }
@@ -233,7 +208,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                             caption = ">"
                             fontSize = 10
                             bindEnabledTo("hasOwnContentSelection")
-//                        width =70
                             onClick {
                                 thisWindow.modelObject.removeContent()
                             }
@@ -252,7 +226,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                         bindItemsTo("otherContents").adaptWithProp<ContentAppModel>("title")
                         bindSelectedTo("otherContentSelected")
                         bindVisibleTo("visible")
-//                    bindBackgroundTo("color")
                         setHeight(100)
                         setWidth(250)
                     }
@@ -274,8 +247,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 text = "Cancel"
                 fontSize = 10
                 onClick {
-                    //setear los valores que tenia antes de editarse
-                    // para eso hay q hacer un SerieAppModel temporal
                     thisWindow.modelObject.title = tempSerie.title
                     thisWindow.modelObject.descripcion = tempSerie.descripcion
                     thisWindow.modelObject.poster = tempSerie.poster
@@ -285,11 +256,11 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     thisWindow.modelObject.relatedContent = tempSerie.relatedContent
 
                     thisWindow.modelObject.otherCategories = tempSerie.otherCategories
-                    thisWindow.modelObject.ownCategorySelected = tempSerie.ownCategorySelected
-                    thisWindow.modelObject.otherCategorySelected = tempSerie.otherCategorySelected
+                    thisWindow.modelObject.ownCategorySelected = null
+                    thisWindow.modelObject.otherCategorySelected = null
                     thisWindow.modelObject.otherContents = tempSerie.otherContents
-                    thisWindow.modelObject.ownContentSelected = tempSerie.ownContentSelected
-                    thisWindow.modelObject.otherContentSelected = tempSerie.otherContentSelected
+                    thisWindow.modelObject.ownContentSelected = null
+                    thisWindow.modelObject.otherContentSelected = null
 
                     thisWindow.close()
                 }

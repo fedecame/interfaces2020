@@ -28,14 +28,14 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
     var otherCategories = mutableListOf<CategoryAppModel>()
     var ownCategorySelected: CategoryAppModel? = null
         set(value) {
-            this.hasOwnCategorySelection = value !== null
             field = value
+            this.hasOwnCategorySelection = value !== null
         }
     var hasOwnCategorySelection: Boolean = false
     var otherCategorySelected: CategoryAppModel? = null
         set(value) {
-            this.hasOtherCategorySelection = value !== null
             field = value
+            this.hasOtherCategorySelection = value !== null
         }
     var hasOtherCategorySelection: Boolean = false
 
@@ -99,13 +99,13 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
         return seasonAppModel
     }
 
-    fun adaptar():String{
-        if(serie!!.state is Available){
-            return "OK"
-        }else{
-            return "X"
-        }
-    }
+//    fun adaptar():String{
+//        if(this.state is Available){
+//            return "OK"
+//        }else{
+//            return "X"
+//        }
+//    }
 
     fun setNewCategory() {
         categories.add(this.otherCategorySelected!!)
@@ -145,5 +145,5 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
         return ids.contains(id)
     }
 
-    fun availableSerie():Boolean = this.state is Available
+//    fun availableSerie():Boolean = this.state is Available
 }
