@@ -12,7 +12,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
     override fun addActions(actionsPanel: Panel?) {
     }
 
-    fun mirrorSelectedChapterValues() {
+    private fun mirrorSelectedChapterValues() {
         modelObject.title = modelObject.seasonAppModel.selectedChapter!!.title
         modelObject.description = modelObject.seasonAppModel.selectedChapter!!.description
         modelObject.duration = modelObject.seasonAppModel.selectedChapter!!.duration
@@ -20,7 +20,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
         modelObject.video = modelObject.seasonAppModel.selectedChapter!!.video
     }
 
-    fun updateSelectedChapterValues() {
+    private fun updateSelectedChapterValues() {
         modelObject.seasonAppModel.selectedChapter!!.title = modelObject.title
         modelObject.seasonAppModel.selectedChapter!!.description = modelObject.description
         modelObject.seasonAppModel.selectedChapter!!.duration = modelObject.duration

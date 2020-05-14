@@ -11,7 +11,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
     override fun addActions(actionsPanel: Panel?) {
     }
 
-    fun agregarCapituloActual() {
+    private fun addNewChapter() {
         modelObject.seasonAppModel.agregarChapter(
             modelObject.title,
             modelObject.description,
@@ -90,7 +90,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                 Button(it) with {
                     caption = "Accept"
                     onClick {
-                        thisWindow.agregarCapituloActual()
+                        thisWindow.addNewChapter()
                         thisWindow.close()
                     }
                 }
@@ -101,7 +101,6 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                         thisWindow.close()
                     }
                 }
-
             }
         }
     }

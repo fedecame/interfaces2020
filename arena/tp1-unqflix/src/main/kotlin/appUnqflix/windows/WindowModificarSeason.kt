@@ -11,13 +11,13 @@ import java.awt.Color
 
 class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<SeasonAppModel>(owner, model){
 
-    fun mirrorSelectedSeasonValues(){
+    private fun mirrorSelectedSeasonValues(){
         modelObject.tituloSeason = modelObject.serieAppModel!!.selected!!.tituloSeason
         modelObject.description = modelObject.serieAppModel!!.selected!!.description
         modelObject.poster = modelObject.serieAppModel!!.selected!!.poster
     }
 
-    fun updateSelectedSeasonValues(){
+    private fun updateSelectedSeasonValues(){
         modelObject.serieAppModel!!.selected!!.tituloSeason = modelObject.tituloSeason
         modelObject.serieAppModel!!.selected!!.description = modelObject.description
         modelObject.serieAppModel!!.selected!!.poster = modelObject.poster

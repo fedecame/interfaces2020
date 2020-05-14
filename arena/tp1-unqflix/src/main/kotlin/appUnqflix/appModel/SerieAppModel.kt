@@ -18,11 +18,7 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
     var myseasons = mutableListOf<SeasonAppModel>()
     var relatedContent = mutableListOf<ContentAppModel>()
 
-
     var selected : SeasonAppModel? = null
-
-    // necesaria por bugs de arena que al deshabilitar elementos en un panel, deshabilita los siguientes dentro del panel padre...
-    var visible = true
 
     // Categories
     var otherCategories = mutableListOf<CategoryAppModel>()
@@ -55,23 +51,17 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
     var hasOtherContentSelection: Boolean = false
 
     init {
-
-      
         this.id = serie?.id ?: ""
         this.title = serie?.title ?: ""
         this.descripcion = serie?.description ?: ""
         this.poster = serie?.poster ?: ""
         this.state = serie?.state ?: Unavailable()
 
-
         this.initContents()
         this.initOtherContents()
         this.initCategories()
         this.initOtherCategories()
         this.initSeasons()
-
-
-
     }
 
     fun initContents() {
@@ -80,12 +70,10 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
 
     fun initSeasons() {
         this.myseasons = serie?.seasons?.map {SeasonAppModel(it, unqflixAppModel, this) }?.toMutableList() ?: mutableListOf<SeasonAppModel>()
-//        this.myseasons = serie.seasons.map { SeasonAppModel(it, unqflixAppModel, this) }.toMutableList()
     }
 
     fun initCategories() {
         this.categories = serie?.categories?.map { CategoryAppModel(it) }?.toMutableList() ?: mutableListOf<CategoryAppModel>()
-//        this.categories = serie!!.categories.map { CategoryAppModel(it) }.toMutableList()
     }
 
     fun agregarSeason(title : String, description : String, poster : String): SeasonAppModel {

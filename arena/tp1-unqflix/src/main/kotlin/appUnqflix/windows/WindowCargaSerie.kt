@@ -18,6 +18,17 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
     }
 
+    private fun addNewSerie() {
+        modelObject.unqflixAppModel.createSerie(
+            modelObject.title,
+            modelObject.descripcion,
+            modelObject.poster,
+            modelObject.state,
+            modelObject.categories,
+            modelObject.relatedContent
+        )
+    }
+
     override fun createFormPanel(p0: Panel?) {
 
         this.title = "Create new serie"
@@ -151,7 +162,6 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     List<CategoryAppModel>(it) with {
                         bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
                         bindSelectedTo("otherCategorySelected")
-                        bindVisibleTo("visible")
                         setHeight(100)
                         setWidth(110)
                     }
@@ -222,7 +232,6 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     List<ContentAppModel>(it) with {
                         bindItemsTo("otherContents").adaptWithProp<ContentAppModel>("title")
                         bindSelectedTo("otherContentSelected")
-                        bindVisibleTo("visible")
                         setHeight(100)
                         setWidth(250)
                     }
@@ -236,14 +245,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 text = "Accept"
                 fontSize = 10
                 onClick {
-                    thisWindow.modelObject.unqflixAppModel.createSerie(
-                        thisWindow.modelObject.title,
-                        thisWindow.modelObject.descripcion,
-                        thisWindow.modelObject.poster,
-                        thisWindow.modelObject.state,
-                        thisWindow.modelObject.categories,
-                        thisWindow.modelObject.relatedContent
-                    )
+                    thisWindow.addNewSerie()
                     thisWindow.close()
                 }
             }
