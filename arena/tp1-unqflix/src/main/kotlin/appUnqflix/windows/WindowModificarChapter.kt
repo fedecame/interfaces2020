@@ -12,9 +12,27 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
     override fun addActions(actionsPanel: Panel?) {
     }
 
+    private fun mirrorSelectedChapterValues() {
+        modelObject.title = modelObject.seasonAppModel.selectedChapter!!.title
+        modelObject.description = modelObject.seasonAppModel.selectedChapter!!.description
+        modelObject.duration = modelObject.seasonAppModel.selectedChapter!!.duration
+        modelObject.thumbnail = modelObject.seasonAppModel.selectedChapter!!.thumbnail
+        modelObject.video = modelObject.seasonAppModel.selectedChapter!!.video
+    }
+
+    private fun updateSelectedChapterValues() {
+        modelObject.seasonAppModel.selectedChapter!!.title = modelObject.title
+        modelObject.seasonAppModel.selectedChapter!!.description = modelObject.description
+        modelObject.seasonAppModel.selectedChapter!!.duration = modelObject.duration
+        modelObject.seasonAppModel.selectedChapter!!.thumbnail = modelObject.thumbnail
+        modelObject.seasonAppModel.selectedChapter!!.video = modelObject.video
+    }
+
     override fun createFormPanel(mainPanel: Panel?) {
-        this.title = "Modify chapter: ${modelObject.title}"
-        val tempChapter = ChaptersAppModel(modelObject.chapter, modelObject.seasonAppModel)
+        this.mirrorSelectedChapterValues()
+
+        this.title = "Modify chapter: ${modelObject.seasonAppModel.selectedChapter!!.title}"
+
         setMinWidth(100)
         Panel(mainPanel) with {
             Label(it) with {
@@ -22,7 +40,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
                 alignLeft()
             }
             TextBox(it) with {
-                bindToModel(modelObject, "title")
+                bindTo("title")
                 width = 200
             }
 
@@ -34,8 +52,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
                 text = "Description"
             }
             KeyWordTextArea(it) with {
-                
-                bindToModel(modelObject, "description")
+                bindTo("description")
                 width = 200
                 height = 50
             }
@@ -47,7 +64,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
                 text = "Duration"
             }
             NumericField(it) with {
-                bindToModel(modelObject, "duration")
+                bindTo("duration")
                 width = 200
             }
         }
@@ -59,7 +76,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
             }
             TextBox(it) with {
                 width=200
-                bindToModel(modelObject, "thumbnail")
+                bindTo("thumbnail")
             }
         }
 
@@ -69,7 +86,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
                 alignLeft()
             }
             TextBox(it) with {
-                bindToModel(modelObject, "video")
+                bindTo("video")
                 width = 200
             }
         }
@@ -79,6 +96,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
             Button(it) with {
                 caption = "Accept"
                 onClick {
+                    thisWindow.updateSelectedChapterValues()
                     thisWindow.close()
                 }
             }
@@ -86,12 +104,6 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
             Button(it) with {
                 caption = "Cancel"
                 onClick {
-
-                    thisWindow.modelObject.title = tempChapter.title
-                    thisWindow.modelObject.description = tempChapter.description
-                    thisWindow.modelObject.duration = tempChapter.duration
-                    thisWindow.modelObject.thumbnail = tempChapter.thumbnail
-                    thisWindow.modelObject.video = tempChapter.video
                     thisWindow.close()
                 }
             }

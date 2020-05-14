@@ -15,6 +15,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
 
     }
 
+
     override fun createFormPanel(p0: Panel) {
         title = "Add Season"
         Panel(p0) with {
@@ -77,11 +78,11 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
     }
 
 
-    fun agregarSeason() {
+    private fun agregarSeason() {
         modelObject.serieAppModel?.agregarSeason(modelObject.titleSeason, modelObject.descripcionSeason, modelObject.posterSeason)
     }
 
-    fun limpiarValoresNuevos() {
+    private fun limpiarValoresNuevos() {
         modelObject.titleSeason = ""
         modelObject.descripcionSeason = ""
         modelObject.posterSeason = ""

@@ -13,6 +13,11 @@ import org.uqbar.lacar.ui.model.ControlBuilder
 class WindowChapters (owner: WindowOwner, seasonAppModel: SeasonAppModel) : SimpleWindow<SeasonAppModel>(owner, seasonAppModel) {
     override fun addActions(actionsPanel: Panel?) {
     }
+
+    fun createEmptyChapterAppModel(): ChaptersAppModel {
+        return ChaptersAppModel(seasonAppModel = modelObject)
+    }
+
     override fun createFormPanel(mainPanel: Panel) {
         this.title = "${modelObject.tituloSeason}'s Chapters"
 
@@ -45,14 +50,13 @@ class WindowChapters (owner: WindowOwner, seasonAppModel: SeasonAppModel) : Simp
                Button(it) with {
                    caption = "Add new chapter"
                    onClick {
-                       val chaptersAppModel = ChaptersAppModel(seasonAppModel = thisWindow.modelObject)
-                       WindowCargaChapter(thisWindow, chaptersAppModel).open()
+                       WindowCargaChapter(thisWindow, thisWindow.createEmptyChapterAppModel()).open()
                    }
                }
                Button(it) with {
                    caption = "Modify selected chapter"
                    onClick {
-                       WindowModificarChapter(thisWindow, thisWindow.modelObject.selectedChapter!!).open()
+                       WindowModificarChapter(thisWindow, thisWindow.createEmptyChapterAppModel()).open()
                    }
                }
                Button(it) with {

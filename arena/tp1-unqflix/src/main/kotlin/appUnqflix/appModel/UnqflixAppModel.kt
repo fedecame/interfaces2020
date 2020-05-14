@@ -29,13 +29,10 @@ class UnqflixAppModel {
     }
 
     fun createSerie(title: String, description: String, poster: String, state: ContentState,
-                    categories: MutableList<CategoryAppModel>, relatedContent: MutableList<ContentAppModel>): SerieAppModel {
+                    categoriesAppModel: MutableList<CategoryAppModel>, relatedContentAppModel: MutableList<ContentAppModel>): SerieAppModel {
 
-
-
-
-        val categories = categories.map { Category(it.id, it.name) }.toMutableList()
-        val relatedContent = relatedContent.map { it.content }.toMutableList()
+        val categories = categoriesAppModel.map { it.category }.toMutableList()
+        val relatedContent = relatedContentAppModel.map { it.content }.toMutableList()
 
         val serie = Serie(
             idGenerator.nextSerieId(),

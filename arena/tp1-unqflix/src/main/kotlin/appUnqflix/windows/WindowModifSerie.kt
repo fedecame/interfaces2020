@@ -18,10 +18,39 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
     }
 
+    private fun mirrorSelectedSerieValues() {
+        modelObject.title = modelObject.unqflixAppModel.selectedSerie!!.title
+        modelObject.descripcion = modelObject.unqflixAppModel.selectedSerie!!.descripcion
+        modelObject.poster = modelObject.unqflixAppModel.selectedSerie!!.poster
+        modelObject.state = modelObject.unqflixAppModel.selectedSerie!!.state
+
+        modelObject.categories.addAll(modelObject.unqflixAppModel.selectedSerie!!.categories)
+        modelObject.relatedContent.addAll(modelObject.unqflixAppModel.selectedSerie!!.relatedContent)
+        modelObject.otherCategories.removeAll { modelObject.idEstaContenidoEnCategorias(it.id) }
+        modelObject.otherContents.removeAll { modelObject.idEstaContenidoEnContent(it.id) }
+
+        modelObject.ownCategorySelected = null
+        modelObject.otherCategorySelected = null
+        modelObject.ownContentSelected = null
+        modelObject.otherContentSelected = null
+    }
+
+    private fun updateSelectedSerieValues() {
+        modelObject.unqflixAppModel.selectedSerie!!.title = modelObject.title
+        modelObject.unqflixAppModel.selectedSerie!!.descripcion = modelObject.descripcion
+        modelObject.unqflixAppModel.selectedSerie!!.poster = modelObject.poster
+        modelObject.unqflixAppModel.selectedSerie!!.state = modelObject.state
+
+        modelObject.unqflixAppModel.selectedSerie!!.categories = modelObject.categories
+        modelObject.unqflixAppModel.selectedSerie!!.otherCategories = modelObject.otherCategories
+        modelObject.unqflixAppModel.selectedSerie!!.relatedContent = modelObject.relatedContent
+        modelObject.unqflixAppModel.selectedSerie!!.otherContents = modelObject.otherContents
+    }
+
     override fun createFormPanel(p0: Panel?) {
-        this.title = "Modify serie: ${modelObject.title}"
-        val tempSerie = SerieAppModel(modelObject.serie, modelObject.unqflixAppModel)
-        modelObject.unqflixAppModel.selectedSerie = tempSerie
+        this.mirrorSelectedSerieValues()
+
+        this.title = "Modify serie: ${modelObject.unqflixAppModel.selectedSerie!!.title}"
 
         Panel(p0) with {
             asHorizontal()
@@ -88,8 +117,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
             }
         }
 
-
-
         Panel(p0) with {
             Label(it) with {
                 text = "Categories:"
@@ -152,7 +179,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     List<CategoryAppModel>(it) with {
                         bindItemsTo("otherCategories").adaptWithProp<CategoryAppModel>("name")
                         bindSelectedTo("otherCategorySelected")
-                        bindVisibleTo("visible")
                         setHeight(100)
                         setWidth(110)
                     }
@@ -171,7 +197,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 asHorizontal()
                 Panel(it) with {
                     Label(it) with {
-                        text = "Related selected"
+                        text = "Content selected"
                         fontSize = 8
                     }
 
@@ -215,7 +241,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
                 Panel(it) with {
                     Label(it) with {
-                        text = "Related to choose"
+                        text = "Content to choose"
                         fontSize = 8
                     }
 
@@ -223,7 +249,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                     List<ContentAppModel>(it) with {
                         bindItemsTo("otherContents").adaptWithProp<ContentAppModel>("title")
                         bindSelectedTo("otherContentSelected")
-                        bindVisibleTo("visible")
                         setHeight(100)
                         setWidth(250)
                     }
@@ -237,6 +262,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 text = "Accept"
                 fontSize = 10
                 onClick {
+                    thisWindow.updateSelectedSerieValues()
                     thisWindow.close()
                 }
             }
@@ -245,26 +271,10 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 text = "Cancel"
                 fontSize = 10
                 onClick {
-                    thisWindow.modelObject.title = tempSerie.title
-                    thisWindow.modelObject.descripcion = tempSerie.descripcion
-                    thisWindow.modelObject.poster = tempSerie.poster
-                    thisWindow.modelObject.state = tempSerie.state
-                    thisWindow.modelObject.categories = tempSerie.categories
-                    thisWindow.modelObject.myseasons = tempSerie.myseasons
-                    thisWindow.modelObject.relatedContent = tempSerie.relatedContent
-
-                    thisWindow.modelObject.otherCategories = tempSerie.otherCategories
-                    thisWindow.modelObject.ownCategorySelected = null
-                    thisWindow.modelObject.otherCategorySelected = null
-                    thisWindow.modelObject.otherContents = tempSerie.otherContents
-                    thisWindow.modelObject.ownContentSelected = null
-                    thisWindow.modelObject.otherContentSelected = null
-
                     thisWindow.close()
                 }
             }
         }
-
 
     }
 

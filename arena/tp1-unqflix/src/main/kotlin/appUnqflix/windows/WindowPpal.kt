@@ -101,7 +101,8 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 width = 100
                 bindEnabledToModel(modelObject,"hasSelection")
                 onClick(Action {
-                    WindowModifSerie(owner, thisWindow.modelObject.selectedSerie!!).open()
+                    val serieAppModel = SerieAppModel(unqflixAppModel = thisWindow.modelObject)
+                    WindowModifSerie(owner, serieAppModel).open()
                 })
             }
             Button(it) with {
@@ -111,12 +112,11 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
                 bindEnabledToModel(modelObject,"hasSelection")
                 onClick {
                     val acepta = ConfirmDelete(thisWindow,thisWindow.modelObject!!)
-                         acepta.onAccept {
-                             thisWindow.modelObject.borrarSerie(thisWindow.modelObject.selectedSerie!!)
-                         }
-                       acepta.open()
-
-                     }
+                    acepta.onAccept {
+                        thisWindow.modelObject.borrarSerie(thisWindow.modelObject.selectedSerie!!)
+                    }
+                    acepta.open()
+                }
             }
             Button(it) with {
                 text = "Show Serie"
