@@ -9,7 +9,16 @@ import org.uqbar.arena.windows.WindowOwner
 class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel) :
     SimpleWindow<ChaptersAppModel>(owner, chaptersAppModel) {
     override fun addActions(actionsPanel: Panel?) {
+    }
 
+    fun agregarCapituloActual() {
+        modelObject.seasonAppModel.agregarChapter(
+            modelObject.title,
+            modelObject.description,
+            modelObject.duration,
+            modelObject.thumbnail,
+            modelObject.video
+        )
     }
 
     override fun createFormPanel(mainPanel: Panel?) {
@@ -26,7 +35,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                 }
 
                 TextBox(it) with {
-                    bindToModel(modelObject, "title")
+                    bindTo("title")
                     width= 200
                 }
             }
@@ -37,7 +46,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                     alignLeft()
                 }
                 KeyWordTextArea(it) with {
-                    bindToModel(modelObject, "description")
+                    bindTo("description")
                     width = 200
                 }
 
@@ -49,7 +58,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                     alignLeft()
                 }
                 NumericField(it) with {
-                    bindToModel(modelObject, "duration")
+                    bindTo("duration")
                     width = 200
                 }
             }
@@ -60,7 +69,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                     alignLeft()
                 }
                 TextBox(it) with {
-                    bindToModel(modelObject, "thumbnail")
+                    bindTo("thumbnail")
                     width = 200
                 }
             }
@@ -71,7 +80,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                     alignLeft()
                 }
                 TextBox(it) with {
-                    bindToModel(modelObject, "video")
+                    bindTo("video")
                     width = 200
                 }
             }
@@ -81,13 +90,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                 Button(it) with {
                     caption = "Accept"
                     onClick {
-                        thisWindow.modelObject.seasonAppModel.agregarChapter(
-                            thisWindow.modelObject.title,
-                            thisWindow.modelObject.description,
-                            thisWindow.modelObject.duration,
-                            thisWindow.modelObject.thumbnail,
-                            thisWindow.modelObject.video
-                        )
+                        thisWindow.agregarCapituloActual()
                         thisWindow.close()
                     }
                 }
