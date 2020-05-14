@@ -18,6 +18,10 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
     override fun addActions(p0: Panel?) {
     }
 
+    fun createEmptySeasonAppModel(): SeasonAppModel {
+        return SeasonAppModel(season = modelObject.selected!!.season,unqflixAppModel = modelObject.unqflixAppModel,serieAppModel = modelObject)
+    }
+
     override fun createFormPanel(p0: Panel) {
         title = "temporadas"
         Panel(p0) with {
@@ -62,8 +66,8 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
                     fontSize = 10
 
                     onClick(Action {
-                        WindowCargaDeSeason(owner, thisWindow.modelObject.selected!!).open()
-
+//                        WindowCargaDeSeason(owner, thisWindow.modelObject.selected!!).open()
+                        WindowCargaDeSeason(owner, thisWindow.createEmptySeasonAppModel()).open()
                     })
 
                 }
@@ -73,7 +77,8 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
                     fontSize = 10
 
                     onClick(Action {
-                        WindowModificarSeason(owner, thisWindow.modelObject.selected!!).open()
+//                        WindowModificarSeason(owner, thisWindow.modelObject.selected!!).open()
+                        WindowModificarSeason(owner, thisWindow.createEmptySeasonAppModel()).open()
                     })
 
                 }

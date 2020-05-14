@@ -10,9 +10,23 @@ import java.awt.Color
 
 
 class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<SeasonAppModel>(owner, model){
+
+    fun mirrorSelectedSeasonValues(){
+        modelObject.tituloSeason = modelObject.serieAppModel!!.selected!!.tituloSeason
+        modelObject.description = modelObject.serieAppModel!!.selected!!.description
+        modelObject.poster = modelObject.serieAppModel!!.selected!!.poster
+    }
+
+    fun updateSelectedSeasonValues(){
+        modelObject.serieAppModel!!.selected!!.tituloSeason = modelObject.tituloSeason
+        modelObject.serieAppModel!!.selected!!.description = modelObject.description
+        modelObject.serieAppModel!!.selected!!.poster = modelObject.poster
+    }
+
     override fun createFormPanel(p0: Panel?) {
+        this.mirrorSelectedSeasonValues()
         title = "modify Season"
-        val tempSeason = SeasonAppModel(modelObject.season, modelObject.unqflixAppModel, modelObject.serieAppModel)
+
 
         Panel(p0) with {
             Label(it) with {
@@ -57,8 +71,8 @@ class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<S
                     text = "Accept"
                     fontSize = 10
                     onClick(Action {
-
-                        close()
+                        thisWindow.updateSelectedSeasonValues()
+                        thisWindow.close()
                     })
                 }
 
@@ -67,10 +81,10 @@ class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<S
                     fontSize = 10
                     onClick(Action {
 
-                        thisWindow.modelObject.tituloSeason = tempSeason.tituloSeason
-                        thisWindow.modelObject.description = tempSeason.description
-                        thisWindow.modelObject.poster = tempSeason.poster
-                        close()
+//                        thisWindow.modelObject.tituloSeason = tempSeason.tituloSeason
+//                        thisWindow.modelObject.description = tempSeason.description
+//                        thisWindow.modelObject.poster = tempSeason.poster
+                        thisWindow.close()
                     })
                 }
             }

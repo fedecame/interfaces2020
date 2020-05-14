@@ -15,6 +15,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
 
     }
 
+
     override fun createFormPanel(p0: Panel) {
         title = "Add Season"
         Panel(p0) with {
