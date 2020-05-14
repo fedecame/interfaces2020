@@ -16,9 +16,6 @@ class ApplicationUnqflix : Application() {
 
         return WindowPpal(this, UnqflixAppModel())
 
-//        return WindowSeason(this, UnqflixAppModel().unaSerie)
-//        return  WindowCargaDeSeason(this,UnqflixAppModel().unaSerie)
-//        return WindowModificarSeason(this,UnqflixAppModel().unaSerie)
 
     }
 

@@ -83,9 +83,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
                     CheckBox(it) with {
                         bindTo("state").setTransformer(StateTransformer())
-//                        bindTo("enabled")
                     }
-
                 }
             }
         }
@@ -143,7 +141,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                         }
                     }
                 }
-
+              
                 Panel(it) with {
                     Label(it) with {
                         text = "Categories to choose"

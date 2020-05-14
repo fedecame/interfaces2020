@@ -32,7 +32,7 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
 
                 fontSize = 10
                 width = 300
-                alignLeft()  // right, left, center
+                alignLeft()
 
 
            bindTo("serieSearch")
@@ -74,7 +74,7 @@ class WindowPpal (owner:WindowOwner, model:UnqflixAppModel) : SimpleWindow<Unqfl
             column {
                 title = "Seasons"
                 fixedSize = 80
-//                bindContentsTo("cantSeasons")
+
                 bindContentsTo("myseasons.size")
             }
             column {
