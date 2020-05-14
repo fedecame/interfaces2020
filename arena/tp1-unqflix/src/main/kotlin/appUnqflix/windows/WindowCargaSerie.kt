@@ -170,7 +170,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
                 asHorizontal()
                 Panel(it)with {
                     Label(it) with {
-                        text = "Related selected"
+                        text = "Content selected"
                         fontSize = 8
                     }
 
@@ -214,7 +214,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
 
                 Panel(it) with {
                     Label(it) with {
-                        text = "Related to choose"
+                        text = "Content to choose"
                         fontSize = 8
                     }
 
