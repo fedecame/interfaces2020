@@ -28,11 +28,6 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
         modelObject.relatedContent.addAll(modelObject.unqflixAppModel.selectedSerie!!.relatedContent)
         modelObject.otherCategories.removeAll { modelObject.idEstaContenidoEnCategorias(it.id) }
         modelObject.otherContents.removeAll { modelObject.idEstaContenidoEnContent(it.id) }
-
-        modelObject.ownCategorySelected = null
-        modelObject.otherCategorySelected = null
-        modelObject.ownContentSelected = null
-        modelObject.otherContentSelected = null
     }
 
     private fun updateSelectedSerieValues() {
@@ -261,6 +256,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
             Button(it) with {
                 text = "Accept"
                 fontSize = 10
+                bindEnabledTo("hasValidInputs")
                 onClick {
                     thisWindow.updateSelectedSerieValues()
                     thisWindow.close()
@@ -270,6 +266,7 @@ class WindowModifSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
             Button(it) with {
                 text = "Cancel"
                 fontSize = 10
+                bindVisibleTo("visible")
                 onClick {
                     thisWindow.close()
                 }

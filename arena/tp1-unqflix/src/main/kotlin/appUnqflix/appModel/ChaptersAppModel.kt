@@ -9,12 +9,12 @@ class ChaptersAppModel (val chapter : Chapter? = null, val seasonAppModel: Seaso
     var title: String = ""
         set(value) {
             field = value
-            hasValidInputs = duration !== 0 && value.isNotEmpty()
+            hasValidInputs = duration > 0 && value.isNotEmpty()
         }
     var duration: Int = 0
         set(value) {
             field = value
-            hasValidInputs = title.isNotEmpty() && value !== 0
+            hasValidInputs = title.isNotEmpty() && value > 0
         }
     var description: String
     var thumbnail: String

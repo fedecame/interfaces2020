@@ -104,6 +104,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
 
             Button(it) with {
                 caption = "Cancel"
+                bindVisibleTo("visible")
                 onClick {
                     thisWindow.close()
                 }

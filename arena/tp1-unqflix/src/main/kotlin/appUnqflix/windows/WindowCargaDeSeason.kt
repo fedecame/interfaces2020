@@ -15,7 +15,6 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
 
     }
 
-
     override fun createFormPanel(p0: Panel) {
         title = "Add Season"
         Panel(p0) with {
@@ -48,7 +47,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
 
             TextBox(it) with {
                 fontSize = 10
-                width = 200
+                width = 100
                 alignLeft()
                 bindTo("poster")
             }
@@ -58,18 +57,18 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
                 Button(it) with {
                     text = "Accept"
                     fontSize = 10
+                    bindEnabledTo("hasValidInputs")
                     onClick(Action {
                         thisWindow.agregarSeason()
                         close()
-//                        limpiarValoresNuevos()
                     })
                 }
 
                 Button(it) with {
                     text = "Cancel"
                     fontSize = 10
+                    bindVisibleTo("visible")
                     onClick(Action {
-//                        limpiarValoresNuevos()
                         close()
                     })
                 }
@@ -77,14 +76,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
         }
     }
 
-
     private fun agregarSeason() {
         modelObject.serieAppModel.agregarSeason(modelObject.tituloSeason, modelObject.description, modelObject.poster)
     }
-
-//    private fun limpiarValoresNuevos() {
-//        modelObject.titleSeason = ""
-//        modelObject.descripcionSeason = ""
-//        modelObject.posterSeason = ""
-//    }
 }

@@ -35,7 +35,6 @@ class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<S
             }
 
             TextBox(it) with {
-
                 fontSize = 10
                 width = 200
                 alignLeft()
@@ -70,6 +69,7 @@ class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<S
                 Button(it) with {
                     text = "Accept"
                     fontSize = 10
+                    bindEnabledTo("hasValidInputs")
                     onClick(Action {
                         thisWindow.updateSelectedSeasonValues()
                         thisWindow.close()
@@ -79,11 +79,8 @@ class WindowModificarSeason(owner: WindowOwner, model: SeasonAppModel): Dialog<S
                 Button(it) with {
                     text = "Cancel"
                     fontSize = 10
+                    bindVisibleTo("visible")
                     onClick(Action {
-
-//                        thisWindow.modelObject.tituloSeason = tempSeason.tituloSeason
-//                        thisWindow.modelObject.description = tempSeason.description
-//                        thisWindow.modelObject.poster = tempSeason.poster
                         thisWindow.close()
                     })
                 }

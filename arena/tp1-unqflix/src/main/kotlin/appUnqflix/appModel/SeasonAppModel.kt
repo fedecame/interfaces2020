@@ -10,7 +10,11 @@ import org.uqbar.commons.model.annotations.Observable
 @Observable
 class SeasonAppModel (val season: Season? = null, val unqflixAppModel: UnqflixAppModel, val serieAppModel: SerieAppModel){
     var id: String
-    var tituloSeason: String
+    var tituloSeason: String = ""
+        set(value) {
+            field = value
+            hasValidInputs = value.isNotEmpty()
+        }
     var description: String
     var poster: String
     var chapters = mutableListOf<ChaptersAppModel>()
@@ -22,6 +26,11 @@ class SeasonAppModel (val season: Season? = null, val unqflixAppModel: UnqflixAp
         }
 
     var hasSelectedChapter : Boolean = false
+
+    var hasValidInputs : Boolean = false
+
+    // fix de bug de arena, que al deshabilitar un boton se lleva puesto y hace invisible uno que esta en el panel padre
+    val visible = true
 
     init {
         this.id = season?.id ?: ""
