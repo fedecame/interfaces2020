@@ -29,7 +29,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
                 fontSize = 10
                 width = 200
                 alignLeft()
-                bindTo("titleSeason")
+                bindTo("tituloSeason")
             }
             Label(it) with {
                 alignLeft()
@@ -38,7 +38,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
 
             KeyWordTextArea(it) with {
                 height = 100
-                bindTo("descripcionSeason")
+                bindTo("description")
             }
 
             Label(it) with {
@@ -50,7 +50,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
                 fontSize = 10
                 width = 200
                 alignLeft()
-                bindTo("posterSeason")
+                bindTo("poster")
             }
 
             Panel(it) with {
@@ -59,9 +59,9 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
                     text = "Accept"
                     fontSize = 10
                     onClick(Action {
-                        agregarSeason()
+                        thisWindow.agregarSeason()
                         close()
-                        limpiarValoresNuevos()
+//                        limpiarValoresNuevos()
                     })
                 }
 
@@ -69,7 +69,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
                     text = "Cancel"
                     fontSize = 10
                     onClick(Action {
-                        limpiarValoresNuevos()
+//                        limpiarValoresNuevos()
                         close()
                     })
                 }
@@ -79,12 +79,12 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
 
 
     private fun agregarSeason() {
-        modelObject.serieAppModel?.agregarSeason(modelObject.titleSeason, modelObject.descripcionSeason, modelObject.posterSeason)
+        modelObject.serieAppModel?.agregarSeason(modelObject.tituloSeason, modelObject.description, modelObject.poster)
     }
 
-    private fun limpiarValoresNuevos() {
-        modelObject.titleSeason = ""
-        modelObject.descripcionSeason = ""
-        modelObject.posterSeason = ""
-    }
+//    private fun limpiarValoresNuevos() {
+//        modelObject.titleSeason = ""
+//        modelObject.descripcionSeason = ""
+//        modelObject.posterSeason = ""
+//    }
 }

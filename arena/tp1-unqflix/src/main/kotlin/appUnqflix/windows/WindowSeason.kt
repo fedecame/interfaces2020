@@ -19,7 +19,7 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
     }
 
     fun createEmptySeasonAppModel(): SeasonAppModel {
-        return SeasonAppModel(season = modelObject.selected!!.season,unqflixAppModel = modelObject.unqflixAppModel,serieAppModel = modelObject)
+        return SeasonAppModel( unqflixAppModel = modelObject.unqflixAppModel,serieAppModel = modelObject)
     }
 
     override fun createFormPanel(p0: Panel) {
