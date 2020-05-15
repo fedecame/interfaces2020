@@ -10,7 +10,11 @@ import scala.util.control.TailCalls
 @Observable
 class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppModel) {
     var id: String
-    var title: String
+    var title: String = ""
+        set(value) {
+            field = value
+            hasValidInputs = value.isNotEmpty()
+        }
     var descripcion: String
     var poster: String
     var state: ContentState
@@ -18,8 +22,18 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
     var myseasons = mutableListOf<SeasonAppModel>()
     var relatedContent = mutableListOf<ContentAppModel>()
 
-    var selected : SeasonAppModel? = null
+    var hasValidInputs: Boolean = false
 
+    // fix de bug de arena, que al deshabilitar un boton se lleva puesto y hace invisible uno que esta en el panel padre
+    val visible = true
+
+    var selected : SeasonAppModel? = null
+        set(value) {
+            field = value
+            this.hasSelected = value !== null
+        }
+
+    var hasSelected : Boolean = false
     // Categories
     var otherCategories = mutableListOf<CategoryAppModel>()
     var ownCategorySelected: CategoryAppModel? = null
@@ -82,14 +96,6 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
         return seasonAppModel
     }
 
-//    fun adaptar():String{
-//        if(this.state is Available){
-//            return "OK"
-//        }else{
-//            return "X"
-//        }
-//    }
-
     fun setNewCategory() {
         categories.add(this.otherCategorySelected!!)
         otherCategories.remove(this.otherCategorySelected!!)
@@ -127,6 +133,4 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
         var ids = this.relatedContent.map { it.id }
         return ids.contains(id)
     }
-
-//    fun availableSerie():Boolean = this.state is Available
 }

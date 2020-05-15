@@ -19,7 +19,7 @@ class WindowChapters (owner: WindowOwner, seasonAppModel: SeasonAppModel) : Simp
     }
 
     override fun createFormPanel(mainPanel: Panel) {
-        this.title = "${modelObject.tituloSeason}'s Chapters"
+       this.title = "${modelObject.tituloSeason}'s Chapters"
 
        Panel(mainPanel) with {
            Label(it) with {
@@ -55,6 +55,7 @@ class WindowChapters (owner: WindowOwner, seasonAppModel: SeasonAppModel) : Simp
                }
                Button(it) with {
                    caption = "Modify selected chapter"
+                   bindEnabledTo("hasSelectedChapter")
                    onClick {
                        WindowModificarChapter(thisWindow, thisWindow.createEmptyChapterAppModel()).open()
                    }
