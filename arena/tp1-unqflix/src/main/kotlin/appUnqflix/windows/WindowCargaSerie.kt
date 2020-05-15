@@ -98,8 +98,6 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
             }
         }
 
-
-
         Panel(p0) with {
             Label(it) with {
                 text = "Categories:"
@@ -244,6 +242,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
             Button(it) with {
                 text = "Accept"
                 fontSize = 10
+                bindEnabledTo("hasValidInputs")
                 onClick {
                     thisWindow.addNewSerie()
                     thisWindow.close()
@@ -253,6 +252,7 @@ class WindowCargaSerie (owner: WindowOwner, model: SerieAppModel) : SimpleWindow
             Button(it) with {
                 text = "Cancel"
                 fontSize = 10
+                bindVisibleTo("visible")
                 onClick {
                     thisWindow.close()
                 }

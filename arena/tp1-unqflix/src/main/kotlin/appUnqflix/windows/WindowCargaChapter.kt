@@ -89,6 +89,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
                 asHorizontal()
                 Button(it) with {
                     caption = "Accept"
+                    bindEnabledTo("hasValidInputs")
                     onClick {
                         thisWindow.addNewChapter()
                         thisWindow.close()
@@ -97,6 +98,7 @@ class WindowCargaChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppModel)
 
                 Button(it) with {
                     caption = "Cancel"
+                    bindVisibleTo("visible")
                     onClick {
                         thisWindow.close()
                     }

@@ -3,7 +3,6 @@ package appUnqflix.appModel
 import data.getUNQFlix
 import data.idGenerator
 import domain.*
-import org.apache.commons.collections.functors.FalsePredicate
 import org.uqbar.commons.model.annotations.Observable
 import org.uqbar.commons.model.exceptions.UserException
 
@@ -11,7 +10,11 @@ import org.uqbar.commons.model.exceptions.UserException
 class UnqflixAppModel {
     var system : UNQFlix = getUNQFlix()
     var serieSearch : String = ""
-  
+        set(value) {
+            field = value
+            this.buscarSeries()
+        }
+
     var myseries = mutableListOf<SerieAppModel>()
     var selectedSerie : SerieAppModel? = null
         set(value) {
@@ -48,6 +51,7 @@ class UnqflixAppModel {
             val serieAppModel = SerieAppModel(serie, this)
             system.addSerie(serie)
             myseries.add(serieAppModel)
+            this.buscarSeries()
             return serieAppModel
         }catch (e: ExistsException){
             throw UserException(e.message)
@@ -93,8 +97,9 @@ class UnqflixAppModel {
         var seriesEncontradas = listOf<Serie>()
 
         seriesEncontradas= system.searchSeries(serieSearch)
-        myseries = seriesEncontradas.map { SerieAppModel(it, this) }.toMutableList()
 
+        myseries.clear()
+        myseries.addAll(seriesEncontradas.map { SerieAppModel(it, this) }.toMutableList())
     }
 
     fun borrarSerie(serie: SerieAppModel){

@@ -95,6 +95,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
             asHorizontal()
             Button(it) with {
                 caption = "Accept"
+                bindEnabledTo("hasValidInputs")
                 onClick {
                     thisWindow.updateSelectedChapterValues()
                     thisWindow.close()
@@ -103,6 +104,7 @@ class WindowModificarChapter(owner: WindowOwner, chaptersAppModel: ChaptersAppMo
 
             Button(it) with {
                 caption = "Cancel"
+                bindVisibleTo("visible")
                 onClick {
                     thisWindow.close()
                 }

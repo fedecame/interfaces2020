@@ -19,7 +19,7 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
     }
 
     fun createEmptySeasonAppModel(): SeasonAppModel {
-        return SeasonAppModel(season = modelObject.selected!!.season,unqflixAppModel = modelObject.unqflixAppModel,serieAppModel = modelObject)
+        return SeasonAppModel( unqflixAppModel = modelObject.unqflixAppModel,serieAppModel = modelObject)
     }
 
     override fun createFormPanel(p0: Panel) {
@@ -75,9 +75,8 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
                 Button(it) with {
                     text = "Modified Season"
                     fontSize = 10
-
+                    bindEnabledTo("hasSelected")
                     onClick(Action {
-//                        WindowModificarSeason(owner, thisWindow.modelObject.selected!!).open()
                         WindowModificarSeason(owner, thisWindow.createEmptySeasonAppModel()).open()
                     })
 
@@ -86,7 +85,7 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
                 Button(it) with {
                     text = "Show chapters"
                     fontSize = 10
-
+                    bindEnabledTo("hasSelected")
                     onClick(Action {
                         thisWindow.close()
                         WindowChapters(thisWindow, thisWindow.modelObject.selected!!).open()
