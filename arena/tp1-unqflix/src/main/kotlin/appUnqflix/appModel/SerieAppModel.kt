@@ -19,7 +19,12 @@ class SerieAppModel(val serie: Serie? = null, val unqflixAppModel: UnqflixAppMod
     var relatedContent = mutableListOf<ContentAppModel>()
 
     var selected : SeasonAppModel? = null
+        set(value) {
+            field = value
+            this.hasSelected = value !== null
+        }
 
+    var hasSelected : Boolean = false
     // Categories
     var otherCategories = mutableListOf<CategoryAppModel>()
     var ownCategorySelected: CategoryAppModel? = null
