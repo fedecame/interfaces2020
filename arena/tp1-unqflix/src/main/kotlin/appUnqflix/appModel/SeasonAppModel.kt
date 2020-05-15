@@ -28,11 +28,11 @@ class SeasonAppModel (val season: Season? = null, val unqflixAppModel: UnqflixAp
         this.description = season?.description ?: ""
         this.poster = season?.poster ?: ""
 
-        this.initChapters(season!!.chapters)
+        this.initChapters()
     }
 
-    fun initChapters(chapters: MutableList<Chapter>){
-        this.chapters = chapters.map { ChaptersAppModel(it, this) }.toMutableList()
+    fun initChapters(){
+        this.chapters = season?.chapters?.map { ChaptersAppModel(it, this) }?.toMutableList() ?: mutableListOf()
     }
 
     fun cantidadChapter(): Int= season!!.chapters.size

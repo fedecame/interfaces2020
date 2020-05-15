@@ -79,7 +79,7 @@ class WindowCargaDeSeason (owner: WindowOwner, model : SeasonAppModel) : Dialog<
 
 
     private fun agregarSeason() {
-        modelObject.serieAppModel?.agregarSeason(modelObject.tituloSeason, modelObject.description, modelObject.poster)
+        modelObject.serieAppModel.agregarSeason(modelObject.tituloSeason, modelObject.description, modelObject.poster)
     }
 
 //    private fun limpiarValoresNuevos() {
