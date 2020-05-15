@@ -75,7 +75,7 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
                 Button(it) with {
                     text = "Modified Season"
                     fontSize = 10
-
+                    bindEnabledTo("hasSelected")
                     onClick(Action {
 //                        WindowModificarSeason(owner, thisWindow.modelObject.selected!!).open()
                         WindowModificarSeason(owner, thisWindow.createEmptySeasonAppModel()).open()
@@ -86,7 +86,7 @@ class WindowSeason (owner: WindowOwner, model : SerieAppModel) : SimpleWindow<Se
                 Button(it) with {
                     text = "Show chapters"
                     fontSize = 10
-
+                    bindEnabledTo("hasSelected")
                     onClick(Action {
                         thisWindow.close()
                         WindowChapters(thisWindow, thisWindow.modelObject.selected!!).open()
