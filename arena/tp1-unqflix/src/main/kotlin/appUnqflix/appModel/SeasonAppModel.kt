@@ -16,12 +16,13 @@ class SeasonAppModel (val season: Season? = null, val unqflixAppModel: UnqflixAp
     var chapters = mutableListOf<ChaptersAppModel>()
 
     var selectedChapter : ChaptersAppModel? = null
-//    var cantchapter : Int = cantidadChapter()
+        set(value) {
+            field = value
+            hasSelectedChapter = value !== null
+        }
 
-//    var titleSeason = ""
-//    var descripcionSeason = ""
-//    var posterSeason = ""
-  
+    var hasSelectedChapter : Boolean = false
+
     init {
         this.id = season?.id ?: ""
         this.tituloSeason = season?.title ?: ""
