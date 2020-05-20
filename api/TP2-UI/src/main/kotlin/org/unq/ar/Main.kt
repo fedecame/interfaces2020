@@ -1,5 +1,6 @@
 package org.unq.ar
 
+import domain.UNQFlix
 import io.javalin.Javalin
 
 fun main(args: Array<String>) {
@@ -7,10 +8,11 @@ fun main(args: Array<String>) {
     app.get("/") { ctx -> ctx.result("Hello World") }
 
     //CRUD
-
+    val unqflix = UNQFlix()
     //GET /users
-    app.get("/") {
-
-    }
+        app.get("/users") { ctx ->
+            val users = unqflix.users
+            ctx.json(users)
+        }
 }
 
