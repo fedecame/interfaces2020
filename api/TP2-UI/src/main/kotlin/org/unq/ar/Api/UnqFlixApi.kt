@@ -1,10 +1,10 @@
-package org.unq.ar
+package org.unq.ar.Api
 
 import data.getUNQFlix
-import domain.UNQFlix
 import io.javalin.Javalin
 import io.javalin.core.util.RouteOverviewPlugin
 import io.javalin.apibuilder.ApiBuilder.*
+import org.unq.ar.Controllers.UnqFlixControllers
 
 fun main(args: Array<String>) { UsersApi(7000).init()}
 
@@ -13,7 +13,7 @@ class UsersApi(private val port: Int) {
         val app = Javalin.create {
             it.defaultContentType = "application/json"
             it.registerPlugin(RouteOverviewPlugin("/routes"))
-            // it.enableCorsForAllOrigins()
+            it.enableCorsForAllOrigins()
             //  it.get("/") { ctx -> ctx.result("Hello World") }
         }
         app.start(port)
@@ -43,6 +43,10 @@ class UsersApi(private val port: Int) {
             path("/content/{:contentId}"){
                 //get(unqflixController)
             }
+            path("/user/lastSeen"){
+
+            }
+
 
         }
 
