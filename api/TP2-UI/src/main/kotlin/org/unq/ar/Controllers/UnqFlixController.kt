@@ -32,23 +32,26 @@ class UnqFlixControllers ( val unqflix:UNQFlix)  {
     }
 
     fun getFavoritesAndLastSeen(ctx: Context){
-        val fav = unqflix.users.map {
-            UserFavorites(it.name, it.image,
-                    it.favorites.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state)) },
-                    it.lastSeen.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state)) })
-        }
-        ctx.json(fav.shuffled())
+        var lastSeen: MutableList<Content> = mutableListOf()
+        var favoritos:MutableList<Content> = mutableListOf()
+        val user=User("xxxx","name","xxxxx","image1","usuario@usuario.com","1234",favoritos,lastSeen)
+        val fav =
+            UserFavorites(user.name, user.image,
+                    user.favorites.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state)) },
+                    user.lastSeen.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state)) })
+
+        ctx.status(200).json(fav)
         }
     fun getContentAvailableOrderByTitle(ctx:Context){
         var seriesAvailables:List<Content> = unqflix.series.filter { adapterAvailable(it.state) }
         var moviesAvailables:List<Content> = unqflix.movies.filter { adapterAvailable(it.state) }
              seriesAvailables += moviesAvailables
          val contenido:List<Contenido> = seriesAvailables.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state)) }
-        ctx.json(contenido.sortedBy { it.title })
+        ctx.status(200).json(contenido.sortedBy { it.title })
     }
     fun getBanners(ctx: Context){
         val banners: List<Contenido> = unqflix.banners.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state)) }
-        ctx.json(banners.shuffled())
+        ctx.status(200).json(banners.shuffled())
     }
 
     fun adapterAvailable(cont:ContentState):Boolean= cont is Available
