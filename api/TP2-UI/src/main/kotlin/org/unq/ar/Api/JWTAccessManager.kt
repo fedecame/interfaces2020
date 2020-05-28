@@ -4,10 +4,7 @@ import domain.UNQFlix
 import domain.User
 import io.javalin.core.security.AccessManager
 import io.javalin.core.security.Role
-import io.javalin.http.Context
-import io.javalin.http.Handler
-import io.javalin.http.NotFoundResponse
-import io.javalin.http.UnauthorizedResponse
+import io.javalin.http.*
 import org.unq.ar.exceptions.NotFoundTokenException
 import org.unq.ar.exceptions.NotFoundUserException
 import org.unq.ar.roles.Roles
@@ -39,6 +36,7 @@ class JWTAccessManager(val jwt: TokenJWT, val unqFlix: UNQFlix): AccessManager {
                 getUser(token)
                 handler.handle(ctx)
             }
+            else -> throw BadRequestResponse("Oops something went wrong")
         }
     }
 }

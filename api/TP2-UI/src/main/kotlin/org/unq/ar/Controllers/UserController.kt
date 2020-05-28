@@ -8,8 +8,8 @@ import io.javalin.http.BadRequestResponse
 import io.javalin.http.Context
 import org.unq.ar.Api.TokenJWT
 import org.unq.ar.exceptions.NotFoundUserException
-import org.unq.ar.mappers.UserLogin
-import org.unq.ar.mappers.UserRegister
+import org.unq.ar.mapper.UserLogin
+import org.unq.ar.mapper.UserRegister
 
 
 class UserController (val unqflix: UNQFlix, val jwt: TokenJWT) {

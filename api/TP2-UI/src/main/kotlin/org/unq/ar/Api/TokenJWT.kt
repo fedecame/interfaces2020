@@ -10,9 +10,8 @@ import javalinjwt.JWTGenerator
 import javalinjwt.JWTProvider
 import org.unq.ar.exceptions.NotFoundTokenException
 import org.unq.ar.exceptions.NotFoundUserException
-import org.unq.ar.mappers.Contenido
-import org.unq.ar.mappers.ContenidoMini
-import org.unq.ar.mappers.UserToken
+import org.unq.ar.mapper.Contenido
+import org.unq.ar.mapper.UserToken
 import org.unq.ar.roles.Roles
 
 private class UserGenerator : JWTGenerator<User> {
