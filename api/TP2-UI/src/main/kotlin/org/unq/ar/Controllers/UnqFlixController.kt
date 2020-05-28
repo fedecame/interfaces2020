@@ -2,13 +2,14 @@ package org.unq.ar.Controllers
 
 import domain.*
 import io.javalin.http.*
-import org.unq.ar.mapper.*
+import javalinjwt.JavalinJWT
+import org.unq.ar.Api.TokenJWT
+import org.unq.ar.exceptions.NotFoundTokenException
+import org.unq.ar.mappers.*
 
 
 
-class UnqFlixControllers ( val unqflix:UNQFlix)  {
-
-     val usersController = UsersController(unqflix)
+class UnqFlixController (val unqflix:UNQFlix, val jwt: TokenJWT)  {
 
     /*
     *  Registra Un usuario
@@ -52,6 +53,33 @@ class UnqFlixControllers ( val unqflix:UNQFlix)  {
     }
 
     fun adapterAvailable(cont:ContentState):Boolean= cont is Available
+
+    fun addLastSeen(ctx: Context) {
+        lateinit var token : UserToken
+        try {
+            token = jwt.validate(ctx.header("Authorization")!!)
+        } catch (e: NotFoundTokenException) {
+            throw NotFoundResponse(e.message!!)
+        } catch (e: Exception) {
+            throw NotFoundResponse(e.message!!)
+        }
+        val idLastSeen = ctx.bodyValidator<IdLastSeen>()
+            .check({it.id != null}, "Missing id inside body")
+            .get().id
+
+        try {
+            unqflix.addLastSeen(token.id, idLastSeen!!)
+        } catch (e: NotFoundException) {
+            throw NotFoundResponse(e.message!!)
+        }
+
+        val favourites = unqflix.users.find { it.id == token.id }!!.favorites
+        ctx.status(200)
+        ctx.header("Authorization", jwt.generateToken(unqflix.users.find{it.id == token.id}!!))
+        ctx.json(mapOf(
+            "favourites" to favourites
+        ))
     }
+}
 
 
