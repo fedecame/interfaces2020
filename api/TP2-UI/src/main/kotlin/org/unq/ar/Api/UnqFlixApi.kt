@@ -3,6 +3,7 @@ package org.unq.ar.Api
 import data.getUNQFlix
 import data.idGenerator
 import domain.User
+import domain.NotFoundException
 import io.javalin.Javalin
 import io.javalin.core.util.RouteOverviewPlugin
 import io.javalin.apibuilder.ApiBuilder.*
@@ -11,15 +12,16 @@ import org.unq.ar.Controllers.UnqFlixController
 import javalinjwt.JavalinJWT
 import org.unq.ar.Controllers.UserController
 import org.unq.ar.roles.Roles
+import io.javalin.http.NotFoundResponse
+import org.unq.ar.Controllers.UnqFlixControllers
 
-fun main(args: Array<String>) { UsersApi(7000).init()}
+fun main(args: Array<String>) {
+    UsersApi(7000).init()
+}
 
 class UsersApi(private val port: Int) {
     fun init(): Javalin {
         val unqFlix = getUNQFlix()
-        unqFlix.addUser(User(idGenerator.nextUserId(), "Diego", "1111 2222 5555 6666", "un_gato.jpg", "asd@gmail.com", "1234"))
-        unqFlix.addUser(User(idGenerator.nextUserId(), "Marito", "4646 2525 7878 9191", "pato.jpg", "comboloco@gmail.com", "777"))
-
         val tokenJWT = TokenJWT(unqFlix)
         val unqflixController = UnqFlixController(unqFlix, tokenJWT)
         val userController = UserController(unqFlix, tokenJWT)
@@ -46,22 +48,32 @@ class UsersApi(private val port: Int) {
                 path("/lastSeen"){
                     post(unqflixController::addLastSeen, mutableSetOf<Role>(Roles.USER))
                 }
+                path("fav"){
+                    path(":contentId"){
+                        post(unqflixController::addOrDeleteContentFromFav)
+                    }
+                }
             }
             path("/content") {
                 // get(unqflixController::getContentAvailableOrderByTitle)
+                path(":contentId"){
+                    get(unqflixController::searchContentById)
+                }
             }
             path("/banners"){
                 // get(unqflixController::getBanners)
             }
-            path("/search"){
-                // get(unqflixController::searchByText)
+            path("/search") {
+                get(unqflixController::searchByText)
             }
             path("/content"){
                 //get(unqflixController)
             }
 
         }
-
+        app.exception(NotFoundException::class.java){ e,_ ->
+            throw NotFoundResponse(e.toString())
+        }
         return app
     }
 
