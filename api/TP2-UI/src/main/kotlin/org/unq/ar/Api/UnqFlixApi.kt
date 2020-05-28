@@ -1,9 +1,11 @@
 package org.unq.ar.Api
 
 import data.getUNQFlix
+import domain.NotFoundException
 import io.javalin.Javalin
 import io.javalin.core.util.RouteOverviewPlugin
 import io.javalin.apibuilder.ApiBuilder.*
+import io.javalin.http.NotFoundResponse
 import org.unq.ar.Controllers.UnqFlixControllers
 
 fun main(args: Array<String>) {
@@ -60,7 +62,9 @@ class UsersApi(private val port: Int) {
 
 
         }
-
+        app.exception(NotFoundException::class.java){ e,_ ->
+            throw NotFoundResponse(e.toString())
+        }
         return app
     }
 
