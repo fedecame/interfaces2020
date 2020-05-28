@@ -6,7 +6,9 @@ import io.javalin.core.util.RouteOverviewPlugin
 import io.javalin.apibuilder.ApiBuilder.*
 import org.unq.ar.Controllers.UnqFlixControllers
 
-fun main(args: Array<String>) { UsersApi(7000).init()}
+fun main(args: Array<String>) {
+    UsersApi(7000).init()
+}
 
 class UsersApi(private val port: Int) {
     fun init(): Javalin {
@@ -20,38 +22,47 @@ class UsersApi(private val port: Int) {
 
         val unqflixController = UnqFlixControllers(getUNQFlix())
 
-        app.routes{
-            path("/register"){
+        app.routes {
+            path("/register") {
                 post(unqflixController::userRegister)
 
             }
-            path("/login"){
-               // post(unqflixController::login)
+            path("/login") {
+                // post(unqflixController::login)
             }
-            path("/user"){
+            path("/user") {
+                get(unqflixController::GetUnUsuario)
                 //get(unqflixController::getFavoritesAndLastSeen)
+                path("fav"){
+                    path(":contentId"){
+                        post(unqflixController::addOrDeleteContentFromFav)
+                    }
+                }
             }
             path("/content") {
                 // get(unqflixController::getContentAvailableOrderByTitle)
+                path(":contentId"){
+                    get(unqflixController::searchContentById)
+                }
             }
-            path("/banners"){
+            path("/banners") {
                 // get(unqflixController::getBanners)
             }
-            path("/search?text={text}"){
-               // get(unqflixController::searchByText)
+            path("/search") {
+                get(unqflixController::searchByText)
             }
-            path("/content/{:contentId}"){
+            path("/content/{:contentId}") {
                 //get(unqflixController)
             }
-            path("/user/lastSeen"){
+            path("/user/lastSeen") {
 
             }
 
 
         }
 
-            return app
-        }
+        return app
+    }
 
 }
 
