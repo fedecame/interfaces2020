@@ -73,11 +73,12 @@ class UnqFlixController (val unqflix:UNQFlix, val jwt: TokenJWT)  {
             throw NotFoundResponse(e.message!!)
         }
 
-        val favourites = unqflix.users.find { it.id == token.id }!!.favorites
+        val lastSeen = unqflix.users.find { it.id == token.id }!!.lastSeen
+        val lastSeenMapped = lastSeen.map { Contenido(it.id, it.description, it.title, it.state is Available) }.toMutableList()
         ctx.status(200)
         ctx.header("Authorization", jwt.generateToken(unqflix.users.find{it.id == token.id}!!))
         ctx.json(mapOf(
-            "favourites" to favourites
+            "lastSeen" to lastSeenMapped
         ))
     }
 }

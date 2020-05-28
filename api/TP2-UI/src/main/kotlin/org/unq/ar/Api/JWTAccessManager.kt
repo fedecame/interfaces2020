@@ -17,7 +17,12 @@ class JWTAccessManager(val jwt: TokenJWT, val unqFlix: UNQFlix): AccessManager {
     private fun getUser(token: String): User {
         try {
             var userToken = jwt.validate(token)
-            return unqFlix.users.first { it.id == userToken.id } ?: throw NotFoundResponse()
+
+            var user: User? = null
+            if(unqFlix.users.isNotEmpty()) {
+                user =  unqFlix.users.first { it.id == userToken.id }
+            }
+            return user ?: throw NotFoundUserException()
         } catch (e: NotFoundUserException) {
             throw NotFoundResponse(e.message!!)
         } catch (e: NotFoundTokenException) {
