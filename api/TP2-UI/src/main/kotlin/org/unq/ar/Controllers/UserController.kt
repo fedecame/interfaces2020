@@ -55,7 +55,7 @@ class UserController (val unqflix: UNQFlix, val jwt: TokenJWT) {
                 "result" to "ok"
             ))
         } catch (e: NotFoundUserException) {
-            ctx.status(404)
+            ctx.status(401)
             ctx.json(mapOf(
                 "result" to "error",
                 "message" to e.message

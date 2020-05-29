@@ -42,7 +42,7 @@ class UsersApi(private val port: Int) {
                 post(userController::login, mutableSetOf<Role>(Roles.ANYONE))
             }
             path("/user"){
-                //get(unqflixController::getFavoritesAndLastSeen)
+                get(unqflixController::getFavoritesAndLastSeen, mutableSetOf<Role>(Roles.USER))
                 path("/fav"){
                     path(":contentId"){
                         post(unqflixController::addOrDeleteContentFromFav, mutableSetOf<Role>(Roles.USER))
@@ -53,24 +53,18 @@ class UsersApi(private val port: Int) {
                 }
             }
             path("/content") {
-                // get(unqflixController::getContentAvailableOrderByTitle)
                 path(":contentId"){
                     get(unqflixController::searchContentById, mutableSetOf<Role>(Roles.USER))
                 }
+                get(unqflixController::getContentAvailableOrderByTitle, mutableSetOf<Role>(Roles.USER))
             }
             path("/banners"){
-                // get(unqflixController::getBanners)
+                 get(unqflixController::getBanners, mutableSetOf<Role>(Roles.USER))
             }
             path("/search") {
                 get(unqflixController::searchByText, mutableSetOf<Role>(Roles.USER))
             }
-            path("/content"){
-                //get(unqflixController)
-            }
 
-        }
-        app.exception(NotFoundException::class.java){ e,_ ->
-            throw NotFoundResponse(e.toString())
         }
         return app
     }
