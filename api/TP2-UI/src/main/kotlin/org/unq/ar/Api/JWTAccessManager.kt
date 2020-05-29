@@ -20,10 +20,8 @@ class JWTAccessManager(val jwt: TokenJWT, val unqFlix: UNQFlix): AccessManager {
                 user =  unqFlix.users.first { it.id == userToken.id }
             }
             return user ?: throw NotFoundUserException()
-        } catch (e: NotFoundUserException) {
-            throw NotFoundResponse(e.message!!)
-        } catch (e: NotFoundTokenException) {
-            throw NotFoundResponse(e.message!!)
+        } catch (e: Exception) {
+            throw UnauthorizedResponse(e.message!!)
         }
     }
 
@@ -31,7 +29,7 @@ class JWTAccessManager(val jwt: TokenJWT, val unqFlix: UNQFlix): AccessManager {
         val token = ctx.header("Authorization")
         when {
             roles.contains(Roles.ANYONE) -> handler.handle(ctx)
-            token == null -> throw NotFoundResponse("Missing or invalid token")
+            token == null -> throw UnauthorizedResponse("Missing or invalid token")
             roles.contains(Roles.USER) -> {
                 getUser(token)
                 handler.handle(ctx)

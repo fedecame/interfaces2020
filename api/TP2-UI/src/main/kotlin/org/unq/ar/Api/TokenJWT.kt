@@ -3,14 +3,10 @@ package org.unq.ar.Api;
 import domain.User
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import domain.Available
-import domain.Content
 import domain.UNQFlix
 import javalinjwt.JWTGenerator
 import javalinjwt.JWTProvider
 import org.unq.ar.exceptions.NotFoundTokenException
-import org.unq.ar.exceptions.NotFoundUserException
-import org.unq.ar.mapper.Contenido
 import org.unq.ar.mapper.UserToken
 import org.unq.ar.roles.Roles
 
