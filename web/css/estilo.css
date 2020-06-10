@@ -1,0 +1,92 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+*{margin: 0; padding: 0; box-sizing: border-box;}
+body{
+	background-color: white;
+	height: 620px;
+	width: 100%;
+	padding: 30px;
+	padding-bottom: 0 ;
+	font-family: 'Montserrat', sans-serif;
+
+}
+
+#container{
+	width: 90%;
+	height: 95%;
+	display: flex;
+	border-radius: 15px;
+	box-shadow: 6px 6px 6px 3px rgba(0,0,0,0.5);
+	margin-left: 5%;
+	
+}
+
+#columnLog{
+
+	height: 100%;
+	width: 40%;
+	background-color:#800000; /*#A9A9A9*/
+	position: relative;
+	padding: 10%;
+	border-top-right-radius: 15px;
+	border-bottom-right-radius: 15px;;
+}
+
+#containerForm{
+	width: 60%;
+	height:60%;
+	background-color: white;
+	top: 20%;
+	position: absolute;
+	top: 20%;
+	left: 20%;
+	opacity: 1;
+	border-radius: 15px;
+	align-items: center;
+	padding: 30px;
+	padding-top: 10px;
+}
+
+#imagenHelado{
+	width: 40px;
+	height: auto;
+	opacity: 0.8;
+	display: inline-block;
+	vertical-align: middle;
+	
+}
+
+#column{
+	width: 60%;
+	height: 100%;
+	
+}
+#containerLogo{
+	width: 200px;
+}
+
+#logo{
+	width: 100%;
+	height: auto;
+}
+
+footer{
+
+	height: 10px;
+	width: 100%;
+
+	
+}
+#firma{
+	display: inline-block;
+	margin-left: 35%;
+	margin-top: 10px;
+	bottom: 5px;
+}
+
+#popcorn{
+	margin: 10%;
+	margin-top: 0;
+	width: 70%;
+	height: auto;
+}
+
