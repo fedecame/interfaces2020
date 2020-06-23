@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Footer from './components/Footer';
 import {Link} from 'react-router-dom';
-import './styles/login.css';
+import './styles/login.scss';
 import pochoclos from './images/popcorn.png'
 import logo from './images/logo.png'
 

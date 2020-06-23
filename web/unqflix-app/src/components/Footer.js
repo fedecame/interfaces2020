@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import helado from '../images/helado.png';
-import '../styles/login.css';
+import '../styles/login.scss';
 
 const Footer = (props) => {
     return (

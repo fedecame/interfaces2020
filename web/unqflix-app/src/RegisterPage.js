@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './styles/login.css';
+import './styles/login.scss';
 import Footer from './components/Footer';
 import {Link} from 'react-router-dom';
 import pochoclos from './images/popcorn.png'
