@@ -1,16 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 *{margin: 0; padding: 0; box-sizing: border-box;}
-body{
+#pseudoBody{
 	background-color: white;
 	height: 620px;
 	width: 100%;
 	padding: 30px;
 	padding-bottom: 0 ;
 	font-family: 'Montserrat', sans-serif;
-
 }
 
-#container{
+#containerLoginRegister{
 	width: 90%;
 	height: 95%;
 	display: flex;
@@ -20,7 +19,7 @@ body{
 	
 }
 
-#columnLog{
+#columnLoginRegister{
 
 	height: 100%;
 	width: 40%;
@@ -31,7 +30,7 @@ body{
 	border-bottom-right-radius: 15px;;
 }
 
-#containerForm, #containerFormRegister{
+#containerFormLogin, #containerFormRegister{
 	width: 60%;
 	height:60%;
 	background-color: white;
@@ -45,6 +44,7 @@ body{
 	padding: 30px;
 	padding-top: 10px;
 }
+
 #containerFormRegister{
 	height: 70%;
 }
@@ -55,61 +55,58 @@ body{
 	opacity: 0.8;
 	display: inline-block;
 	vertical-align: middle;
-	
 }
 
-#column{
+#columnIzqLoginRegister{
 	width: 60%;
 	height: 100%;
-	
 }
-#containerLogo{
+
+#containerLogoLoginRegister{
 	width: 200px;
 }
 
-#logo{
+#logoLoginRegister{
 	width: 100%;
 	height: auto;
 }
 
-footer{
-
+#footerWrapper{
 	height: 10px;
 	width: 100%;
-
-	
 }
-#firma{
+
+#firmaFooter{
 	display: inline-block;
 	margin-left: 35%;
 	margin-top: 10px;
 	bottom: 5px;
 }
 
-#popcorn{
+#popcornImage{
 	margin: 10%;
 	margin-top: 0;
 	width: 70%;
 	height: auto;
 }
 
-a{
+.anchorLoginRegister{
 	text-decoration: none;
 	font-weight: bold;
 	color: #800000;
 }
- input{
-	 width: 220px;
 
- }
+.inputLoginRegister{
+	width: 220px;
+}
 
- button{
-	 width: 100px;
-	 height: 30px;
-	 text-align: center;
-	 border-radius: 8%;
- }
+.buttonLoginRegister{
+	width: 100px;
+	height: 30px;
+	text-align: center;
+	border-radius: 8%;
+}
 
- button:hover{
+.buttonLoginRegister:hover{
 	font-weight: bold;
- }
+}
