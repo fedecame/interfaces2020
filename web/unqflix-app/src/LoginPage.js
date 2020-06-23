@@ -1,41 +1,41 @@
 import React, { useState, useEffect } from 'react';
 import Footer from './components/Footer';
 import {Link} from 'react-router-dom';
-import './styles/login.css';
+import './styles/login.scss';
 import pochoclos from './images/popcorn.png'
 import logo from './images/logo.png'
 
 const LoginPage = (props) => {
     return ( 
-        <>
-            <div id="container">
-                <div id="column">	
-                    <img id="popcorn" src={pochoclos} alt="Pochoclos"/>
+        <div id="pseudoBody">
+            <div id="containerLoginRegister">
+                <div id="columnIzqLoginRegister">	
+                    <img id="popcornImage" src={pochoclos} alt="Pochoclos"/>
                 </div>
-                <div id="columnLog">
-                    <div id="containerForm">
-                        <div id="containerLogo">
-                            <img id="logo"	src={logo} alt="Logo de Unqflix"/>
+                <div id="columnLoginRegister">
+                    <div id="containerFormLogin">
+                        <div id="containerLogoLoginRegister">
+                            <img id="logoLoginRegister"	src={logo} alt="Logo de Unqflix"/>
                             <br/>
                         </div>
                         <form action="">
                             <label >User:</label>
                             <br/>
-                            <input type="text" name="user"/>
+                            <input className="inputLoginRegister" type="text" name="user"/>
                             <br/>
                             <label>Password: </label>
                             <br/>
-                            <input type="password" name="pass"/>
+                            <input className="inputLoginRegister" type="password" name="pass"/>
                             <br/><br/>
-                            <button id="botonForm">Login</button>
+                            <button className="buttonLoginRegister" id="botonForm">Login</button>
                             <br/><br/>
-                            <Link to="/register">Register</Link>
+                            <Link to="/register" className="anchorLoginRegister">Register</Link>
                         </form>
                     </div>
                 </div>
             </div>
             <Footer/>
-        </>
+        </div>
     );
 }
  
