@@ -5,8 +5,11 @@ import './styles/login.scss';
 import pochoclos from './images/popcorn.png';
 import logo from './images/logo.png';
 import axios from 'axios';
+import { login } from './Api';
 
-const LoginPage = (props) => {
+function Loginpage() {
+const [user, setUser] = useState('');
+const [password, setPassword] = useState('');
     return ( 
         <div id="pseudoBody">
             <div id="containerLoginRegister">
@@ -22,13 +25,24 @@ const LoginPage = (props) => {
                         <form action="">
                             <label >User:</label>
                             <br/>
-                            <input className="inputLoginRegister" type="text" name="user"/>
+                            <input className="inputLoginRegister" 
+                            type="text" 
+                            name="user"
+                            value={user}/>
+                            setUser(user)
                             <br/>
                             <label>Password: </label>
                             <br/>
-                            <input className="inputLoginRegister" type="password" name="pass"/>
+                            <input className="inputLoginRegister"
+                            type="password" 
+                            name="pass"
+                            value={password}
+                             />
+                            setPassword(password)
                             <br/><br/>
-                            <button className="buttonLoginRegister" id="botonForm">Login</button>
+                            <button className="buttonLoginRegister" 
+                            id="botonForm"
+                            onClick={login}>Login</button>
                             <br/><br/>
                             <Link to="/register" className="anchorLoginRegister">Register</Link>
                         </form>
@@ -39,5 +53,5 @@ const LoginPage = (props) => {
         </div>
     );
 }
- 
+
 export default LoginPage;
