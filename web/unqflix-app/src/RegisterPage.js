@@ -8,11 +8,11 @@ import apiConsumer from './ApiConsumer';
 import Cookies from 'js-cookie';
 
 const RegisterPage = (props) => {
-	const [username, setUsername] = useState("");
-	const [email, setEmail] = useState("");
-	const [password, setPassword] = useState("");
-	const [image, setImage] = useState("");
-	const [creditCard, setCreditCard] = useState("");
+	const [username, setUsername] = useState("asd");
+	const [email, setEmail] = useState("asd@asd.com");
+	const [password, setPassword] = useState("asd");
+	const [image, setImage] = useState("http://asd.jpg");
+	const [creditCard, setCreditCard] = useState("123");
 
 	const userRegister = {
 		"name": "Edward Elric",

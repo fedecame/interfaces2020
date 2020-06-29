@@ -21,6 +21,17 @@ const CatalogPage = (props) => {
         })
     };
 
+    const getBannersHandler = (text) => {
+        apiConsumer.getBanners()
+        .then(res => {
+            console.log("search: ", res);
+            console.log("search data: ", res.data);
+        })
+        .catch(err => {
+            console.error("search error: ", err.response);
+        })
+    };
+
     return (
         <Container>
             <Row>
@@ -33,7 +44,10 @@ const CatalogPage = (props) => {
                 <Button variant="dark" onClick={() => history.push("/login")}>Login</Button>
             </Row>
             <Row>
-            <Button variant="secondary" onClick={() => searchTestHandler("the")}>Search</Button>
+                <Button variant="secondary" onClick={() => searchTestHandler("the")}>Search</Button>
+            </Row>
+            <Row>
+                <Button variant="primary" onClick={() => getBannersHandler()}>Search</Button>
             </Row>
         </Container>
     );
