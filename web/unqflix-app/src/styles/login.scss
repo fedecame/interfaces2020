@@ -41,6 +41,9 @@
 	padding: 30px;
 	padding-top: 5px;
 }
+#containerFormRegister{
+	height: 88%;
+}
 
 
 #imagenHelado{
@@ -98,6 +101,13 @@
 }
 
 .buttonLoginRegister{
- background-color:#800000; ;
+ background-color:#800000; 
+ border-color:#800000 ;
+}
+
+.buttonLoginRegister:hover{
+	color:#800000 ;
+	background-color: white;
+	border-color:#800000 ;
 }
 
