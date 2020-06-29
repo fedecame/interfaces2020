@@ -7,10 +7,10 @@ import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
 import {useHistory} from 'react-router-dom';
 
-const LoginPage = (props) => {
+function LoginPage() {
     let history = useHistory();
     const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [password, setPassword] = useState('');
 
     const loginHandler = (event) => {
         event.preventDefault();
@@ -37,13 +37,23 @@ const LoginPage = (props) => {
                         <form onSubmit={loginHandler} method="post">
                             <label htmlFor="email">Email:</label>
                             <br/>
-                            <input className="inputLoginRegister" type="email" name="email" value={email} onChange={handleEmailChange}/>
+                            <input className="inputLoginRegister" 
+                            type="email" 
+                            name="email"
+                            value={email}
+                            onChange={handleEmailChange}/>
                             <br/>
                             <label htmlFor="pass">Password: </label>
                             <br/>
-                            <input className="inputLoginRegister" type="password" name="pass" value={password} onChange={handlePasswordChange}/>
+                            <input className="inputLoginRegister"
+                            type="password" 
+                            name="pass"
+                            value={password}
+                            onChange={handlePasswordChange}/>
                             <br/><br/>
-                            <button className="buttonLoginRegister" id="botonForm" type="submit">Login</button>
+                            <button className="buttonLoginRegister" 
+                            id="botonForm"
+                            type="submit">Login</button>
                             <br/><br/>
                             <Link to="/register" className="anchorLoginRegister">Register</Link>
                         </form>
@@ -54,5 +64,5 @@ const LoginPage = (props) => {
         </div>
     );
 }
- 
+
 export default LoginPage;
