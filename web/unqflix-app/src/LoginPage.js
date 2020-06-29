@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Footer from './components/Footer';
-import {Link, useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './styles/login.scss';
 import pochoclos from './images/popcorn.png';
 import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
+import {useHistory} from 'react-router-dom';
+import { Button, Form } from 'react-bootstrap';
 
-const LoginPage = () => {
+function LoginPage() {
     let history = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState('');
@@ -33,35 +35,34 @@ const LoginPage = () => {
                             <img id="logoLoginRegister"	src={logo} alt="Logo de Unqflix"/>
                             <br/>
                         </div>
-                        <form onSubmit={loginHandler} method="post">
-                            <label htmlFor="email">Email:</label>
+                        <Form>
+                        <Form.Group controlId= "formBasicEmail" onSubmit={loginHandler} method="post">
+                            <Form.Label type="email">Email:</Form.Label>
                             <br/>
-                            <input className="inputLoginRegister" 
-                            type="email" 
-                            name="email"
+                            <Form.Text className="text-muted" 
                             value={email}
                             onChange={handleEmailChange}/>
                             <br/>
-                            <label htmlFor="pass">Password: </label>
+                            <Form.Label>Password: </Form.Label>
                             <br/>
-                            <input className="inputLoginRegister"
+                            <Form.Control 
                             type="password" 
-                            name="pass"
                             value={password}
                             onChange={handlePasswordChange}/>
                             <br/><br/>
-                            <button className="buttonLoginRegister" 
+                            <Button variant="primary"
                             id="botonForm"
-                            type="submit">Login</button>
+                            type="submit">Login</Button>
                             <br/><br/>
                             <Link to="/register" className="anchorLoginRegister">Register</Link>
-                        </form>
+                        </Form.Group>
+                        </Form>
                     </div>
                 </div>
             </div>
             <Footer/>
         </div>
     );
-};
+}
 
 export default LoginPage;
