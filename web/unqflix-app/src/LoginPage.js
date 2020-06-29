@@ -6,7 +6,7 @@ import pochoclos from './images/popcorn.png';
 import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
 import {useHistory} from 'react-router-dom';
-import { Button, Form } from 'react-bootstrap';
+import { Button, Form, Image } from 'react-bootstrap';
 
 function LoginPage() {
     let history = useHistory();
@@ -27,19 +27,21 @@ function LoginPage() {
         <div id="pseudoBody">
             <div id="containerLoginRegister">
                 <div id="columnIzqLoginRegister">	
-                    <img id="popcornImage" src={pochoclos} alt="Pochoclos"/>
+                    <Image src={pochoclos} id="popcornImage" thumbnail />
                 </div>
                 <div id="columnLoginRegister">
                     <div id="containerFormLogin">
                         <div id="containerLogoLoginRegister">
-                            <img id="logoLoginRegister"	src={logo} alt="Logo de Unqflix"/>
+                            <Image src={logo} id="logoLoginRegister" thumbnail />
                             <br/>
                         </div>
                         <Form>
                         <Form.Group controlId= "formBasicEmail" onSubmit={loginHandler} method="post">
                             <Form.Label type="email">Email:</Form.Label>
                             <br/>
-                            <Form.Text className="text-muted" 
+                            <Form.Control type="email" 
+                            className="inputLoginRegister"
+                            placeholder="myemail@mail.com"
                             value={email}
                             onChange={handleEmailChange}/>
                             <br/>
@@ -47,11 +49,13 @@ function LoginPage() {
                             <br/>
                             <Form.Control 
                             type="password" 
+                            className="inputLoginRegister"
                             value={password}
                             onChange={handlePasswordChange}/>
                             <br/><br/>
                             <Button variant="primary"
                             id="botonForm"
+                            className="buttonLoginRegister"
                             type="submit">Login</Button>
                             <br/><br/>
                             <Link to="/register" className="anchorLoginRegister">Register</Link>
