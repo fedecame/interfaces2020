@@ -2,10 +2,26 @@ import React, { useState, useEffect } from 'react';
 import Footer from './components/Footer';
 import {Link} from 'react-router-dom';
 import './styles/login.scss';
-import pochoclos from './images/popcorn.png'
-import logo from './images/logo.png'
+import pochoclos from './images/popcorn.png';
+import logo from './images/logo.png';
+import apiConsumer from './ApiConsumer';
+import {useHistory} from 'react-router-dom';
 
 const LoginPage = (props) => {
+    let history = useHistory();
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    const loginHandler = (event) => {
+        event.preventDefault();
+        apiConsumer.login({email, password})
+        .then(res => (res.status >= 200 && res.status < 300) ? history.push('/') : null)
+        .catch(err => console.error("login error response: ", err.response));
+    }
+
+    const handlePasswordChange = (event) => setPassword(event.target.value);
+    const handleEmailChange = (event) => setEmail(event.target.value);
+
     return ( 
         <div id="pseudoBody">
             <div id="containerLoginRegister">
@@ -18,16 +34,16 @@ const LoginPage = (props) => {
                             <img id="logoLoginRegister"	src={logo} alt="Logo de Unqflix"/>
                             <br/>
                         </div>
-                        <form action="">
-                            <label >User:</label>
+                        <form onSubmit={loginHandler} method="post">
+                            <label htmlFor="email">Email:</label>
                             <br/>
-                            <input className="inputLoginRegister" type="text" name="user"/>
+                            <input className="inputLoginRegister" type="email" name="email" value={email} onChange={handleEmailChange}/>
                             <br/>
-                            <label>Password: </label>
+                            <label htmlFor="pass">Password: </label>
                             <br/>
-                            <input className="inputLoginRegister" type="password" name="pass"/>
+                            <input className="inputLoginRegister" type="password" name="pass" value={password} onChange={handlePasswordChange}/>
                             <br/><br/>
-                            <button className="buttonLoginRegister" id="botonForm">Login</button>
+                            <button className="buttonLoginRegister" id="botonForm" type="submit">Login</button>
                             <br/><br/>
                             <Link to="/register" className="anchorLoginRegister">Register</Link>
                         </form>

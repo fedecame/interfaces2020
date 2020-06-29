@@ -4,8 +4,49 @@ import Footer from './components/Footer';
 import {Link} from 'react-router-dom';
 import pochoclos from './images/popcorn.png'
 import logo from './images/logo.png'
+import apiConsumer from './ApiConsumer';
+import Cookies from 'js-cookie';
 
 const RegisterPage = (props) => {
+	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [image, setImage] = useState("");
+	const [creditCard, setCreditCard] = useState("");
+
+	const userRegister = {
+		"name": "Edward Elric",
+		"email": "edwardElric@gmail.com",
+		"password": "philosopherStone",
+		"image": "https://a.wattpad.com/cover/83879595-352-k192548.jpg",
+		"creditCard": "4444 3333 2222 1111"
+	}
+
+	const usernameChangeHandler = (event) => setUsername(event.target.value);
+	const emailChangeHandler = (event) => setEmail(event.target.value);
+	const passwordChangeHandler = (event) => setPassword(event.target.value);
+	const imageChangeHandler = (event) => setImage(event.target.value);
+	const creditCardChangeHandler = (event) => setCreditCard(event.target.value);
+
+	const registerHandler = (event) => {
+		event.preventDefault();
+		apiConsumer.register({
+			name: username,
+			email,
+			password,
+			image,
+			creditCard
+		})
+		.then(res => {
+			Cookies.set('authToken', res.headers.authorization);
+			apiConsumer.updateAuthToken();
+		})
+		.catch(err => {
+			console.error("register error: ", err);
+			console.error("register error response: ", err.response);
+		})
+	}
+
     return ( 
 		<div id="pseudoBody">
 			<div id="containerLoginRegister">
@@ -17,23 +58,23 @@ const RegisterPage = (props) => {
 					<div id="containerLogoLoginRegister">
 						<img id="logoLoginRegister"	src={logo} alt="Logo de Unqflix"/><br/>
 					</div>
-					<form action="">
-						<label>Email:</label><br/>
-						<input className="inputLoginRegister" type="email" name="email" required/>
+					<form onSubmit={registerHandler} method="post">
+						<label htmlFor="email">Email:</label><br/>
+						<input className="inputLoginRegister" type="email" name="email" value={email} onChange={emailChangeHandler} required/>
 						<br/>
-						<label>Name:</label><br/>
-						<input className="inputLoginRegister" type="text" name="user" required/>
+						<label htmlFor="user">Name:</label><br/>
+						<input className="inputLoginRegister" type="text" name="user" value={username} onChange={usernameChangeHandler} required/>
 						<br/>
-						<label>Password: </label><br/>
-						<input className="inputLoginRegister" type="password" name="pass" required/>
+						<label htmlFor="pass">Password: </label><br/>
+						<input className="inputLoginRegister" type="password" name="pass" value={password} onChange={passwordChangeHandler} required/>
 						<br/>
-						<label >Imagelink:</label><br/>
-						<input className="inputLoginRegister" type="url" name="image"/>
+						<label htmlFor="image">Imagelink:</label><br/>
+						<input className="inputLoginRegister" type="url" name="image" value={image} onChange={imageChangeHandler} required/>
 						<br/>
-						<label >Credit Card:</label><br/>
-						<input className="inputLoginRegister" type="text" name="creditCard"/>
+						<label htmlFor="creditCard">Credit Card:</label><br/>
+						<input className="inputLoginRegister" type="text" name="creditCard" value={creditCard} onChange={creditCardChangeHandler} required/>
 						<br/><br/>
-						<button className="buttonLoginRegister" id="botonForm">Register</button><br/><br/>
+						<button className="buttonLoginRegister" id="botonForm" type="submit">Register</button><br/><br/>
 						<Link to="/login" className="anchorLoginRegister">Back</Link>
 					</form>
 				</div>
