@@ -15,7 +15,7 @@ class UnqFlixControllers (val unqflix:UNQFlix, val jwt: TokenJWT)  {
     private fun transformarContentsToContenido(favorites: MutableList<Content>): MutableList<Contenido> {
         var res = mutableListOf<Contenido>()
         for(cont in favorites){
-            var unContenido = Contenido(cont.id, cont.description, cont.title, adapterAvailable(cont.state ))
+            var unContenido = Contenido(cont.id, cont.description, cont.title, adapterAvailable(cont.state ), cont.poster)
             res.add(unContenido)
         }
         return res
@@ -24,7 +24,7 @@ class UnqFlixControllers (val unqflix:UNQFlix, val jwt: TokenJWT)  {
     private fun transformarMovieToContenido(favorites: MutableList<Movie>): MutableList<Contenido> {
         var res = mutableListOf<Contenido>()
         for (cont in favorites) {
-            var unContenido = Contenido(cont.id, cont.description, cont.title, adapterAvailable(cont.state))
+            var unContenido = Contenido(cont.id, cont.description, cont.title, adapterAvailable(cont.state), cont.poster)
             res.add(unContenido)
         }
         return res
@@ -50,8 +50,8 @@ class UnqFlixControllers (val unqflix:UNQFlix, val jwt: TokenJWT)  {
         }
         val fav =
             UserFavorites(user.name, user.image,
-                user.favorites.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state)) }.toMutableList(),
-                user.lastSeen.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state)) }.toMutableList())
+                user.favorites.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state), it.poster) }.toMutableList(),
+                user.lastSeen.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state), it.poster) }.toMutableList())
 
         ctx.status(200).json(fav)
     }
@@ -62,7 +62,7 @@ class UnqFlixControllers (val unqflix:UNQFlix, val jwt: TokenJWT)  {
         var seriesAvailables:List<Content> = unqflix.series.filter { adapterAvailable(it.state) }
         var moviesAvailables:List<Content> = unqflix.movies.filter { adapterAvailable(it.state) }
         seriesAvailables += moviesAvailables
-        val contenido:List<Contenido> = seriesAvailables.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state)) }
+        val contenido:List<Contenido> = seriesAvailables.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state), it.poster) }
         ctx.status(200).json(contenido.sortedBy { it.title })
     }
 
@@ -71,7 +71,7 @@ class UnqFlixControllers (val unqflix:UNQFlix, val jwt: TokenJWT)  {
 
 
     fun getBanners(ctx: Context){
-        val banners: List<Contenido> = unqflix.banners.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state)) }
+        val banners: List<Contenido> = unqflix.banners.map { Contenido(it.id, it.description, it.title, adapterAvailable(it.state), it.poster) }
         ctx.status(200).json(banners.shuffled())
     }
 
@@ -111,7 +111,7 @@ class UnqFlixControllers (val unqflix:UNQFlix, val jwt: TokenJWT)  {
     private fun transformarSerieToContenido(searchSerie: MutableList<Serie>): Collection<Contenido> {
         var res = mutableListOf<Contenido>()
         for (cont in searchSerie) {
-            var unContenido = Contenido(cont.id, cont.description, cont.title, adapterAvailable(cont.state))
+            var unContenido = Contenido(cont.id, cont.description, cont.title, adapterAvailable(cont.state), cont.poster)
             res.add(unContenido)
         }
         return res
@@ -172,7 +172,7 @@ class UnqFlixControllers (val unqflix:UNQFlix, val jwt: TokenJWT)  {
         }
 
         val lastSeen = unqflix.users.find { it.id == token.id }!!.lastSeen
-        val lastSeenMapped = lastSeen.map { Contenido(it.id, it.description, it.title, it.state is Available) }.toMutableList()
+        val lastSeenMapped = lastSeen.map { Contenido(it.id, it.description, it.title, it.state is Available, it.poster) }.toMutableList()
         ctx.status(200)
         ctx.header("Authorization", jwt.generateToken(unqflix.users.find{it.id == token.id}!!))
         ctx.json(mapOf(

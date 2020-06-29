@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import Footer from './components/Footer';
-import {Link} from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import './styles/login.scss';
 import pochoclos from './images/popcorn.png';
 import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
-import {useHistory} from 'react-router-dom';
 
-function LoginPage() {
+const LoginPage = () => {
     let history = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState('');
@@ -63,6 +62,6 @@ function LoginPage() {
             <Footer/>
         </div>
     );
-}
+};
 
 export default LoginPage;
