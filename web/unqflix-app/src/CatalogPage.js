@@ -44,6 +44,9 @@ const CatalogPage = (props) => {
                 <Button variant="dark" onClick={() => history.push("/login")}>Login</Button>
             </Row>
             <Row>
+                <Button variant="dark" onClick={() => history.push("/content/:id")}>Content</Button>
+            </Row>
+            <Row>
                 <Button variant="secondary" onClick={() => searchTestHandler("the")}>Search</Button>
             </Row>
             <Row>
