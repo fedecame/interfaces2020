@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
+import CardsSeasons from './components/CardsSeasons';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -30,7 +31,10 @@ return(
                             </Col>
                         </Row >
                         <Row id="seasonsRow">
-                            <h4>Seasons</h4> 
+                            <h4>Seasons</h4>
+                            <Row id="cardContainer">
+                            <CardsSeasons/>
+                            </Row> 
                         </Row>
                     </Col>
                 </Row> 
