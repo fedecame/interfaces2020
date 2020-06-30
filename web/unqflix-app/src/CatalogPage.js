@@ -43,10 +43,7 @@ const CatalogPage = (props) => {
             <Row>
                 <Button variant="dark" onClick={() => history.push("/login")}>Login</Button>
             </Row>
-            <Row>
-                <Button variant="dark" onClick={() => history.push("/content/:id")}>Content</Button>
-            </Row>
-           
+        
             <Row>
                 <Button variant="secondary" onClick={() => searchTestHandler("the")}>Search</Button>
             </Row>
@@ -54,7 +51,10 @@ const CatalogPage = (props) => {
                 <Button variant="primary" onClick={() => getBannersHandler()}>Search</Button>
             </Row>
             <Row>
-                <Button variant="primary" onClick={() => history.push("/details")}>Detalle Serie</Button>
+                <Button variant="primary" onClick={() => history.push("/detailsSerie")}>Detalle Serie</Button>
+            </Row>
+            <Row>
+                <Button variant="primary" onClick={() => history.push("/detailsMovie")}>Detalle Movie</Button>
             </Row>
         </Container>
     );

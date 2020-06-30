@@ -12,7 +12,7 @@ import apiConsumer from './ApiConsumer';
 import pochoclos from './images/popcorn.png';
 import { Button, Form, Image } from 'react-bootstrap';
 
-function ProductDetailsPage(){
+function ProductSerieDetailsPage(){
     let history = useHistory();    
 return(
     <Container>
@@ -33,7 +33,7 @@ return(
                         <Row id="seasonsRow">
                             <h4>Seasons</h4>
                             <Row id="cardContainer">
-                            <CardsSeasons/>
+                              <CardsSeasons/>
                             </Row> 
                         </Row>
                     </Col>
@@ -50,4 +50,4 @@ return(
 
 
 }
-export default ProductDetailsPage;
+export default ProductSerieDetailsPage;
