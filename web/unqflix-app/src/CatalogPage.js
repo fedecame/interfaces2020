@@ -45,7 +45,6 @@ const CatalogPage = (props) => {
         } else if (content.id.startsWith('ser')) {
             apiConsumer.getSerieImage(content.title)
             .then(res => {
-                console.log("Serie image result: ", res);
                 const posterPath = res.data.results.find(elem => elem.poster_path !== null).poster_path;
                 event.target.src = `https://image.tmdb.org/t/p/w500/${posterPath}`;
             })
