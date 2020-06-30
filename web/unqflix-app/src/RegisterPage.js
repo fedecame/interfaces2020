@@ -38,6 +38,7 @@ const RegisterPage = (props) => {
 			creditCard
 		})
 		.then(res => {
+			Cookies.remove('authToken');
 			Cookies.set('authToken', res.headers.authorization);
 			apiConsumer.updateAuthToken();
 		})

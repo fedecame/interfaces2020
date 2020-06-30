@@ -153,7 +153,7 @@ const CatalogPage = (props) => {
                     </Col>
                 </Row>
             </Container> */}
-            {catalog.length &&
+            {catalog.length > 0 &&
             <GridGenerator colAmount={6}>
                 {catalog.map(content => (
                     <Card key={content.id} className="bg-dark text-white mt-4">

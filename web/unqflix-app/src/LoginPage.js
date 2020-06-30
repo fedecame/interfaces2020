@@ -5,6 +5,7 @@ import './styles/login.scss';
 import pochoclos from './images/popcorn.png';
 import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
+import Cookies from 'js-cookie';
 
 const LoginPage = () => {
     let history = useHistory();
@@ -14,7 +15,14 @@ const LoginPage = () => {
     const loginHandler = (event) => {
         event.preventDefault();
         apiConsumer.login({email, password})
-        .then(res => (res.status >= 200 && res.status < 300) ? history.push('/') : null)
+        .then(res => {
+            Cookies.remove('authToken');
+			Cookies.set('authToken', res.headers.authorization);
+			apiConsumer.updateAuthToken();
+            if (res.status >= 200 && res.status < 300){
+                history.push('/');
+            }
+        })
         .catch(err => console.error("login error response: ", err.response));
     }
 

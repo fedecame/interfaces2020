@@ -17,7 +17,7 @@ const tmdbInstance = axios.create({
   withCredentials: false,
 });
 
-const updateAuthToken = () => instance.defaults.headers.common['Authorization'] = Cookies.get('authToken');
+const updateAuthToken = () => instance.defaults.headers['Authorization'] = Cookies.get('authToken');
 
 //posts
 const register = ({name, email, password, image, creditCard}) => instance.post('register', {name, email, password, image, creditCard});
