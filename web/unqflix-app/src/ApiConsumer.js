@@ -11,6 +11,12 @@ const instance = axios.create({
   }
 });
 
+const tmbdApiKey = "f89a93870b54be100cd02918d7089864";
+const tmdbInstance = axios.create({
+  baseURL: "https://api.themoviedb.org/3/",
+  withCredentials: false,
+});
+
 const updateAuthToken = () => instance.defaults.headers.common['Authorization'] = Cookies.get('authToken');
 
 //posts
@@ -25,6 +31,10 @@ const getUserContent = () => instance.get('/user');
 const getAvailableContent = () => instance.get('/content');
 const getBanners = () => instance.get('/banners');
 
+//tmdb
+const getMovieImage = movieTitle => tmdbInstance.get('/search/movie', {params: {api_key: tmbdApiKey, query: movieTitle}});
+const getSerieImage = serieTitle => tmdbInstance.get('/search/tv', {params: {api_key: tmbdApiKey, query: serieTitle}});
+
 export default {
   register,
   login,
@@ -36,4 +46,6 @@ export default {
   getAvailableContent,
   getBanners,
   updateAuthToken,
+  getMovieImage,
+  getSerieImage,
 };
