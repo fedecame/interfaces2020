@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import CarouselBanners from './components/CarouselBanners';
+import Header from './components/Header';
 
 const SearchResultsPage = (props) => {
-    return ( 
+    return (
         <>
-            <CarouselBanners/>
-            {/* <h1>SearchResultsPage</h1> */}
+            <Header />
         </>
     );
 }
