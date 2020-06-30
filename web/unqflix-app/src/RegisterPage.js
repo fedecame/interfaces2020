@@ -60,8 +60,8 @@ const RegisterPage = (props) => {
 				    	<Image src={logo} id="logoLoginRegister" thumbnail />
 					     <br/>	
 					</div>
-					<Form>
-					<Form.Group controlId= "formBasicEmail" onSubmit={registerHandler} method="post">
+					<Form onSubmit={registerHandler} method="post">
+					<Form.Group controlId= "formBasicEmail">
 					    <Form.Label type="email">Email:</Form.Label>
 						<Form.Control type="email" 
                             className="inputLoginRegister"
@@ -69,13 +69,13 @@ const RegisterPage = (props) => {
                             value={email}
                             onChange={emailChangeHandler} required/>
 						<Form.Label type="text">Name:</Form.Label>
-						<Form.Control type="email" 
+						<Form.Control type="text" 
                             className="inputLoginRegister"
                             placeholder="Input your Name"
                             value={username}
                             onChange={usernameChangeHandler} required/>
 						<Form.Label type="pass">Password:</Form.Label>
-						<Form.Control type="pass" 
+						<Form.Control type="password" 
                             className="inputLoginRegister"
                             placeholder="Input your Password"
                             value={password}

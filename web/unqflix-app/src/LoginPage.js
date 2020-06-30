@@ -35,11 +35,12 @@ function LoginPage() {
                             <Image src={logo} id="logoLoginRegister" thumbnail />
                             <br/>
                         </div>
-                        <Form>
-                        <Form.Group controlId= "formBasicEmail" onSubmit={loginHandler} method="post">
+                        <Form onSubmit={loginHandler} method="post">
+                        <Form.Group controlId= "formBasicEmail">
                             <Form.Label type="email">Email:</Form.Label>
                             <br/>
-                            <Form.Control type="email" 
+                            <Form.Control
+                            type="email" 
                             className="inputLoginRegister"
                             placeholder="myemail@mail.com"
                             value={email}
