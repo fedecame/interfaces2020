@@ -46,11 +46,15 @@ const CatalogPage = (props) => {
             <Row>
                 <Button variant="dark" onClick={() => history.push("/content/:id")}>Content</Button>
             </Row>
+           
             <Row>
                 <Button variant="secondary" onClick={() => searchTestHandler("the")}>Search</Button>
             </Row>
             <Row>
                 <Button variant="primary" onClick={() => getBannersHandler()}>Search</Button>
+            </Row>
+            <Row>
+                <Button variant="primary" onClick={() => history.push("/details")}>Detalle Serie</Button>
             </Row>
         </Container>
     );
