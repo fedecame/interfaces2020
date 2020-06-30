@@ -2,33 +2,34 @@ import React, { useState, useEffect } from 'react';
 import {Navbar, Nav, Form, FormControl, Button,} from 'react-bootstrap'
 import apiConsumer from "../ApiConsumer"
 import logo from "../images/logo.png"
+import user from "../images/usuario.png"
+import { useHistory } from 'react-router-dom';
 
 const Header = (props) => {
 
-    // let history = useHistory();
+    const history = useHistory();
     const [searchText, setSearchText] = useState("");
-     
+
 
     const searchHandler = (event) => {
         event.preventDefault();
         apiConsumer.search(searchText)
-        // .then(res => (res.status >= 200 && res.status < 300) ? history.push('/') : null)
-        .then(res => {
-            console.log("resultado de busqueda: ", res.data) //sacar cuando este lo de las imagenes
-        })
-        .catch(err => console.error("search error response: ", err.response));
+            .then(res => {
+                console.log("resultado de busqueda: ", res.data) //sacar cuando este lo de las imagenes
+            })
+            .catch(err => console.error("search error response: ", err.response));
     }
 
     const handleSearchChange = event => setSearchText(event.target.value);
 
 
 
-    return ( 
-       
-       <div>
+    return (
+
+        <div>
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand>
-                <img id="logoHeader" src={logo} alt="Logo de Unqflix"/>
+                    <img id="logoHeader" onClick={() => history.push("/")} src={logo} alt="Logo de Unqflix" />
                 </Navbar.Brand>
                 <Nav className="mr-auto">
                 </Nav>
@@ -36,9 +37,12 @@ const Header = (props) => {
                     <FormControl type="text" value={searchText} onChange={handleSearchChange} placeholder="Search" className="mr-sm-2" />
                     <Button type="submit" variant="outline-info">Search</Button>
                 </Form>
+                
+                <img id="avatarUser" src={user} alt="avatar de usuario"/>
+                
             </Navbar>
         </div>
-        
+
     );
 }
  
