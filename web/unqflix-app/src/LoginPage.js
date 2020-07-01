@@ -5,9 +5,9 @@ import './styles/login.scss';
 import pochoclos from './images/popcorn.png';
 import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
-import Cookies from 'js-cookie';
 import {useHistory} from 'react-router-dom';
 import { Button, Form, Image } from 'react-bootstrap';
+import authSingleton from './Auth';
 
 function LoginPage() {
     let history = useHistory();
@@ -18,9 +18,8 @@ function LoginPage() {
         event.preventDefault();
         apiConsumer.login({email, password})
         .then(res => {
-            Cookies.remove('authToken');
-			Cookies.set('authToken', res.headers.authorization);
-			apiConsumer.updateAuthToken();
+            authSingleton.logout(); // es necesario?
+            authSingleton.login(res.headers.authorization);
             if (res.status >= 200 && res.status < 300){
                 history.push('/');
             }
