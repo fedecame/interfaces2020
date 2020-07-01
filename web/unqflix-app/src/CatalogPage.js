@@ -9,6 +9,7 @@ import Row from 'react-bootstrap/Row';
 import CarouselBanners from './components/CarouselBanners';
 import GridGenerator from './components/GridGenerator';
 import GridCard from './components/GridCard';
+import Header from './components/Header';
 
 const CatalogPage = (props) => {
     const history = useHistory();
@@ -52,7 +53,8 @@ const CatalogPage = (props) => {
 
     return (
         <>
-        <Container>
+        <Header />
+        <Container fluid>
             <Row>
                 <Col>
                 <h1>CatalogPage</h1>
