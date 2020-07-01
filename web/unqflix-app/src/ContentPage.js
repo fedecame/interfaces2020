@@ -7,9 +7,11 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
 const ContentPage = (props) => {
-    return ( 
+    return (
+        <>
+        <Header/> 
         <div id="pseudoBody">
-            <Header/>
+            
             <Container fluid>
                 <Row>
                     <Col>
@@ -21,6 +23,7 @@ const ContentPage = (props) => {
             </Container>
              <Footer/>
         </div>
+        </>
     );
 }
  

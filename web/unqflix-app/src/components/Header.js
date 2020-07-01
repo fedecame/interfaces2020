@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import {Navbar, Nav, Form, FormControl, Button,} from 'react-bootstrap'
+import { Navbar, Nav, Form, FormControl, Button, Image } from 'react-bootstrap'
 import apiConsumer from "../ApiConsumer"
+import '../styles/header.scss';
 import logo from "../images/logo.png"
 import user from "../images/usuario.png"
 import { useHistory } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 const Header = (props) => {
 
@@ -21,14 +23,19 @@ const Header = (props) => {
     }
 
     const handleSearchChange = event => setSearchText(event.target.value);
+
     const redirectToHome = () => history.push("/")
+
+    const logout = () => {
+        Cookies.remove("authToken");
+    }
 
     return (
 
         <div>
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand>
-                    <img id="logoHeader" onClick={redirectToHome} src={logo} alt="Logo de Unqflix" />
+                    <Image id="logoHeader" src={logo} alt="Logo de Unqflix" onClick={redirectToHome} />
                 </Navbar.Brand>
                 <Nav className="mr-auto">
                 </Nav>
@@ -36,13 +43,11 @@ const Header = (props) => {
                     <FormControl type="text" value={searchText} onChange={handleSearchChange} placeholder="Search" className="mr-sm-2" />
                     <Button type="submit" variant="outline-info">Search</Button>
                 </Form>
-                
-                <img id="avatarUser" src={user} alt="avatar de usuario"/>
-                
+                <Image id="avatarUser" src={user} alt="avatar de usuario" onClick={logout} />
             </Navbar>
         </div>
 
     );
 }
- 
+
 export default Header;
