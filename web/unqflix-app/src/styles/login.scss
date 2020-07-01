@@ -20,26 +20,26 @@
 
 #columnLoginRegister{
 	height: 100%;
-	width: 40%;
+	width: 50%;
 	background-color:#800000; /*#A9A9A9*/
 	position: relative;
 	padding: 10%;
 	border-top-right-radius: 15px;
-	border-bottom-right-radius: 15px;;
+	border-bottom-right-radius: 15px;
+	text-align: center;
 }
 
 #containerFormLogin, #containerFormRegister{
-	width: 70%;
-	height:80%;
+	width: 360px;
+	height:640px;
 	background-color: white;
-	top: 10%;
 	position: absolute;
-	left: 20%;
 	opacity: 1;
 	border-radius: 15px;
-	align-items: center;
-	padding: 30px;
+	padding: 20px;
 	padding-top: 5px;
+	margin: 0 auto;
+	text-align: left;
 }
 #containerFormRegister{
 	height: 88%;
@@ -56,13 +56,12 @@
 }
 
 #columnIzqLoginRegister{
-	width: 60%;
+	width: 50%;
 	height: 100%;
+	background-image: url('../images/popcorn.png');
 }
 
-#containerLogoLoginRegister{
-	width: 200px;
-}
+
 
 #logoLoginRegister{
 	width: 100%;
@@ -97,7 +96,7 @@
 }
 
 .inputLoginRegister{
-	width: 220px;
+	width: 300px;
 }
 
 .buttonLoginRegister{
@@ -148,3 +147,32 @@
 }
 
 //css header
+
+@media only screen and (max-width: 580px) {
+	#containerFormLogin, #containerFormRegister{
+		left: 3%;
+		height: 80%;
+		margin-right: 3%;
+		width: 88%;
+		margin-left: 0;
+		padding-left: 3%;
+		padding-right: 3%;
+	}
+	#columnLoginRegister{
+		height: 100%;
+		width: 100%;
+		background-color:#800000; /*#A9A9A9*/
+		position: relative;
+		padding: 10%;
+		border-radius: 15px;}
+		#columnIzqLoginRegister{
+			width: 0;
+			height: 0;
+		}
+	#containerLoginRegister{
+		height: 700px;	
+	}
+	.inputLoginRegister{
+		width: 200px;
+	}
+}

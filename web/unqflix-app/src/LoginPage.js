@@ -34,7 +34,7 @@ function LoginPage() {
         <div id="pseudoBody">
             <div id="containerLoginRegister">
                 <div id="columnIzqLoginRegister">	
-                    <Image src={pochoclos} id="popcornImage" thumbnail />
+            
                 </div>
                 <div id="columnLoginRegister">
                     <div id="containerFormLogin">
@@ -42,12 +42,11 @@ function LoginPage() {
                             <Image src={logo} id="logoLoginRegister" thumbnail />
                             <br/>
                         </div>
-                        <Form onSubmit={loginHandler} method="post">
-                        <Form.Group controlId= "formBasicEmail">
+                        <Form>
+                        <Form.Group controlId= "formBasicEmail" onSubmit={loginHandler} method="post">
                             <Form.Label type="email">Email:</Form.Label>
                             <br/>
-                            <Form.Control
-                            type="email" 
+                            <Form.Control type="email" 
                             className="inputLoginRegister"
                             placeholder="myemail@mail.com"
                             value={email}
