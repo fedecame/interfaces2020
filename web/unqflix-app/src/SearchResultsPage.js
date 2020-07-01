@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import CarouselBanners from './components/CarouselBanners';
+import React from 'react';
+// import CarouselBanners from './components/CarouselBanners';
 import Header from './components/Header';
 
-const SearchResultsPage = (props) => {
+const SearchResultsPage = () => {
     return (
         <>
             <Header />

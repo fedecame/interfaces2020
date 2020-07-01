@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Footer from './components/Footer';
 import {Link} from 'react-router-dom';
 import './styles/login.scss';
-import pochoclos from './images/popcorn.png';
+// import pochoclos from './images/popcorn.png';
 import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
 import {useHistory} from 'react-router-dom';
@@ -18,6 +18,7 @@ function LoginPage() {
         event.preventDefault();
         apiConsumer.login({email, password})
         .then(res => {
+            console.log("respuesta login: ", res);
             authSingleton.logout(); // es necesario?
             authSingleton.login(res.headers.authorization);
             if (res.status >= 200 && res.status < 300){

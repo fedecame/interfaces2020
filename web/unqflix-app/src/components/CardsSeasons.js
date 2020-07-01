@@ -1,9 +1,9 @@
 import '../styles/productDetails.scss';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import {Card, Nav ,ListGroup, ListGroupItem} from 'react-bootstrap'
 
 
-const CardSeasons = (props) =>{
+const CardSeasons = () =>{
 return(
 <Card bg={'Dark'} text={'white'} id="cardSeasons">
   <Card.Header>

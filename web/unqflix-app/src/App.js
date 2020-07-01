@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 // import './App.css';
 import CatalogPage from './CatalogPage';
 import RegisterPage from './RegisterPage';
@@ -18,8 +18,6 @@ import {
 } from 'react-router-dom';
 
 function App() {
-  const [favs, setFavs] = useState([]);
-  const [lastSeen, setLastSeen] = useState([]);
 
   function PrivateRoute({ children, ...rest }) {
     return (
@@ -44,10 +42,14 @@ function App() {
   return (
     <BrowserRouter>
       <Switch>
-        <Route path="/register" component={RegisterPage}/>
-        <Route path="/login" component={LoginPage}/>
+        <Route path="/register">
+          <RegisterPage/>
+        </Route>
+        <Route path="/login">
+          <LoginPage/>
+        </Route>
         <PrivateRoute exact path="/">
-          <CatalogPage colAmount={6} favsState={[favs, setFavs]} lastSeenState={[lastSeen, setLastSeen]}/>
+          <CatalogPage colAmount={6}/>
         </PrivateRoute>
         <PrivateRoute path="/content/:id">
           <ContentPage />

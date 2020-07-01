@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
-import helado from '../images/helado.png';
+import React, { useState } from 'react';
+// import helado from '../images/helado.png';
 import {Navbar, Nav, Form, FormControl, Button,} from 'react-bootstrap'
 import apiConsumer from "../ApiConsumer"
 import logo from "../images/logo.png"
 import user from "../images/usuario.png"
 import { useHistory } from 'react-router-dom';
 
-const Header = (props) => {
+const Header = () => {
 
     const history = useHistory();
     const [searchText, setSearchText] = useState("");

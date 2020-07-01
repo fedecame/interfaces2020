@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
@@ -21,7 +21,7 @@ const GridGenerator = ({colAmount, children}) => {
             {rows.map((cols, index) => (
                 <Row key={index}>
                     {cols.map((col, index) => (
-                        <Col xs={12} sm={colWidth <= 2 ? colWidth*3 : colWidth} sm={colWidth <= 3 ? colWidth*2 : colWidth} xl={colWidth} key={index}>
+                        <Col xs={12} sm={colWidth <= 2 ? colWidth*3 : colWidth} lg={colWidth <= 3 ? colWidth*2 : colWidth} xl={colWidth} key={index}>
                             {col}
                         </Col>
                     ))}

@@ -1,19 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Footer from './components/Footer';
 import Header from './components/Header';
 import CardsSeasons from './components/CardsSeasons';
-import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
+// import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed'
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import './styles/productDetails.scss';
-import {useHistory} from 'react-router-dom';
-import apiConsumer from './ApiConsumer';
+// import {useHistory} from 'react-router-dom';
+// import apiConsumer from './ApiConsumer';
 import pochoclos from './images/popcorn.png';
-import { Button, Form, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 
 function ProductSerieDetailsPage(){
-    let history = useHistory();    
+    // let history = useHistory();    
 return(
     <Container>
         <Col id="pseudoBody">

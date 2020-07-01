@@ -1,17 +1,46 @@
-import React, { useState, useEffect } from 'react';
-import Footer from './components/Footer';
+import React from 'react';
+// import Footer from './components/Footer';
 import Header from './components/Header';
 import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
-import { Button, Form, Image } from 'react-bootstrap';
+import { Image } from 'react-bootstrap';
 import './styles/productDetails.scss';
-import {useHistory} from 'react-router-dom';
+// import {useHistory} from 'react-router-dom';
 import pochoclos from './images/popcorn.png';
 import CardsSeasons from './components/CardsSeasons';
+// import {useParams, useLocation} from 'react-router-dom';
+// import apiConsumer from './ApiConsumer';
+import corazon from './images/corazon.png';
+// import corazonLleno from './images/corazonFilled.png';
 
-const ContentPage = (props) => {
+const ContentPage = () => {
+    // const {id} = useParams();
+    // const location = useLocation();
+    // const [content, setContent] = useState({});
+
+    // apiConsumer.getContent(id);
+
+    // useEffect(() => {
+    //     console.log("location se actualizo!");
+    //     apiConsumer.getContent(id)
+    //     .then(res => {
+    //         console.log(`content ${id} data: `, res.data);
+    //         setContent(res.data);
+    //     })
+    //     .catch(err => console.error(`Error getting content ${id}: `, err));
+    // }, [location]);
+
+    const toggleFavorite = (event) => {
+        // apiConsumer.addFav(id)
+        // .then(res => {
+        //     console.log("data del post de favoritos: ", res.data);
+        // })
+        // .catch(err => console.error(`Error with fav endpoint for ${id}: `, err));
+        // event.target.src = corazonLleno; //despues hacer la logica de que se cambie cuando se lo cliquea de nuevo
+    };
+
     return (
         // <div id="pseudoBody">
         <>
@@ -26,8 +55,11 @@ const ContentPage = (props) => {
                         <Col xs={12} sm={8} id="containerDescription">
                             <Row className="align-items-center" id="descriptionRow">
                                 <Col>
-                                    <h1>Title</h1> <br />
-                                    <p>Descripcion</p>
+                                    {/* <h1>{content.title}</h1> <br />
+                                    <p>{content.description}</p> */}
+                                </Col>
+                                <Col xs={2}>
+                                <Image src={corazon} width={40} height={40} onClick={toggleFavorite}></Image>
                                 </Col>
                             </Row >
                             <Row id="seasonsRow">

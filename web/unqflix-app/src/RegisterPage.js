@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './styles/login.scss';
 import Footer from './components/Footer';
 import {Link} from 'react-router-dom';
-import pochoclos from './images/popcorn.png'
+// import pochoclos from './images/popcorn.png'
 import logo from './images/logo.png'
 import apiConsumer from './ApiConsumer';
 import { Button, Form, Image } from 'react-bootstrap';
