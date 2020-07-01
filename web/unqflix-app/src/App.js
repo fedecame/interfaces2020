@@ -5,7 +5,10 @@ import RegisterPage from './RegisterPage';
 import LoginPage from './LoginPage';
 import ContentPage from './ContentPage';
 import SearchResultsPage from './SearchResultsPage';
+import ProductSerieDetailsPage from './ProductSerieDetailsPage'
+import ProductMovieDetailsPage from './ProductMovieDetailsPage'
 import NotFoundPage from './NotFoundPage';
+
 import {
   BrowserRouter,
   Switch,
@@ -22,7 +25,10 @@ function App() {
         <Route path="/register" component={RegisterPage}/>
         <Route path="/login" component={LoginPage}/>
         <Route path="/content/:id" component={ContentPage}/>
+        <Route path="/detailsSerie" component={ProductSerieDetailsPage}/>
+        <Route path="/detailsMovie" component={ProductMovieDetailsPage}/>
         <Route path="/search" component={SearchResultsPage}/>
+       
         <Route path="*" component={NotFoundPage}/>
       </Switch>
     </BrowserRouter>

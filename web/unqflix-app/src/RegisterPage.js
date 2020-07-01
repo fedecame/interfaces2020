@@ -6,6 +6,7 @@ import pochoclos from './images/popcorn.png'
 import logo from './images/logo.png'
 import apiConsumer from './ApiConsumer';
 import Cookies from 'js-cookie';
+import { Button, Form, Image } from 'react-bootstrap';
 
 const RegisterPage = (props) => {
 	const [username, setUsername] = useState("asd");
@@ -52,32 +53,53 @@ const RegisterPage = (props) => {
 		<div id="pseudoBody">
 			<div id="containerLoginRegister">
 				<div id="columnIzqLoginRegister">
-					<img id="popcornImage" src={pochoclos} alt="Pochoclos"/>
+					<Image src={pochoclos} id="popcornImage" thumbnail />
 				</div>
 				<div id="columnLoginRegister">
 				<div id="containerFormRegister">
 					<div id="containerLogoLoginRegister">
-						<img id="logoLoginRegister"	src={logo} alt="Logo de Unqflix"/><br/>
+				    	<Image src={logo} id="logoLoginRegister" thumbnail />
+					     <br/>	
 					</div>
-					<form onSubmit={registerHandler} method="post">
-						<label htmlFor="email">Email:</label><br/>
-						<input className="inputLoginRegister" type="email" name="email" value={email} onChange={emailChangeHandler} required/>
-						<br/>
-						<label htmlFor="user">Name:</label><br/>
-						<input className="inputLoginRegister" type="text" name="user" value={username} onChange={usernameChangeHandler} required/>
-						<br/>
-						<label htmlFor="pass">Password: </label><br/>
-						<input className="inputLoginRegister" type="password" name="pass" value={password} onChange={passwordChangeHandler} required/>
-						<br/>
-						<label htmlFor="image">Imagelink:</label><br/>
-						<input className="inputLoginRegister" type="url" name="image" value={image} onChange={imageChangeHandler} required/>
-						<br/>
-						<label htmlFor="creditCard">Credit Card:</label><br/>
-						<input className="inputLoginRegister" type="text" name="creditCard" value={creditCard} onChange={creditCardChangeHandler} required/>
-						<br/><br/>
-						<button className="buttonLoginRegister" id="botonForm" type="submit">Register</button><br/><br/>
+					<Form onSubmit={registerHandler} method="post">
+					<Form.Group controlId= "formBasicEmail">
+					    <Form.Label type="email">Email:</Form.Label>
+						<Form.Control type="email" 
+                            className="inputLoginRegister"
+                            placeholder="myemail@mail.com"
+                            value={email}
+                            onChange={emailChangeHandler} required/>
+						<Form.Label type="text">Name:</Form.Label>
+						<Form.Control type="text" 
+                            className="inputLoginRegister"
+                            placeholder="Input your Name"
+                            value={username}
+                            onChange={usernameChangeHandler} required/>
+						<Form.Label type="pass">Password:</Form.Label>
+						<Form.Control type="password" 
+                            className="inputLoginRegister"
+                            placeholder="Input your Password"
+                            value={password}
+                            onChange={passwordChangeHandler} required/>
+						<Form.Label type="url">Imagelink:</Form.Label>
+						<Form.Control type="url" 
+                            className="inputLoginRegister"
+                            placeholder="Input your image url"
+                            value={image}
+                            onChange={imageChangeHandler} required/>
+						<Form.Label type="text">Credit Card:</Form.Label>
+						<Form.Control type="text" 
+                            className="inputLoginRegister"
+                            placeholder="Input your Credit Card Number"
+                            value={creditCard}
+                            onChange={creditCardChangeHandler} required/>
+						<Button variant="primary"
+                            id="botonForm"
+                            className="buttonLoginRegister"
+                            type="submit">Register</Button> <br/>
 						<Link to="/login" className="anchorLoginRegister">Back</Link>
-					</form>
+						</Form.Group>
+					</Form>
 				</div>
 				</div>
 			</div>

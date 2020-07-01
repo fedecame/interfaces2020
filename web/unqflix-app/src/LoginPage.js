@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import Footer from './components/Footer';
-import {Link, useHistory} from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import './styles/login.scss';
 import pochoclos from './images/popcorn.png';
 import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
 import Cookies from 'js-cookie';
+import {useHistory} from 'react-router-dom';
+import { Button, Form, Image } from 'react-bootstrap';
 
-const LoginPage = () => {
+function LoginPage() {
     let history = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState('');
@@ -33,43 +35,47 @@ const LoginPage = () => {
         <div id="pseudoBody">
             <div id="containerLoginRegister">
                 <div id="columnIzqLoginRegister">	
-                    <img id="popcornImage" src={pochoclos} alt="Pochoclos"/>
+                    <Image src={pochoclos} id="popcornImage" thumbnail />
                 </div>
                 <div id="columnLoginRegister">
                     <div id="containerFormLogin">
                         <div id="containerLogoLoginRegister">
-                            <img id="logoLoginRegister"	src={logo} alt="Logo de Unqflix"/>
+                            <Image src={logo} id="logoLoginRegister" thumbnail />
                             <br/>
                         </div>
-                        <form onSubmit={loginHandler} method="post">
-                            <label htmlFor="email">Email:</label>
+                        <Form onSubmit={loginHandler} method="post">
+                        <Form.Group controlId= "formBasicEmail">
+                            <Form.Label type="email">Email:</Form.Label>
                             <br/>
-                            <input className="inputLoginRegister" 
+                            <Form.Control
                             type="email" 
-                            name="email"
+                            className="inputLoginRegister"
+                            placeholder="myemail@mail.com"
                             value={email}
                             onChange={handleEmailChange}/>
                             <br/>
-                            <label htmlFor="pass">Password: </label>
+                            <Form.Label>Password: </Form.Label>
                             <br/>
-                            <input className="inputLoginRegister"
+                            <Form.Control 
                             type="password" 
-                            name="pass"
+                            className="inputLoginRegister"
                             value={password}
                             onChange={handlePasswordChange}/>
                             <br/><br/>
-                            <button className="buttonLoginRegister" 
+                            <Button variant="primary"
                             id="botonForm"
-                            type="submit">Login</button>
+                            className="buttonLoginRegister"
+                            type="submit">Login</Button>
                             <br/><br/>
                             <Link to="/register" className="anchorLoginRegister">Register</Link>
-                        </form>
+                        </Form.Group>
+                        </Form>
                     </div>
                 </div>
             </div>
             <Footer/>
         </div>
     );
-};
+}
 
 export default LoginPage;

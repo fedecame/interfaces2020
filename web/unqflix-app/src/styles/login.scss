@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+ @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
 *{margin: 0; padding: 0; box-sizing: border-box;}
 #pseudoBody{
 	background-color: white;
@@ -29,23 +29,22 @@
 }
 
 #containerFormLogin, #containerFormRegister{
-	width: 60%;
-	height:60%;
+	width: 70%;
+	height:80%;
 	background-color: white;
-	top: 20%;
+	top: 10%;
 	position: absolute;
-	top: 20%;
 	left: 20%;
 	opacity: 1;
 	border-radius: 15px;
 	align-items: center;
 	padding: 30px;
-	padding-top: 10px;
+	padding-top: 5px;
+}
+#containerFormRegister{
+	height: 88%;
 }
 
-#containerFormRegister{
-	height: 70%;
-}
 
 #imagenHelado{
 	width: 40px;
@@ -53,6 +52,7 @@
 	opacity: 0.8;
 	display: inline-block;
 	vertical-align: middle;
+
 }
 
 #columnIzqLoginRegister{
@@ -67,6 +67,7 @@
 #logoLoginRegister{
 	width: 100%;
 	height: auto;
+	border: none;
 }
 
 #footerWrapper{
@@ -86,6 +87,7 @@
 	margin-top: 0;
 	width: 70%;
 	height: auto;
+	border: none;
 }
 
 .anchorLoginRegister{
@@ -99,12 +101,36 @@
 }
 
 .buttonLoginRegister{
-	width: 100px;
-	height: 30px;
-	text-align: center;
-	border-radius: 8%;
+ background-color:#800000; 
+ border-color:#800000 ;
 }
 
 .buttonLoginRegister:hover{
-	font-weight: bold;
+	color:#800000 ;
+	background-color: white;
+	border-color:#800000 ;
 }
+
+#headerSearch{
+	display: inline-block;
+	width: 100%;
+	height: 100px;
+	display: flex;
+	align-items: center;
+}
+
+#containerVideo{
+	height: 80%;
+	width: 100%;
+}
+
+#logoHeader{
+	width: auto;
+	height: 90%;
+	border: none;
+}
+
+#inputSearch{
+	width: 300px;
+}
+
