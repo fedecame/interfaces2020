@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import helado from '../images/helado.png';
 import {Navbar, Nav, Form, FormControl, Button,} from 'react-bootstrap'
 import apiConsumer from "../ApiConsumer"
 import logo from "../images/logo.png"
@@ -22,14 +21,14 @@ const Header = (props) => {
     }
 
     const handleSearchChange = event => setSearchText(event.target.value);
-
+    const redirectToHome = () => history.push("/")
 
     return (
 
         <div>
             <Navbar bg="dark" variant="dark">
                 <Navbar.Brand>
-                    <img id="logoHeader" onClick={() => history.push("/")} src={logo} alt="Logo de Unqflix" />
+                    <img id="logoHeader" onClick={redirectToHome} src={logo} alt="Logo de Unqflix" />
                 </Navbar.Brand>
                 <Nav className="mr-auto">
                 </Nav>
