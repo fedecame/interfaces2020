@@ -5,7 +5,6 @@ import './styles/login.scss';
 import pochoclos from './images/popcorn.png';
 import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
-import Cookies from 'js-cookie';
 import {useHistory} from 'react-router-dom';
 import { Button, Form, Image } from 'react-bootstrap';
 
@@ -17,14 +16,7 @@ function LoginPage() {
     const loginHandler = (event) => {
         event.preventDefault();
         apiConsumer.login({email, password})
-        .then(res => {
-            Cookies.remove('authToken');
-			Cookies.set('authToken', res.headers.authorization);
-			apiConsumer.updateAuthToken();
-            if (res.status >= 200 && res.status < 300){
-                history.push('/');
-            }
-        })
+        .then(res => (res.status >= 200 && res.status < 300) ? history.push('/') : null)
         .catch(err => console.error("login error response: ", err.response));
     }
 
@@ -35,7 +27,7 @@ function LoginPage() {
         <div id="pseudoBody">
             <div id="containerLoginRegister">
                 <div id="columnIzqLoginRegister">	
-                    <Image src={pochoclos} id="popcornImage" thumbnail />
+            
                 </div>
                 <div id="columnLoginRegister">
                     <div id="containerFormLogin">
@@ -43,12 +35,11 @@ function LoginPage() {
                             <Image src={logo} id="logoLoginRegister" thumbnail />
                             <br/>
                         </div>
-                        <Form onSubmit={loginHandler} method="post">
-                        <Form.Group controlId= "formBasicEmail">
+                        <Form>
+                        <Form.Group controlId= "formBasicEmail" onSubmit={loginHandler} method="post">
                             <Form.Label type="email">Email:</Form.Label>
                             <br/>
-                            <Form.Control
-                            type="email" 
+                            <Form.Control type="email" 
                             className="inputLoginRegister"
                             placeholder="myemail@mail.com"
                             value={email}
