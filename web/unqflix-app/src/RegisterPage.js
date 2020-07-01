@@ -53,7 +53,7 @@ const RegisterPage = (props) => {
 		<div id="pseudoBody">
 			<div id="containerLoginRegister">
 				<div id="columnIzqLoginRegister">
-					<Image src={pochoclos} id="popcornImage" thumbnail />
+				
 				</div>
 				<div id="columnLoginRegister">
 				<div id="containerFormRegister">
