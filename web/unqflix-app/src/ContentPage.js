@@ -57,10 +57,10 @@ const ContentPage = () => {
         <Header/>
         <Container fluid className="margin-for-fixed-header bg-dark">
             <Row>
-                <Col xs={12} sm={4}>
-                    <Image style={{maxWidth:"100%", paddingBottom:"2rem"}} src={content.poster} alt={`${content.title} image`}/>
+                <Col xs={12} md={4}>
+                    <Image className="image-content-page" src={content.poster} alt={`${content.title} image`}/>
                 </Col>
-                <Col xs={12} sm={8} className="text-light responsive-font-size-content-page">
+                <Col xs={12} md={8} className="text-light responsive-font-size-content-page">
                     <Row>
                         <Col>
                         <p className="font-weight-bold">{content.title}</p>

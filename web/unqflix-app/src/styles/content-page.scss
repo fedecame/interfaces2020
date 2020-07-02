@@ -7,3 +7,13 @@
         font-size: 1.25em;
     }
 }
+
+.image-content-page {
+    max-width: 100%;
+    padding-bottom: 2rem;
+
+    @media (max-width: 768px) {
+        display: block;
+        margin: auto;
+    }
+}
