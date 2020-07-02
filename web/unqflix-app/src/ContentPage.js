@@ -5,8 +5,9 @@ import ResponsiveEmbed from 'react-bootstrap/ResponsiveEmbed';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
-import { Image } from 'react-bootstrap';
-import './styles/productDetails.scss';
+import Image from 'react-bootstrap/Image';
+import Button from 'react-bootstrap/Button';
+// import './styles/productDetails.scss';
 // import {useHistory} from 'react-router-dom';
 import pochoclos from './images/popcorn.png';
 import CardsSeasons from './components/CardsSeasons';
@@ -14,18 +15,20 @@ import {useParams, useLocation} from 'react-router-dom';
 import apiConsumer from './ApiConsumer';
 import corazon from './images/corazon.png';
 import corazonLleno from './images/corazonFilled.png';
+import Card from 'react-bootstrap/Card';
+import './styles/content-page.scss';
+import CarouselGeneric from './components/CarouselGeneric';
 
 const ContentPage = () => {
     const {id} = useParams();
     const location = useLocation();
     const [content, setContent] = useState({});
 
-    apiConsumer.getContent(id);
-
     useEffect(() => {
         console.log(`USE EFFECT DE ${id}`);
         apiConsumer.getContent(id)
         .then(res => {
+            console.log("content data: ", res.data);
             setContent(res.data);
         })
         .then(() => {
@@ -47,10 +50,48 @@ const ContentPage = () => {
         .catch(err => console.error(`Error with fav endpoint for ${id}: `, err.response));
     };
 
+    const isSerie = () => id.startsWith('ser_');
+
     return (
-        // <div id="pseudoBody">
         <>
-        <Header />
+        <Header/>
+        <Container fluid className="margin-for-fixed-header bg-dark">
+            <Row>
+                <Col xs={12} sm={4}>
+                    <Image style={{maxWidth:"100%", paddingBottom:"2rem"}} src={content.poster} alt={`${content.title} image`}/>
+                </Col>
+                <Col xs={12} sm={8} className="text-light responsive-font-size-content-page">
+                    <Row>
+                        <Col>
+                        <p className="font-weight-bold">{content.title}</p>
+                        <p className="text-justify">{content.description}</p>
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col>
+                        {isSerie() ?
+                        <CardsSeasons/> 
+                        : <Button
+                            variant="primary"
+                            id="botonForm"
+                            className="buttonLoginRegister"
+                            onClick={() => console.log("tenga su buen video señor")}
+                          >Play</Button>
+                        }
+                        </Col>
+                    </Row>
+                </Col>
+            </Row>
+            <Row>
+                <Col>
+                {content.relatedContent?.length > 0 && <CarouselGeneric carouselType="Related Content" contentList={content.relatedContent}/>}
+                </Col>
+            </Row>
+        </Container>
+
+
+
+        {/* <Header />
         <Container fluid>
             <Col id="pseudoBody">
                 <Row id="containerAll">
@@ -80,12 +121,12 @@ const ContentPage = () => {
                         <h4>Contenido Relacionado</h4>
                     </Row>
 
-                    {/* <Button 
+                    <Button 
                         variant="primary"
                         id="botonForm"
                         className="buttonLoginRegister"
                         onClick={() => history.push("/content/:id")}
-                    >Play</Button> */}
+                    >Play</Button>
                     
                 </Row>
                 <Row>
@@ -96,10 +137,8 @@ const ContentPage = () => {
                     </Col>
                 </Row>
             </Col>
-        </Container>
-        {/* <Footer /> */}
+        </Container> */}
         </>
-        // </div>
     );
 }
 
