@@ -18,7 +18,6 @@ function LoginPage() {
         event.preventDefault();
         apiConsumer.login({email, password})
         .then(res => {
-            console.log("respuesta login: ", res);
             authSingleton.logout(); // es necesario?
             authSingleton.login(res.headers.authorization);
             if (res.status >= 200 && res.status < 300){
@@ -43,8 +42,8 @@ function LoginPage() {
                             <Image src={logo} id="logoLoginRegister" thumbnail />
                             <br/>
                         </div>
-                        <Form>
-                        <Form.Group controlId= "formBasicEmail" onSubmit={loginHandler} method="post">
+                        <Form onSubmit={loginHandler} method="post">
+                        <Form.Group controlId= "formBasicEmail">
                             <Form.Label type="email">Email:</Form.Label>
                             <br/>
                             <Form.Control type="email" 

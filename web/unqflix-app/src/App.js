@@ -37,7 +37,7 @@ function App() {
         }
       />
     );
-  }
+  };
 
   return (
     <BrowserRouter>
@@ -63,7 +63,9 @@ function App() {
         <PrivateRoute path="/search">
           <SearchResultsPage />
         </PrivateRoute>
-        <Route path="*" component={NotFoundPage}/>
+        <Route path="*">
+          <NotFoundPage/>
+        </Route>
       </Switch>
     </BrowserRouter>
   )

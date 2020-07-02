@@ -89,7 +89,7 @@ const CarouselGeneric = ({carouselType, contentList}) => {
             removeArrowOnDeviceType={["mobile"]}
             itemClass="px-2 margin-for-carousel"
         >
-            {contents.map(content => (
+            {contentList.map(content => (
                 <GridCard key={content.id} content={content}/>
             ))}
         </Carousel>

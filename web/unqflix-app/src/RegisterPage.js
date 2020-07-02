@@ -8,7 +8,7 @@ import apiConsumer from './ApiConsumer';
 import { Button, Form, Image } from 'react-bootstrap';
 import authSingleton from './Auth';
 
-const RegisterPage = (props) => {
+const RegisterPage = () => {
 	const [username, setUsername] = useState("asd");
 	const [email, setEmail] = useState("asd@asd.com");
 	const [password, setPassword] = useState("asd");
