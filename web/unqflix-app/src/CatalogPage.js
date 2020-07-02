@@ -22,34 +22,8 @@ const CatalogPage = ({colAmount}) => {
 
     useEffect(() => {
         fetchAvailableContent();
-        // fetchUserContent();
-
-        apiConsumer.getUserContent()
-        .then(res => {
-            console.log("user content data: ", res.data);
-            if (res.data.favorites.length !== favs.length) {
-                setFavs(res.data.favorites);
-            }
-            if (res.data.lastSeen.length !== lastSeen.length) {
-                setLastSeen(res.data.lastSeen);
-            }
-        })
-        .catch(err => console.error("ERROR GET USER CONTENT: ", err));
+        fetchUserContent();
     }, [location, favsDesdeCat]); // probar de agregar: favs.length, lastSeen.length, fetchAvailableContent y fetchUserContent
-
-    // if (catalog.length === 0) {
-    //     apiConsumer.getAvailableContent()
-    //     .then(res => {
-    //         console.log("catalog data: ", res.data);
-    //         setCatalog(res.data);
-    //     })
-    //     .then(() => {
-    //         if (catalog.length < colAmount) {
-    //             colAmount = catalog.length;
-    //         }
-    //     })
-    //     .catch(err => console.error("ERROR GET AVAILABLE CONTENT: ", err));
-    // }
 
     const fetchAvailableContent = () => {
         apiConsumer.getAvailableContent()
@@ -65,33 +39,19 @@ const CatalogPage = ({colAmount}) => {
         .catch(err => console.error("ERROR GET AVAILABLE CONTENT: ", err));
     };
 
-    // const fetchUserContent = () => {
-    //     apiConsumer.getUserContent()
-    //     .then(res => {
-    //         console.log("user content data: ", res.data);
-    //         if (res.data.favorites.length !== favs.length) {
-    //             setFavs(res.data.favorites);
-    //         }
-    //         if (res.data.lastSeen.length !== lastSeen.length) {
-    //             setLastSeen(res.data.lastSeen);
-    //         }
-    //     })
-    //     .catch(err => console.error("ERROR GET USER CONTENT: ", err));
-    // };
-
-    // if (favs.length === 0 || lastSeen.length === 0) {
-    //     apiConsumer.getUserContent()
-    //     .then(res => {
-    //         console.log("user content data: ", res.data);
-    //         if (res.data.favorites.length !== favs.length) {
-    //             setFavs(res.data.favorites);
-    //         }
-    //         if (res.data.lastSeen.length !== lastSeen.length) {
-    //             setLastSeen(res.data.lastSeen);
-    //         }
-    //     })
-    //     .catch(err => console.error("ERROR GET USER CONTENT: ", err));
-    // }
+    const fetchUserContent = () => {
+        apiConsumer.getUserContent()
+        .then(res => {
+            console.log("user content data: ", res.data);
+            if (res.data.favorites.length !== favs.length) {
+                setFavs(res.data.favorites);
+            }
+            if (res.data.lastSeen.length !== lastSeen.length) {
+                setLastSeen(res.data.lastSeen);
+            }
+        })
+        .catch(err => console.error("ERROR GET USER CONTENT: ", err));
+    };
 
     const searchTestHandler = (text) => {
         apiConsumer.search(text)
