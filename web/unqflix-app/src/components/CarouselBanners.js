@@ -78,7 +78,7 @@ const CarouselBanners = ({banners}) => {
         itemClass="px-2 margin-for-carousel"
     >
         {banners.map(content => (
-            <Card className="bg-dark text-white mt-4" key={content.id}>
+            <Card border="dark" className="bg-dark text-white mt-4" key={content.id}>
             <Card.Img className="custom-banner-image" variant="top" src={content.poster} onError={event => getNewUrlOrFallbackSrc(event, content)} onClick={() => goToContentPage(content.id)} alt="Card image" />
             <Card.Body>
                 <Badge pill variant="success" className="float-right ml-2 mt-1"> Disponible </Badge>
