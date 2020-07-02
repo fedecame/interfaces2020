@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Footer from './components/Footer';
 import {Link} from 'react-router-dom';
 import './styles/login.scss';
-import pochoclos from './images/popcorn.png';
+// import pochoclos from './images/popcorn.png';
 import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
-import Cookies from 'js-cookie';
 import {useHistory} from 'react-router-dom';
 import { Button, Form, Image } from 'react-bootstrap';
+import authSingleton from './Auth';
 
 function LoginPage() {
     let history = useHistory();
@@ -18,9 +18,8 @@ function LoginPage() {
         event.preventDefault();
         apiConsumer.login({email, password})
         .then(res => {
-            Cookies.remove('authToken');
-			Cookies.set('authToken', res.headers.authorization);
-			apiConsumer.updateAuthToken();
+            authSingleton.logout(); // es necesario?
+            authSingleton.login(res.headers.authorization);
             if (res.status >= 200 && res.status < 300){
                 history.push('/');
             }
@@ -35,7 +34,7 @@ function LoginPage() {
         <div id="pseudoBody">
             <div id="containerLoginRegister">
                 <div id="columnIzqLoginRegister">	
-                    <Image src={pochoclos} id="popcornImage" thumbnail />
+            
                 </div>
                 <div id="columnLoginRegister">
                     <div id="containerFormLogin">
@@ -47,8 +46,7 @@ function LoginPage() {
                         <Form.Group controlId= "formBasicEmail">
                             <Form.Label type="email">Email:</Form.Label>
                             <br/>
-                            <Form.Control
-                            type="email" 
+                            <Form.Control type="email" 
                             className="inputLoginRegister"
                             placeholder="myemail@mail.com"
                             value={email}

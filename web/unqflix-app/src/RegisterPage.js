@@ -1,27 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './styles/login.scss';
 import Footer from './components/Footer';
 import {Link} from 'react-router-dom';
-import pochoclos from './images/popcorn.png'
+// import pochoclos from './images/popcorn.png'
 import logo from './images/logo.png'
 import apiConsumer from './ApiConsumer';
-import Cookies from 'js-cookie';
 import { Button, Form, Image } from 'react-bootstrap';
+import authSingleton from './Auth';
 
-const RegisterPage = (props) => {
+const RegisterPage = () => {
 	const [username, setUsername] = useState("asd");
 	const [email, setEmail] = useState("asd@asd.com");
 	const [password, setPassword] = useState("asd");
 	const [image, setImage] = useState("http://asd.jpg");
 	const [creditCard, setCreditCard] = useState("123");
-
-	const userRegister = {
-		"name": "Edward Elric",
-		"email": "edwardElric@gmail.com",
-		"password": "philosopherStone",
-		"image": "https://a.wattpad.com/cover/83879595-352-k192548.jpg",
-		"creditCard": "4444 3333 2222 1111"
-	}
 
 	const usernameChangeHandler = (event) => setUsername(event.target.value);
 	const emailChangeHandler = (event) => setEmail(event.target.value);
@@ -39,9 +31,8 @@ const RegisterPage = (props) => {
 			creditCard
 		})
 		.then(res => {
-			Cookies.remove('authToken');
-			Cookies.set('authToken', res.headers.authorization);
-			apiConsumer.updateAuthToken();
+			authSingleton.logout();
+			authSingleton.login(res.headers.authorization);
 		})
 		.catch(err => {
 			console.error("register error: ", err);
@@ -53,7 +44,7 @@ const RegisterPage = (props) => {
 		<div id="pseudoBody">
 			<div id="containerLoginRegister">
 				<div id="columnIzqLoginRegister">
-					<Image src={pochoclos} id="popcornImage" thumbnail />
+				
 				</div>
 				<div id="columnLoginRegister">
 				<div id="containerFormRegister">

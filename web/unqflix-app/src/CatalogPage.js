@@ -1,21 +1,57 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import apiConsumer from './ApiConsumer';
 import './styles/catalog.scss';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-import CarouselBanners from './components/CarouselBanners';
+// import CarouselBanners from './components/CarouselBanners';
 import GridGenerator from './components/GridGenerator';
 import GridCard from './components/GridCard';
 import Header from './components/Header';
+import CarouselGeneric from './components/CarouselGeneric';
 
-const CatalogPage = (props) => {
+const CatalogPage = ({colAmount}) => {
     const history = useHistory();
+    const location = useLocation();
     const [catalog, setCatalog] = useState([]);
-    let colAmount = 6;
-    if (catalog.length == 0) {
+    const [favs, setFavs] = useState([]);
+    const [lastSeen, setLastSeen] = useState([]);
+    let favsDesdeCat = 0;
+
+    useEffect(() => {
+        fetchAvailableContent();
+        // fetchUserContent();
+
+        apiConsumer.getUserContent()
+        .then(res => {
+            console.log("user content data: ", res.data);
+            if (res.data.favorites.length !== favs.length) {
+                setFavs(res.data.favorites);
+            }
+            if (res.data.lastSeen.length !== lastSeen.length) {
+                setLastSeen(res.data.lastSeen);
+            }
+        })
+        .catch(err => console.error("ERROR GET USER CONTENT: ", err));
+    }, [location, favsDesdeCat]); // probar de agregar: favs.length, lastSeen.length, fetchAvailableContent y fetchUserContent
+
+    // if (catalog.length === 0) {
+    //     apiConsumer.getAvailableContent()
+    //     .then(res => {
+    //         console.log("catalog data: ", res.data);
+    //         setCatalog(res.data);
+    //     })
+    //     .then(() => {
+    //         if (catalog.length < colAmount) {
+    //             colAmount = catalog.length;
+    //         }
+    //     })
+    //     .catch(err => console.error("ERROR GET AVAILABLE CONTENT: ", err));
+    // }
+
+    const fetchAvailableContent = () => {
         apiConsumer.getAvailableContent()
         .then(res => {
             console.log("catalog data: ", res.data);
@@ -26,8 +62,36 @@ const CatalogPage = (props) => {
                 colAmount = catalog.length;
             }
         })
-        .catch(err => console.error("ERROR GET CONTENT: ", err));
-    }
+        .catch(err => console.error("ERROR GET AVAILABLE CONTENT: ", err));
+    };
+
+    // const fetchUserContent = () => {
+    //     apiConsumer.getUserContent()
+    //     .then(res => {
+    //         console.log("user content data: ", res.data);
+    //         if (res.data.favorites.length !== favs.length) {
+    //             setFavs(res.data.favorites);
+    //         }
+    //         if (res.data.lastSeen.length !== lastSeen.length) {
+    //             setLastSeen(res.data.lastSeen);
+    //         }
+    //     })
+    //     .catch(err => console.error("ERROR GET USER CONTENT: ", err));
+    // };
+
+    // if (favs.length === 0 || lastSeen.length === 0) {
+    //     apiConsumer.getUserContent()
+    //     .then(res => {
+    //         console.log("user content data: ", res.data);
+    //         if (res.data.favorites.length !== favs.length) {
+    //             setFavs(res.data.favorites);
+    //         }
+    //         if (res.data.lastSeen.length !== lastSeen.length) {
+    //             setLastSeen(res.data.lastSeen);
+    //         }
+    //     })
+    //     .catch(err => console.error("ERROR GET USER CONTENT: ", err));
+    // }
 
     const searchTestHandler = (text) => {
         apiConsumer.search(text)
@@ -58,7 +122,9 @@ const CatalogPage = (props) => {
             <Row>
                 <Col>
                 <h1>CatalogPage</h1>
-                <CarouselBanners/>
+                {/* <CarouselBanners/> */}
+                {favs.length > 0 && <CarouselGeneric carouselType="Favorites" contentList={favs}/>}
+                {lastSeen.length > 0 && <CarouselGeneric carouselType="Last Seen" contentList={lastSeen}/>}
                 </Col>
             </Row>
             <Row>
@@ -79,7 +145,7 @@ const CatalogPage = (props) => {
             </Row>
         </Container>
         {catalog.length > 0 &&
-            <GridGenerator colAmount={6}>
+            <GridGenerator colAmount={colAmount}>
                 {catalog.map(content => <GridCard key={content.id} content={content}/> )}
             </GridGenerator>
         }

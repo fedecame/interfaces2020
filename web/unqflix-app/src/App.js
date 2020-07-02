@@ -8,28 +8,64 @@ import SearchResultsPage from './SearchResultsPage';
 import ProductSerieDetailsPage from './ProductSerieDetailsPage'
 import ProductMovieDetailsPage from './ProductMovieDetailsPage'
 import NotFoundPage from './NotFoundPage';
+import authSingleton from './Auth';
 
 import {
   BrowserRouter,
   Switch,
   Route,
-  Link,
   Redirect
 } from 'react-router-dom';
 
 function App() {
+
+  function PrivateRoute({ children, ...rest }) {
+    return (
+      <Route
+        {...rest}
+        render={({ location }) =>
+          authSingleton.isAuthenticated() ? (
+            children
+          ) : (
+            <Redirect
+              to={{
+                pathname: "/login",
+                state: { from: location }
+              }}
+            />
+          )
+        }
+      />
+    );
+  };
+
   return (
     <BrowserRouter>
       <Switch>
-        <Route exact path="/" component={CatalogPage}/>
-        <Route path="/register" component={RegisterPage}/>
-        <Route path="/login" component={LoginPage}/>
-        <Route path="/content/:id" component={ContentPage}/>
-        <Route path="/detailsSerie" component={ProductSerieDetailsPage}/>
-        <Route path="/detailsMovie" component={ProductMovieDetailsPage}/>
-        <Route path="/search" component={SearchResultsPage}/>
-       
-        <Route path="*" component={NotFoundPage}/>
+        <Route path="/register">
+          <RegisterPage/>
+        </Route>
+        <Route path="/login">
+          <LoginPage/>
+        </Route>
+        <PrivateRoute exact path="/">
+          <CatalogPage colAmount={6}/>
+        </PrivateRoute>
+        <PrivateRoute path="/content/:id">
+          <ContentPage />
+        </PrivateRoute>
+        <PrivateRoute path="/detailsSerie">
+          <ProductSerieDetailsPage />
+        </PrivateRoute>
+        <PrivateRoute path="/detailsMovie">
+          <ProductMovieDetailsPage />
+        </PrivateRoute>
+        <PrivateRoute path="/search">
+          <SearchResultsPage />
+        </PrivateRoute>
+        <Route path="*">
+          <NotFoundPage/>
+        </Route>
       </Switch>
     </BrowserRouter>
   )

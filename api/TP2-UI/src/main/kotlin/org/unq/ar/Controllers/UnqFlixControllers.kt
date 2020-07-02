@@ -2,11 +2,10 @@ package org.unq.ar.Controllers
 
 import domain.*
 import io.javalin.http.*
-import javalinjwt.JavalinJWT
 import org.unq.ar.Api.TokenJWT
-import org.unq.ar.exceptions.NotFoundTokenException
 import org.unq.ar.exceptions.NotFoundUserException
 import org.unq.ar.mapper.*
+import org.unq.ar.mapper.Id
 import support.getById
 
 
@@ -77,25 +76,6 @@ class UnqFlixControllers (val unqflix:UNQFlix, val jwt: TokenJWT)  {
 
     fun adapterAvailable(cont: ContentState): Boolean = cont is Available
 
-    fun addOrDeleteContentFromFav(ctx: Context){
-        lateinit var token : UserToken
-        try {
-            token = jwt.validate(ctx.header("Authorization")!!)
-        } catch (e: Exception) {
-            throw UnauthorizedResponse(e.message!!)
-        }
-
-        val idUser = token.id
-        val contentId = ctx.pathParam("contentId")
-        try {
-            unqflix.addOrDeleteFav(idUser,contentId)
-            ctx.status(200)
-            ctx.json(mapOf("result:" to "ok"))
-        }catch (e : NotFoundException){
-            throw BadRequestResponse(e.message.toString())
-        }
-    }
-
     fun searchByText(ctx: Context){
         val texToSearch = ctx.queryParam("text").toString()
 
@@ -161,7 +141,7 @@ class UnqFlixControllers (val unqflix:UNQFlix, val jwt: TokenJWT)  {
             throw UnauthorizedResponse(e.message!!)
         }
 
-        val idLastSeen = ctx.bodyValidator<IdLastSeen>()
+        val idLastSeen = ctx.bodyValidator<Id>()
             .check({it.id != null}, "Missing id inside body")
             .get().id
 
@@ -178,6 +158,29 @@ class UnqFlixControllers (val unqflix:UNQFlix, val jwt: TokenJWT)  {
         ctx.json(mapOf(
             "lastSeen" to lastSeenMapped
         ))
+    }
+
+    fun addOrDeleteContentFromFav(ctx: Context){
+        lateinit var token : UserToken
+        try {
+            token = jwt.validate(ctx.header("Authorization")!!)
+        } catch (e: Exception) {
+            throw UnauthorizedResponse(e.message!!)
+        }
+
+        val idUser = token.id
+
+        val contentId = ctx.bodyValidator<Id>()
+            .check({it.id != null}, "Missing id inside body")
+            .get().id
+
+        try {
+            unqflix.addOrDeleteFav(idUser,contentId!!)
+            ctx.status(200)
+            ctx.json(mapOf("result:" to "ok"))
+        }catch (e : NotFoundException){
+            throw BadRequestResponse(e.message.toString())
+        }
     }
 
 }

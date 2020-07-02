@@ -1,14 +1,14 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import banner1 from '../images/imagenes banner test/foto lago Cropped.jpg';
 import banner2 from '../images/imagenes banner test/foto ruta Cropped.jpg';
-import banner3 from '../images/imagenes banner test/foto ruta2 Cropped.jpg';
+// import banner3 from '../images/imagenes banner test/foto ruta2 Cropped.jpg';
 import banner4 from '../images/imagenes banner test/foto vias Cropped.jpg';
 
-const CarouselBanner = (props) => {
+const CarouselBanner = () => {
     const [index, setIndex] = useState(0);
 
-    const handleSelect = (selectedIndex, e) => {
+    const handleSelect = (selectedIndex) => {
       setIndex(selectedIndex);
     };
 
