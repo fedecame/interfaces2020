@@ -55,18 +55,6 @@ const CatalogPage = ({colAmount}) => {
         .catch(err => console.error("ERROR GET USER CONTENT: ", err.response));
     };
 
-    const searchTestHandler = (text) => {
-        apiConsumer.search(text)
-        .then(res => {
-            console.log("search: ", res);
-            console.log("search data: ", res.data);
-            setCatalog(res.data);
-        })
-        .catch(err => {
-            console.error("search error: ", err.response);
-        });
-    };
-
     const fetchBanners = () => {
         apiConsumer.getBanners()
         .then(res => {
@@ -96,21 +84,6 @@ const CatalogPage = ({colAmount}) => {
             <Row>
                 <Col>
                 {lastSeen.length > 0 && <CarouselGeneric carouselType="Last Seen" contentList={lastSeen}/>}
-                </Col>
-            </Row>
-
-            <Row className="mt-5">
-                <Col>
-                <Button variant="warning" onClick={() => history.push("/login")}>Login</Button>
-                </Col>
-                <Col>
-                <Button variant="secondary" onClick={() => searchTestHandler("")}>Search</Button>
-                </Col>
-                <Col>
-                <Button variant="primary" onClick={() => history.push("/detailsSerie")}>Detalle Serie</Button>
-                </Col>
-                <Col>
-                <Button variant="primary" onClick={() => history.push("/detailsMovie")}>Detalle Movie</Button>
                 </Col>
             </Row>
         </Container>
