@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
-// import CarouselBanners from './components/CarouselBanners';
+import CarouselBanners from './components/CarouselBanners';
 import GridGenerator from './components/GridGenerator';
 import GridCard from './components/GridCard';
 import Header from './components/Header';
@@ -16,6 +16,7 @@ const CatalogPage = ({colAmount}) => {
     const history = useHistory();
     const location = useLocation();
     const [catalog, setCatalog] = useState([]);
+    const [banners, setBanners] = useState([]);
     const [favs, setFavs] = useState([]);
     const [lastSeen, setLastSeen] = useState([]);
     let favsDesdeCat = 0;
@@ -23,6 +24,7 @@ const CatalogPage = ({colAmount}) => {
     useEffect(() => {
         fetchAvailableContent();
         fetchUserContent();
+        fetchBanners();
     }, [location, favsDesdeCat]); // probar de agregar: favs.length, lastSeen.length, fetchAvailableContent y fetchUserContent
 
     const fetchAvailableContent = () => {
@@ -36,7 +38,7 @@ const CatalogPage = ({colAmount}) => {
                 colAmount = catalog.length;
             }
         })
-        .catch(err => console.error("ERROR GET AVAILABLE CONTENT: ", err));
+        .catch(err => console.error("ERROR GET AVAILABLE CONTENT: ", err.response));
     };
 
     const fetchUserContent = () => {
@@ -50,7 +52,7 @@ const CatalogPage = ({colAmount}) => {
                 setLastSeen(res.data.lastSeen);
             }
         })
-        .catch(err => console.error("ERROR GET USER CONTENT: ", err));
+        .catch(err => console.error("ERROR GET USER CONTENT: ", err.response));
     };
 
     const searchTestHandler = (text) => {
@@ -61,29 +63,37 @@ const CatalogPage = ({colAmount}) => {
         })
         .catch(err => {
             console.error("search error: ", err.response);
-        })
+        });
     };
 
-    const getBannersHandler = (text) => {
+    const fetchBanners = () => {
         apiConsumer.getBanners()
         .then(res => {
-            console.log("search: ", res);
-            console.log("search data: ", res.data);
+            console.log("banners data: ", res.data);
+            setBanners(res.data);
         })
         .catch(err => {
-            console.error("search error: ", err.response);
-        })
+            console.error("Banners request error: ", err.response);
+        });
     };
 
     return (
         <>
         <Header />
-        <Container fluid>
+        <Container fluid className="margin-for-fixed-header bg-dark">
+            <Row className="pt-3">
+                <Col>
+                {/* <h1>CatalogPage</h1> */}
+                {banners.length > 0 && <CarouselBanners banners={banners}/>}
+                </Col>
+            </Row>
             <Row>
                 <Col>
-                <h1>CatalogPage</h1>
-                {/* <CarouselBanners/> */}
                 {favs.length > 0 && <CarouselGeneric carouselType="Favorites" contentList={favs}/>}
+                </Col>
+            </Row>
+            <Row>
+                <Col>
                 {lastSeen.length > 0 && <CarouselGeneric carouselType="Last Seen" contentList={lastSeen}/>}
                 </Col>
             </Row>
@@ -95,7 +105,7 @@ const CatalogPage = ({colAmount}) => {
                 <Button variant="secondary" onClick={() => searchTestHandler("the")}>Search</Button>
             </Row>
             <Row>
-                <Button variant="primary" onClick={() => getBannersHandler()}>Search</Button>
+                <Button variant="primary" onClick={() => fetchBanners()}>Search</Button>
             </Row>
             <Row>
                 <Button variant="primary" onClick={() => history.push("/detailsSerie")}>Detalle Serie</Button>

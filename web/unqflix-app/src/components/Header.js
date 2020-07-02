@@ -26,8 +26,7 @@ const Header = () => {
 
     return (
 
-        <div>
-            <Navbar bg="dark" variant="dark">
+            <Navbar bg="dark" variant="dark" fixed="top">
                 <Navbar.Brand>
                     <img id="logoHeader" onClick={() => history.push("/")} src={logo} alt="Logo de Unqflix" />
                 </Navbar.Brand>
@@ -41,7 +40,6 @@ const Header = () => {
                 <img id="avatarUser" src={user} alt="avatar de usuario"/>
                 
             </Navbar>
-        </div>
 
     );
 }

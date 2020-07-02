@@ -17,7 +17,7 @@ const GridGenerator = ({colAmount, children}) => {
     const rows = chunk(children, colAmount);
 
     return (
-        <Container fluid className="bg-dark">
+        <Container fluid className="bg-dark pt-5">
             {rows.map((cols, index) => (
                 <Row key={index}>
                     {cols.map((col, index) => (
