@@ -7,6 +7,7 @@ import logo from './images/logo.png'
 import apiConsumer from './ApiConsumer';
 import { Button, Form, Image } from 'react-bootstrap';
 import authSingleton from './Auth';
+import Alert from 'react-bootstrap/Alert'
 
 const RegisterPage = () => {
 	const [username, setUsername] = useState("asd");
@@ -14,6 +15,7 @@ const RegisterPage = () => {
 	const [password, setPassword] = useState("asd");
 	const [image, setImage] = useState("http://asd.jpg");
 	const [creditCard, setCreditCard] = useState("123");
+	const [show, setShow] = useState(false);
 
 	const usernameChangeHandler = (event) => setUsername(event.target.value);
 	const emailChangeHandler = (event) => setEmail(event.target.value);
@@ -31,8 +33,10 @@ const RegisterPage = () => {
 			creditCard
 		})
 		.then(res => {
+			setShow(true);
 			authSingleton.logout();
 			authSingleton.login(res.headers.authorization);
+			
 		})
 		.catch(err => {
 			console.error("register error: ", err);
@@ -84,6 +88,12 @@ const RegisterPage = () => {
                             placeholder="Input your Credit Card Number"
                             value={creditCard}
                             onChange={creditCardChangeHandler} required/>
+							  <Alert show={show} variant="success" onClose={() => setShow(false)} dismissible>
+                              <Alert.Heading>Welcome!</Alert.Heading>
+                             <p> Your account has been resgistered
+                              </p>
+                           </Alert>
+						   <br/>
 						<Button variant="primary"
                             id="botonForm"
                             className="buttonLoginRegister"
