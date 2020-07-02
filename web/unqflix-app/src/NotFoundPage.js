@@ -1,10 +1,17 @@
 import React from 'react';
+import { Button, Image, Row, Col, Container } from 'react-bootstrap';
+import notFound from './images/notFound.png';
+import './styles/notFoundPage.scss';
 
 const NotFoundPage = () => {
     return ( 
-        <div>
-            <h1>NotFoundPage</h1>
-        </div>
+        <Container id="notFoundContainer">
+        <Row>
+          <Col id="notFound"> 
+          <Image src={notFound} id="notFound" thumbnail />
+          </Col>
+        </Row>
+      </Container>
     );
 }
  

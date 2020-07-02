@@ -17,12 +17,14 @@ const RegisterPage = () => {
 	const [creditCard, setCreditCard] = useState("123");
 	const [show, setShow] = useState(false);
 
-	const usernameChangeHandler = (event) => setUsername(event.target.value);
-	const emailChangeHandler = (event) => setEmail(event.target.value);
+
+
+	const usernameChangeHandler = (event) => {setUsername(event.target.value);}
+	const emailChangeHandler = (event) => {setEmail(event.target.value);}
 	const passwordChangeHandler = (event) => setPassword(event.target.value);
 	const imageChangeHandler = (event) => setImage(event.target.value);
-	const creditCardChangeHandler = (event) => setCreditCard(event.target.value);
-
+	const creditCardChangeHandler = (event) => {setCreditCard(event.target.value);}
+	 
 	const registerHandler = (event) => {
 		event.preventDefault();
 		apiConsumer.register({
@@ -81,11 +83,11 @@ const RegisterPage = () => {
                             className="inputLoginRegister"
                             placeholder="Input your image url"
                             value={image}
-                            onChange={imageChangeHandler} required/>
+                            onChange={imageChangeHandler} required/>	
 						<Form.Label type="text">Credit Card:</Form.Label>
 						<Form.Control type="text" 
-                            className="inputLoginRegister"
-                            placeholder="Input your Credit Card Number"
+							className="inputLoginRegister"
+                            placeholder="1234 1234 1234 1234"
                             value={creditCard}
                             onChange={creditCardChangeHandler} required/>
 							  <Alert show={show} variant="success" onClose={() => setShow(false)} dismissible>
