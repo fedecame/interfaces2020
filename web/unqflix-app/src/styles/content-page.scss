@@ -1,0 +1,31 @@
+.responsive-font-size-content-page {
+    @media (min-width: 1260px) { 
+        font-size: 1.5em;
+    }
+
+    @media (max-width: 1260px) and (min-width: 880px) {
+        font-size: 1.25em;
+    }
+}
+
+.image-content-page {
+    max-width: 100%;
+    padding-bottom: 2rem;
+
+    @media (max-width: 768px) {
+        display: block;
+        margin: auto;
+    }
+}
+
+.modal-video-content-page {
+    min-width: 100%;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+}
+
+.heart-content-page {
+    cursor: pointer;
+}

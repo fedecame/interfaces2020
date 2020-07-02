@@ -49,9 +49,6 @@ class UsersApi(private val port: Int) {
                 get(unqflixController::getFavoritesAndLastSeen, mutableSetOf<Role>(Roles.USER))
                 path("/fav"){
                     post(unqflixController::addOrDeleteContentFromFav, mutableSetOf<Role>(Roles.USER))
-//                    path(":contentId"){
-//                        post(unqflixController::addOrDeleteContentFromFav, mutableSetOf<Role>(Roles.USER))
-//                    }
                 }
                 path("/lastSeen"){
                     post(unqflixController::addLastSeen, mutableSetOf<Role>(Roles.USER))

@@ -25,7 +25,7 @@ const CatalogPage = ({colAmount}) => {
         fetchAvailableContent();
         fetchUserContent();
         fetchBanners();
-    }, [location, favsDesdeCat]); // probar de agregar: favs.length, lastSeen.length, fetchAvailableContent y fetchUserContent
+    }, [location, favsDesdeCat]);
 
     const fetchAvailableContent = () => {
         apiConsumer.getAvailableContent()
@@ -60,6 +60,7 @@ const CatalogPage = ({colAmount}) => {
         .then(res => {
             console.log("search: ", res);
             console.log("search data: ", res.data);
+            setCatalog(res.data);
         })
         .catch(err => {
             console.error("search error: ", err.response);
@@ -97,21 +98,20 @@ const CatalogPage = ({colAmount}) => {
                 {lastSeen.length > 0 && <CarouselGeneric carouselType="Last Seen" contentList={lastSeen}/>}
                 </Col>
             </Row>
-            <Row>
-                <Button variant="dark" onClick={() => history.push("/login")}>Login</Button>
-            </Row>
-        
-            <Row>
-                <Button variant="secondary" onClick={() => searchTestHandler("the")}>Search</Button>
-            </Row>
-            <Row>
-                <Button variant="primary" onClick={() => fetchBanners()}>Search</Button>
-            </Row>
-            <Row>
+
+            <Row className="mt-5">
+                <Col>
+                <Button variant="warning" onClick={() => history.push("/login")}>Login</Button>
+                </Col>
+                <Col>
+                <Button variant="secondary" onClick={() => searchTestHandler("")}>Search</Button>
+                </Col>
+                <Col>
                 <Button variant="primary" onClick={() => history.push("/detailsSerie")}>Detalle Serie</Button>
-            </Row>
-            <Row>
+                </Col>
+                <Col>
                 <Button variant="primary" onClick={() => history.push("/detailsMovie")}>Detalle Movie</Button>
+                </Col>
             </Row>
         </Container>
         {catalog.length > 0 &&
