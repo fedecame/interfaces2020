@@ -7,9 +7,10 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
+import Modal from 'react-bootstrap/Modal';
 // import './styles/productDetails.scss';
 // import {useHistory} from 'react-router-dom';
-import pochoclos from './images/popcorn.png';
+// import pochoclos from './images/popcorn.png';
 import CardsSeasons from './components/CardsSeasons';
 import {useParams, useLocation} from 'react-router-dom';
 import apiConsumer from './ApiConsumer';
@@ -23,9 +24,13 @@ const ContentPage = () => {
     const {id} = useParams();
     const location = useLocation();
     const [content, setContent] = useState({});
+    const [showVideo, setShowVideo] = useState(false);
+    const [imageSrc, setImageSrc] = useState("");
 
     useEffect(() => {
         console.log(`USE EFFECT DE ${id}`);
+        console.log("Location: ", location);
+        location.state?.imageSrc && setImageSrc(location.state.imageSrc);
         apiConsumer.getContent(id)
         .then(res => {
             console.log("content data: ", res.data);
@@ -52,13 +57,27 @@ const ContentPage = () => {
 
     const isSerie = () => id.startsWith('ser_');
 
+    const embedYoutubeUrl = (videoUrl) => {return (videoUrl.replace('watch?v=', 'embed/') + '?autoplay=1')};
+
     return (
         <>
         <Header/>
+        <Modal
+            show={showVideo}
+            onHide={() => setShowVideo(false)}
+            dialogClassName="modal-video-content-page"
+            animation={false}
+            aria-labelledby="content-video-modal"
+            centered
+        >
+            {!!content.video && <ResponsiveEmbed aspectRatio="16by9">
+                <embed title="content-video-modal" type="video/webm" src={embedYoutubeUrl(content.video)}/>
+            </ResponsiveEmbed>}
+        </Modal>
         <Container fluid className="margin-for-fixed-header bg-dark">
             <Row>
                 <Col xs={12} md={4}>
-                    <Image className="image-content-page" src={content.poster} alt={`${content.title} image`}/>
+                    <Image className="image-content-page" src={imageSrc || content.poster} alt={`${content.title} image`}/>
                 </Col>
                 <Col xs={12} md={8} className="text-light responsive-font-size-content-page">
                     <Row>
@@ -75,7 +94,7 @@ const ContentPage = () => {
                             variant="primary"
                             id="botonForm"
                             className="buttonLoginRegister"
-                            onClick={() => console.log("tenga su buen video señor")}
+                            onClick={() => setShowVideo(true)}
                           >Play</Button>
                         }
                         </Col>

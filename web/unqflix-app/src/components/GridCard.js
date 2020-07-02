@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Card from 'react-bootstrap/Card';
 import Badge from 'react-bootstrap/Badge';
 import apiConsumer from '../ApiConsumer';
@@ -9,10 +9,12 @@ import {useHistory} from 'react-router-dom';
 const GridCard = ({content}) => {
     const imageBaseURL = "https://image.tmdb.org/t/p/w500/";
     const history = useHistory();
+    let imageValidSrc = content.poster; // usado para pasarla por history.push
 
     const updateImage = (target, resResults) => {
         const posterPath = resResults.find(elem => elem.poster_path !== null).poster_path;
-        target.src = imageBaseURL + posterPath;
+        imageValidSrc = imageBaseURL + posterPath;
+        target.src = imageValidSrc;
     }
 
     const getNewUrlOrFallbackSrc = (event, content) => {
@@ -42,7 +44,7 @@ const GridCard = ({content}) => {
     };
 
     const goToContentPage = (contentId) => {
-        history.push(`/content/${contentId}`);
+        history.push(`/content/${contentId}`, {imageSrc: imageValidSrc});
     };
 
     return (
