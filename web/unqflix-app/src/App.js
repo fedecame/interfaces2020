@@ -1,5 +1,6 @@
 import React from 'react';
 // import './App.css';
+import "react-multi-carousel/lib/styles.css";
 import CatalogPage from './CatalogPage';
 import RegisterPage from './RegisterPage';
 import LoginPage from './LoginPage';

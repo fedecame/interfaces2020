@@ -23,7 +23,7 @@ const GridCard = ({content}) => {
                 updateImage(event.target, res.data.results);
             })
             .catch(err => {
-                console.error("Movie image error: ", err);
+                console.error("Movie image error: ", err.response);
                 event.target.src = noImage;
             });
         } else if (content.id.startsWith('ser')) {
@@ -32,7 +32,7 @@ const GridCard = ({content}) => {
                 updateImage(event.target, res.data.results);
             })
             .catch(err => {
-                console.error("Serie image error: ", err);
+                console.error("Serie image error: ", err.response);
                 event.target.src = noImage;
             });
         } else {
@@ -47,7 +47,7 @@ const GridCard = ({content}) => {
 
     return (
     <Card key={content.id} className="bg-dark text-white mt-4 custom-grid-card" onClick={() => goToContentPage(content.id)}>
-        <Card.Img src={content.poster} onError={(event) => getNewUrlOrFallbackSrc(event, content)} alt="Card image"/>
+        <Card.Img src={content.poster} onError={event => getNewUrlOrFallbackSrc(event, content)} alt="Card image"/>
         <Card.ImgOverlay>
             <Badge pill variant="success" className="float-right ml-2 mt-1"> Disponible </Badge>
             <Card.Title className="font-weight-bold">{content.title}</Card.Title>

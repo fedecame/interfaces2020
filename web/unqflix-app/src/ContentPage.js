@@ -35,7 +35,7 @@ const ContentPage = () => {
             })
             .catch(err => console.error(`Error adding last seen ${id}: `, err));
         })
-        .catch(err => console.error(`Error getting content ${id}: `, err));
+        .catch(err => console.error(`Error getting content ${id}: `, err.response));
     }, [location, id]);
 
     const toggleFavorite = (event) => {
@@ -44,7 +44,7 @@ const ContentPage = () => {
         .then(() => {
             event.target.src = corazonLleno; //despues hacer la logica de que se cambie cuando se lo cliquea de nuevo
         })
-        .catch(err => console.error(`Error with fav endpoint for ${id}: `, err));
+        .catch(err => console.error(`Error with fav endpoint for ${id}: `, err.response));
     };
 
     return (
