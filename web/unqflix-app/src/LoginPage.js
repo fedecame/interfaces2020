@@ -8,11 +8,13 @@ import apiConsumer from './ApiConsumer';
 import {useHistory} from 'react-router-dom';
 import { Button, Form, Image } from 'react-bootstrap';
 import authSingleton from './Auth';
+import Alert from 'react-bootstrap/Alert'
 
 function LoginPage() {
     let history = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState('');
+    const [show, setShow] = useState(false);
 
     const loginHandler = (event) => {
         event.preventDefault();
@@ -24,11 +26,11 @@ function LoginPage() {
                 history.push('/');
             }
         })
-        .catch(err => console.error("login error response: ", err.response));
+        .catch(err => {console.error("login error response: ", err.response); setShow(true)});
     }
 
-    const handlePasswordChange = (event) => setPassword(event.target.value);
-    const handleEmailChange = (event) => setEmail(event.target.value);
+    const handlePasswordChange = (event) => {setPassword(event.target.value); setShow(false)}
+    const handleEmailChange = (event) => {setEmail(event.target.value); setShow(false)}
 
     return ( 
         <div id="pseudoBody">
@@ -60,6 +62,11 @@ function LoginPage() {
                             value={password}
                             onChange={handlePasswordChange}/>
                             <br/><br/>
+                            <Alert show={show} variant="danger" onClose={() => setShow(false)} dismissible>
+                              <Alert.Heading>Error!</Alert.Heading>
+                             <p> Password or User incorrect
+                              </p>
+                           </Alert>
                             <Button variant="primary"
                             id="botonForm"
                             className="buttonLoginRegister"
