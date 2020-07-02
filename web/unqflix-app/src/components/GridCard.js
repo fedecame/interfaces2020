@@ -49,7 +49,7 @@ const GridCard = ({content}) => {
     <Card key={content.id} className="bg-dark text-white mt-4 custom-grid-card" onClick={() => goToContentPage(content.id)}>
         <Card.Img src={content.poster} onError={event => getNewUrlOrFallbackSrc(event, content)} alt="Card image"/>
         <Card.ImgOverlay>
-            <Badge pill variant="success" className="float-right ml-2 mt-1"> Disponible </Badge>
+            <Badge pill variant={content.state ? "success" : "danger"} className="float-right ml-2 mt-1"> {content.state ? "Disponible" : "Indisponible"} </Badge>
             <Card.Title className="font-weight-bold">{content.title}</Card.Title>
             <Card.Text className="grid-card-description">
                 {content.description}
