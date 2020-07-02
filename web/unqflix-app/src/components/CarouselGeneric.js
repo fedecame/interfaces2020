@@ -5,7 +5,6 @@ import '../styles/carouselGeneric.scss';
 
 const CarouselGeneric = ({carouselType, contentList}) => {
 
-  console.log("mira que linda lista de contents: ", contentList);
     const responsive = {
         ultrawides: {
           breakpoint: { max: 3000, min: 1510 },

@@ -6,7 +6,7 @@ import noImage from '../images/no-image-available.jpg';
 import '../styles/grid-card.scss';
 import {useHistory} from 'react-router-dom';
 
-const GridCard = ({content}) => {
+const BannerCard = ({content}) => {
     const imageBaseURL = "https://image.tmdb.org/t/p/w500/";
     const history = useHistory();
     let imageValidSrc = content.poster; // usado para pasarla por history.push
@@ -48,17 +48,15 @@ const GridCard = ({content}) => {
     };
 
     return (
-    <Card key={content.id} className="bg-dark text-white mt-4 custom-grid-card" onClick={() => goToContentPage(content.id)}>
-        <Card.Img src={content.poster} onError={event => getNewUrlOrFallbackSrc(event, content)} alt="Card image"/>
-        <Card.ImgOverlay>
+    <Card key={content.id} className="bg-dark text-white mt-4">
+        <Card.Img className="custom-banner-image" variant="top" src={content.poster} onError={event => getNewUrlOrFallbackSrc(event, content)} onClick={() => goToContentPage(content.id)} alt="Card image"/>
+        <Card.Body>
             <Badge pill variant={content.state ? "success" : "danger"} className="float-right ml-2 mt-1"> {content.state ? "Disponible" : "Indisponible"} </Badge>
             <Card.Title className="font-weight-bold">{content.title}</Card.Title>
-            <Card.Text className="grid-card-description">
-                {content.description}
-            </Card.Text>
-        </Card.ImgOverlay>
+            <Card.Text className="banner-card-description">{content.description}</Card.Text>
+        </Card.Body>
     </Card>
     );
 }
  
-export default GridCard;
+export default BannerCard;

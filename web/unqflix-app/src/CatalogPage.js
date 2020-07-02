@@ -25,7 +25,7 @@ const CatalogPage = ({colAmount}) => {
         fetchAvailableContent();
         fetchUserContent();
         fetchBanners();
-    }, [location, favsDesdeCat]); // probar de agregar: favs.length, lastSeen.length, fetchAvailableContent y fetchUserContent
+    }, [location, favsDesdeCat]);
 
     const fetchAvailableContent = () => {
         apiConsumer.getAvailableContent()
