@@ -17,20 +17,19 @@ const SearchResultsPage = () => {
 
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
-        setSearchedText(queryParams.get("text"));
-        fetchSearchResult(searchedText);
+        const searchedTextLocal = queryParams.get("text");
+        setSearchedText(searchedTextLocal);
+        fetchSearchResult(searchedTextLocal);
     }, [location]);
 
     const fetchSearchResult = searchText => {
         console.log("search text: ", searchText);
-        if (searchText) {
             apiConsumer.search(searchText)
             .then(res => {
                 console.log("resultado de busqueda: ", res.data);
                 setSearchResult(res.data);
             })
             .catch(err => console.error("search error response: ", err.response));
-        }
     };
 
     return (
