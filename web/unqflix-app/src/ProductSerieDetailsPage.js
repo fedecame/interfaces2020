@@ -7,7 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import './styles/productDetails.scss';
-// import {useHistory} from 'react-router-dom';
+import {useHistory} from 'react-router-dom';
 // import apiConsumer from './ApiConsumer';
 import pochoclos from './images/popcorn.png';
 import { Image } from 'react-bootstrap';
