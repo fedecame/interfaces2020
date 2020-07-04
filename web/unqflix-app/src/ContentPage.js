@@ -96,7 +96,7 @@ const ContentPage = () => {
                 <embed title="content-video-modal" type="video/webm" src={embedYoutubeUrl(content.video)}/>
             </ResponsiveEmbed>}
         </Modal>
-        <Container fluid className="margin-for-fixed-header bg-dark">
+        <Container fluid className="margin-for-fixed-header bg-dark pt-3">
             <Row>
                 <Col xs={12} md={4}>
                     <Image className="image-content-page" src={imageSrc || content.poster} alt={`${content.title} image`}/>

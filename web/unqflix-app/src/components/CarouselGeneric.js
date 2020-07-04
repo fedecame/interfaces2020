@@ -30,7 +30,7 @@ const CarouselGeneric = ({carouselType, contentList}) => {
 
     return ( 
         <>
-        <h3 className="px-2 font-weight-bold mt-5 text-light">{carouselType}</h3>
+        <h3 className="px-2 font-weight-bold mt-3 text-light">{carouselType}</h3>
         <Carousel
             responsive={responsive}
             infinite={true}
