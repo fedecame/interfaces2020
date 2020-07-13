@@ -3,7 +3,7 @@ import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 
-const GridGenerator = ({colAmount, children}) => {
+const GridGenerator = ({colAmount, heading, children}) => {
     // colAmount tiene que ser multiplo de 12, sino se redondea para abajo la cantidad de columnas
     const colWidth = Math.floor(12 / colAmount);
 
@@ -17,7 +17,8 @@ const GridGenerator = ({colAmount, children}) => {
     const rows = chunk(children, colAmount);
 
     return (
-        <Container fluid className="bg-dark pt-5">
+        <Container fluid className="bg-dark pt-4">
+            {heading}
             {rows.map((cols, index) => (
                 <Row key={index}>
                     {cols.map((col, index) => (

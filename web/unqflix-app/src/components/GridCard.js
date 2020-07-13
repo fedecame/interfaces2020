@@ -48,7 +48,7 @@ const GridCard = ({content}) => {
     };
 
     return (
-    <Card key={content.id} className="bg-dark text-white mt-4 custom-grid-card" onClick={() => goToContentPage(content.id)}>
+    <Card key={content.id} className="bg-dark text-white mb-4 custom-grid-card" onClick={() => goToContentPage(content.id)}>
         <Card.Img src={content.poster} onError={event => getNewUrlOrFallbackSrc(event, content)} alt="Card image"/>
         <Card.ImgOverlay>
             <Badge pill variant={content.state ? "success" : "danger"} className="float-right ml-2 mt-1"> {content.state ? "Disponible" : "Indisponible"} </Badge>
