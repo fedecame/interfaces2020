@@ -35,16 +35,16 @@ const SearchResultsPage = () => {
     return (
         <>
             <Header />
-            <Container fluid className="bg-dark">
+            {/* <Container fluid className="bg-dark">
                 <Row>
                     <Col>
                     {searchResult.length > 0 && <div><h3 className="px-2 font-weight-bold text-light margin-for-fixed-header bg-dark">{`Searched text: ${searchedText}`}</h3></div>}
                     </Col>
                 </Row>
-            </Container>
+            </Container> */}
             {
             searchResult.length > 0 &&
-                <GridGenerator colAmount={6}>
+                <GridGenerator colAmount={6} heading={<h3 className="px-2 font-weight-bold text-light margin-for-fixed-header bg-dark">{`Searched text: "${searchedText}"`}</h3>}>
                     {searchResult.map(content => <GridCard key={content.id} content={content} />)}
                 </GridGenerator>
             }

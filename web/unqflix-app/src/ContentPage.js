@@ -8,15 +8,11 @@ import Container from 'react-bootstrap/Container';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-// import './styles/productDetails.scss';
-// import {useHistory} from 'react-router-dom';
-// import pochoclos from './images/popcorn.png';
-import CardsSeasons from './components/CardsSeasons';
+import SeasonsDropdowns from './components/SeasonsDropdowns';
 import {useParams, useLocation} from 'react-router-dom';
 import apiConsumer from './ApiConsumer';
 import corazon from './images/corazon.png';
 import corazonLleno from './images/corazonFilled.png';
-// import Card from 'react-bootstrap/Card';
 import './styles/content-page.scss';
 import CarouselGeneric from './components/CarouselGeneric';
 
@@ -25,6 +21,7 @@ const ContentPage = () => {
     const location = useLocation();
     const [content, setContent] = useState({});
     const [showVideo, setShowVideo] = useState(false);
+    const [chapterVideo, setChapterVideo] = useState("");
     const [imageSrc, setImageSrc] = useState("");
     const [favsDetail, setFavsDetail] = useState([]);
     const [isFav, setIsFav] = useState(false);
@@ -86,7 +83,7 @@ const ContentPage = () => {
         <Header/>
         <Modal
             show={showVideo}
-            onHide={() => setShowVideo(false)}
+            onHide={() => {setShowVideo(false); setChapterVideo("")}}
             dialogClassName="modal-video-content-page"
             animation={false}
             aria-labelledby="content-video-modal"
@@ -95,8 +92,11 @@ const ContentPage = () => {
             {!!content.video && <ResponsiveEmbed aspectRatio="16by9">
                 <embed title="content-video-modal" type="video/webm" src={embedYoutubeUrl(content.video)}/>
             </ResponsiveEmbed>}
+            {!!chapterVideo && <ResponsiveEmbed aspectRatio="16by9">
+                <embed title="content-video-modal" type="video/webm" src={embedYoutubeUrl(chapterVideo)}/>
+            </ResponsiveEmbed>}
         </Modal>
-        <Container fluid className="margin-for-fixed-header bg-dark">
+        <Container fluid className="margin-for-fixed-header bg-dark pt-3">
             <Row>
                 <Col xs={12} md={4}>
                     <Image className="image-content-page" src={imageSrc || content.poster} alt={`${content.title} image`}/>
@@ -112,7 +112,7 @@ const ContentPage = () => {
                     <Row>
                         <Col>
                         {isSerie() ?
-                        <CardsSeasons/> 
+                        !!content.season && <SeasonsDropdowns seasons={content.season} setChapterVideo={setChapterVideo} setShowVideo={setShowVideo}/>
                         : <Button
                             variant="primary"
                             id="botonForm"
@@ -130,56 +130,6 @@ const ContentPage = () => {
                 </Col>
             </Row>
         </Container>
-
-
-
-        {/* <Header />
-        <Container fluid>
-            <Col id="pseudoBody">
-                <Row id="containerAll">
-                    <Row id="containerDetails">
-                        <Col xs={6} sm={4} id="containerPoster">
-                            <Image src={pochoclos} id="posterImage" thumbnail />
-                        </Col>
-                        <Col xs={12} sm={8} id="containerDescription">
-                            <Row className="align-items-center" id="descriptionRow">
-                                <Col>
-                                    <h1>{content.title}</h1> <br />
-                                    <p>{content.description}</p>
-                                </Col>
-                                <Col xs={2}>
-                                <Image src={corazon} width={40} height={40} onClick={toggleFavorite}></Image>
-                                </Col>
-                            </Row >
-                            <Row id="seasonsRow">
-                                <h4>Seasons</h4>
-                                <Row id="cardContainer">
-                                    <CardsSeasons />
-                                </Row>
-                            </Row>
-                        </Col>
-                    </Row>
-                    <Row id="containerCarouselContent">
-                        <h4>Contenido Relacionado</h4>
-                    </Row>
-
-                    <Button 
-                        variant="primary"
-                        id="botonForm"
-                        className="buttonLoginRegister"
-                        onClick={() => history.push("/content/:id")}
-                    >Play</Button>
-                    
-                </Row>
-                <Row>
-                    <Col>
-                        <ResponsiveEmbed aspectRatio="16by9">
-                            <embed type="video/webm" src="https://www.youtube.com/embed/Kxms-OtUXS0" />
-                        </ResponsiveEmbed>
-                    </Col>
-                </Row>
-            </Col>
-        </Container> */}
         </>
     );
 }

@@ -6,8 +6,6 @@ import RegisterPage from './RegisterPage';
 import LoginPage from './LoginPage';
 import ContentPage from './ContentPage';
 import SearchResultsPage from './SearchResultsPage';
-import ProductSerieDetailsPage from './ProductSerieDetailsPage'
-import ProductMovieDetailsPage from './ProductMovieDetailsPage'
 import NotFoundPage from './NotFoundPage';
 import authSingleton from './Auth';
 
@@ -54,12 +52,6 @@ function App() {
         </PrivateRoute>
         <PrivateRoute path="/content/:id">
           <ContentPage />
-        </PrivateRoute>
-        <PrivateRoute path="/detailsSerie">
-          <ProductSerieDetailsPage />
-        </PrivateRoute>
-        <PrivateRoute path="/detailsMovie">
-          <ProductMovieDetailsPage />
         </PrivateRoute>
         <PrivateRoute path="/search">
           <SearchResultsPage />
