@@ -16,6 +16,7 @@ const RegisterPage = () => {
 	const [image, setImage] = useState("http://asd.jpg");
 	const [creditCard, setCreditCard] = useState("123");
 	const [show, setShow] = useState(false);
+	const [errorReg,setErrorReg] =useState(false);
 
 
 
@@ -43,11 +44,12 @@ const RegisterPage = () => {
 		.catch(err => {
 			console.error("register error: ", err);
 			console.error("register error response: ", err.response);
+			setErrorReg(true)
 		})
 	}
 
     return ( 
-		<div id="pseudoBody">
+		<div id="pseudoBodyLogReg">
 			<div id="containerLoginRegister">
 				<div id="columnIzqLoginRegister">
 				
@@ -90,12 +92,16 @@ const RegisterPage = () => {
                             placeholder="1234 1234 1234 1234"
                             value={creditCard}
                             onChange={creditCardChangeHandler} required/>
-							  <Alert show={show} variant="success" onClose={() => setShow(false)} dismissible>
+						{show && <Alert variant="success" onClose={() => setShow(false)} dismissible>
                               <Alert.Heading>Welcome!</Alert.Heading>
-                             <p> Your account has been resgistered
-                              </p>
-                           </Alert>
-						   <br/>
+                             <p> Your account has been Registered</p>
+                           </Alert>}
+						{errorReg && <Alert variant="danger" onClose={() => setErrorReg(false)} dismissible>
+							<Alert.Heading>Sorry!</Alert.Heading>
+							<p> Your account has not been Registered
+							</p>
+						</Alert>}
+
 						<Button variant="primary"
                             id="botonForm"
                             className="buttonLoginRegister"

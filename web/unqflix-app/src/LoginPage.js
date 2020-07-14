@@ -33,7 +33,7 @@ function LoginPage() {
     const handleEmailChange = (event) => {setEmail(event.target.value); setShow(false)}
 
     return ( 
-        <div id="pseudoBody">
+        <div id="pseudoBodyLogReg">
             <div id="containerLoginRegister">
                 <div id="columnIzqLoginRegister">	
             
@@ -62,11 +62,11 @@ function LoginPage() {
                             value={password}
                             onChange={handlePasswordChange}/>
                             <br/><br/>
-                            <Alert show={show} variant="danger" onClose={() => setShow(false)} dismissible>
+                            {show && <Alert  variant="danger" onClose={() => setShow(false)} dismissible>
                               <Alert.Heading>Error!</Alert.Heading>
                              <p> Password or User incorrect
                               </p>
-                           </Alert>
+                           </Alert>}
                             <Button variant="primary"
                             id="botonForm"
                             className="buttonLoginRegister"
