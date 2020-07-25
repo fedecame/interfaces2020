@@ -4,7 +4,7 @@ import Footer from './components/Footer';
 import { useHistory } from 'react-router-dom';
 import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
-import { Button, Form, Image } from 'react-bootstrap';
+import { Button, Form, Image, Alert } from 'react-bootstrap';
 import authSingleton from './Auth';
 
 const RegisterPage = () => {
@@ -13,15 +13,19 @@ const RegisterPage = () => {
 	const [password, setPassword] = useState("");
 	const [image, setImage] = useState("");
 	const [creditCard, setCreditCard] = useState("");
+	const [showInputAlert, setShowInputAlert] = useState(false);
 
-	const usernameChangeHandler = (event) => { setUsername(event.target.value); }
-	const emailChangeHandler = (event) => { setEmail(event.target.value); }
-	const passwordChangeHandler = (event) => setPassword(event.target.value);
-	const imageChangeHandler = (event) => setImage(event.target.value);
-	const creditCardChangeHandler = (event) => { setCreditCard(event.target.value); }
+	const usernameChangeHandler = (event) => { setUsername(event.target.value); setShowInputAlert(false); }
+	const emailChangeHandler = (event) => { setEmail(event.target.value); setShowInputAlert(false); }
+	const passwordChangeHandler = (event) => { setPassword(event.target.value); setShowInputAlert(false); }
+	const imageChangeHandler = (event) => { setImage(event.target.value); setShowInputAlert(false); }
+	const creditCardChangeHandler = (event) => { setCreditCard(event.target.value); setShowInputAlert(false); }
 	const history = useHistory();
 
 	const registerHandler = () => {
+		if (!email || !username || !password || !image || !creditCard) {
+			return setShowInputAlert(true);
+		}
 		apiConsumer.register({
 			name: username,
 			email,
@@ -47,6 +51,11 @@ const RegisterPage = () => {
 	}
 
 	return (<>
+			{showInputAlert &&
+			<Alert  variant="warning" onClose={() => setShowInputAlert(false)} dismissible>
+				<Alert.Heading>Empty input</Alert.Heading>
+				<p>Please complete all inputs</p>
+            </Alert>}
 			<div id="pseudoBodyLogReg">
 				<div id="containerLoginRegister">
 					<div id="columnIzqLoginRegister">
