@@ -49,7 +49,7 @@ function LoginPage() {
             </Alert>}
             {showRegisterError && <Alert  variant="danger" onClose={() => setShowRegisterError(false)} dismissible>
                 <Alert.Heading>Sorry!</Alert.Heading>
-                <p>Email already taken</p>
+                <p>Couldn't Register</p>
             </Alert>}
             <div id="pseudoBodyLogReg">
                 <div id="containerLoginRegister">
