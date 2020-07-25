@@ -10,11 +10,19 @@ import authSingleton from './Auth';
 import Alert from 'react-bootstrap/Alert'
 
 const RegisterPage = () => {
+<<<<<<< HEAD
 	const [username, setUsername] = useState(" ");
 	const [email, setEmail] = useState(" ");
 	const [password, setPassword] = useState(" ");
 	const [image, setImage] = useState(" ");
 	const [creditCard, setCreditCard] = useState(" ");
+=======
+	const [username, setUsername] = useState("");
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [image, setImage] = useState("");
+	const [creditCard, setCreditCard] = useState("");
+>>>>>>> 1888452b29d7f7189aa750adb9749803112fbd6f
 	const [show, setShow] = useState(false);
 	const [errorReg,setErrorReg] =useState(false);
 
