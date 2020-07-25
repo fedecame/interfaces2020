@@ -4,9 +4,8 @@ import './styles/login.scss';
 import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
 import { useHistory, useLocation } from 'react-router-dom';
-import { Button, Form, Image } from 'react-bootstrap';
+import { Button, Form, Image, Alert } from 'react-bootstrap';
 import authSingleton from './Auth';
-import Alert from 'react-bootstrap/Alert'
 
 function LoginPage() {
     const history = useHistory();
