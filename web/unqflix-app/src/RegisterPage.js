@@ -10,11 +10,11 @@ import authSingleton from './Auth';
 import Alert from 'react-bootstrap/Alert'
 
 const RegisterPage = () => {
-	const [username, setUsername] = useState("asd");
-	const [email, setEmail] = useState("asd@asd.com");
-	const [password, setPassword] = useState("asd");
-	const [image, setImage] = useState("http://asd.jpg");
-	const [creditCard, setCreditCard] = useState("123");
+	const [username, setUsername] = useState(" ");
+	const [email, setEmail] = useState(" ");
+	const [password, setPassword] = useState(" ");
+	const [image, setImage] = useState(" ");
+	const [creditCard, setCreditCard] = useState(" ");
 	const [show, setShow] = useState(false);
 	const [errorReg,setErrorReg] =useState(false);
 
@@ -48,7 +48,16 @@ const RegisterPage = () => {
 		})
 	}
 
-    return ( 
+    return ( <>
+		{show && <Alert variant="success" onClose={() => setShow(false)} dismissible>
+			<Alert.Heading>Welcome!</Alert.Heading>
+			<p> Your account has been Registered</p>
+		</Alert>}
+		{errorReg && <Alert variant="danger" onClose={() => setErrorReg(false)} dismissible>
+			<Alert.Heading>Sorry!</Alert.Heading>
+			<p> Your account has not been Registered
+			</p>
+		</Alert>}
 		<div id="pseudoBodyLogReg">
 			<div id="containerLoginRegister">
 				<div id="columnIzqLoginRegister">
@@ -92,19 +101,8 @@ const RegisterPage = () => {
                             placeholder="1234 1234 1234 1234"
                             value={creditCard}
                             onChange={creditCardChangeHandler} required/>
-						{show && <Alert variant="success" onClose={() => setShow(false)} dismissible>
-                              <Alert.Heading>Welcome!</Alert.Heading>
-                             <p> Your account has been Registered</p>
-                           </Alert>}
-						{errorReg && <Alert variant="danger" onClose={() => setErrorReg(false)} dismissible>
-							<Alert.Heading>Sorry!</Alert.Heading>
-							<p> Your account has not been Registered
-							</p>
-						</Alert>}
-
 						<Button variant="primary"
-                            id="botonForm"
-                            className="buttonLoginRegister"
+                            id="botonForm" className="buttonLoginRegister shadow-lg bg-black rounded"
                             type="submit">Register</Button> <br/>
 						<Link to="/login" className="anchorLoginRegister">Back</Link>
 						</Form.Group>
@@ -113,7 +111,7 @@ const RegisterPage = () => {
 				</div>
 			</div>
 			<Footer/>
-        </div>
+        </div> </>
     );
 }
  

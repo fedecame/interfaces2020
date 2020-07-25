@@ -32,7 +32,12 @@ function LoginPage() {
     const handlePasswordChange = (event) => {setPassword(event.target.value); setShow(false)}
     const handleEmailChange = (event) => {setEmail(event.target.value); setShow(false)}
 
-    return ( 
+    return (<>
+        {show && <Alert  variant="danger" onClose={() => setShow(false)} dismissible>
+            <Alert.Heading>Error!</Alert.Heading>
+            <p> Password or User incorrect
+            </p>
+        </Alert>}
         <div id="pseudoBodyLogReg">
             <div id="containerLoginRegister">
                 <div id="columnIzqLoginRegister">	
@@ -62,14 +67,9 @@ function LoginPage() {
                             value={password}
                             onChange={handlePasswordChange}/>
                             <br/><br/>
-                            {show && <Alert  variant="danger" onClose={() => setShow(false)} dismissible>
-                              <Alert.Heading>Error!</Alert.Heading>
-                             <p> Password or User incorrect
-                              </p>
-                           </Alert>}
                             <Button variant="primary"
                             id="botonForm"
-                            className="buttonLoginRegister"
+                                    className="buttonLoginRegister shadow-lg bg-black rounded"
                             type="submit">Login</Button>
                             <br/><br/>
                             <Link to="/register" className="anchorLoginRegister">Register</Link>
@@ -79,7 +79,7 @@ function LoginPage() {
                 </div>
             </div>
             <Footer/>
-        </div>
+        </div></>
     );
 }
 

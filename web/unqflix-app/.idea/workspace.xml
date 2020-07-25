@@ -4,8 +4,6 @@
     <list default="true" id="a9e1f74c-f6b4-4e91-a348-fbaf4031cf29" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LoginPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/RegisterPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/RegisterPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/styles/login.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/login.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +24,7 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../TPUI3/2020s1-Grupo04-HeladoNapolitano/web/unqflix-app/src/styles/login.scss" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../TPIntegrador/unq-ui-flavia-fernandez-trabajo-final/ohsheldon" />
     <property name="nodejs_package_manager_path" value="yarn" />
   </component>
   <component name="SvnConfiguration">
@@ -40,7 +38,8 @@
       <option name="presentableId" value="Default" />
       <updated>1594659214850</updated>
       <workItem from="1594659216679" duration="10000" />
-      <workItem from="1594682314940" duration="4734000" />
+      <workItem from="1594682314940" duration="5722000" />
+      <workItem from="1594736866380" duration="145000" />
     </task>
     <servers />
   </component>
@@ -48,9 +47,9 @@
     <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="420" y="95" key="FileChooserDialogImpl" timestamp="1594686075210">
+    <state x="420" y="95" key="FileChooserDialogImpl" timestamp="1594736953174">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
-    <state x="420" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1594686075210" />
+    <state x="420" y="95" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1594736953174" />
   </component>
 </project>
