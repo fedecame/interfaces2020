@@ -1,19 +1,22 @@
-// @import url('https://fonts.googleapis.com/css2?family=Montserrat&display=swap');
+@import "node_modules/bootstrap/scss/functions";
+@import "node_modules/bootstrap/scss/variables";
+@import "node_modules/bootstrap/scss/mixins";
 
-// #headerUbicacion{
-//     position: relative;
-// }
-
-#logoHeader{	
-	width: 150px;
-	height: auto;
-	cursor: pointer;
+#logoHeader{
+    width: 150px;
+    height: auto;
+    cursor: pointer;
 }
 
 #avatarUser{
-	width: 30px;
-	height: auto;
-	margin-left: 30px;
-	cursor: pointer;
-}
+    width: 30px;
+    height: auto;
+    margin-left: 30px;
+    cursor: pointer;
 
+    @include media-breakpoint-down(xs) {
+        position: absolute;
+        right: 1rem;
+        bottom: .5rem;
+    }
+}

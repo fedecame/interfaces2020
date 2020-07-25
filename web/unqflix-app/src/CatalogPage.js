@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useHistory, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import apiConsumer from './ApiConsumer';
 import './styles/catalog.scss';
-import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
+import Alert from 'react-bootstrap/Alert';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import CarouselBanners from './components/CarouselBanners';
@@ -13,12 +13,12 @@ import Header from './components/Header';
 import CarouselGeneric from './components/CarouselGeneric';
 
 const CatalogPage = ({colAmount}) => {
-    const history = useHistory();
     const location = useLocation();
     const [catalog, setCatalog] = useState([]);
     const [banners, setBanners] = useState([]);
     const [favs, setFavs] = useState([]);
     const [lastSeen, setLastSeen] = useState([]);
+    const [showAlert, setShowAlert] = useState("");
     let favsDesdeCat = 0;
 
     useEffect(() => {
@@ -26,6 +26,10 @@ const CatalogPage = ({colAmount}) => {
         fetchUserContent();
         fetchBanners();
     }, [location, favsDesdeCat]);
+
+    useEffect(() => {
+        location.state?.showAlert && setShowAlert(location.state.showAlert);
+    }, []);
 
     const fetchAvailableContent = () => {
         apiConsumer.getAvailableContent()
@@ -68,11 +72,15 @@ const CatalogPage = ({colAmount}) => {
 
     return (
         <>
+        {showAlert &&
+        <Alert variant="success" className="fixed-top overlap-header rounded-0" onClose={() => setShowAlert("")} dismissible>
+            <Alert.Heading>Welcome!</Alert.Heading>
+        <p>You {showAlert} successfully</p>
+        </Alert>}
         <Header />
         <Container fluid className="margin-for-fixed-header bg-dark">
             <Row className="pt-3">
                 <Col>
-                {/* <h1>CatalogPage</h1> */}
                 {banners.length > 0 && <CarouselBanners banners={banners}/>}
                 </Col>
             </Row>
