@@ -1,24 +1,18 @@
 import React, { useState } from 'react';
 import './styles/login.scss';
 import Footer from './components/Footer';
-import { Link, useHistory } from 'react-router-dom';
-// import pochoclos from './images/popcorn.png'
-import logo from './images/logo.png'
+import { useHistory } from 'react-router-dom';
+import logo from './images/logo.png';
 import apiConsumer from './ApiConsumer';
 import { Button, Form, Image } from 'react-bootstrap';
 import authSingleton from './Auth';
-import Alert from 'react-bootstrap/Alert'
 
 const RegisterPage = () => {
-	const [username, setUsername] = useState("");
 	const [email, setEmail] = useState("");
+	const [username, setUsername] = useState("");
 	const [password, setPassword] = useState("");
 	const [image, setImage] = useState("");
 	const [creditCard, setCreditCard] = useState("");
-	const [show, setShow] = useState(false);
-	const [errorReg, setErrorReg] = useState(false);
-
-
 
 	const usernameChangeHandler = (event) => { setUsername(event.target.value); }
 	const emailChangeHandler = (event) => { setEmail(event.target.value); }
@@ -27,8 +21,7 @@ const RegisterPage = () => {
 	const creditCardChangeHandler = (event) => { setCreditCard(event.target.value); }
 	const history = useHistory();
 
-	const registerHandler = (event) => {
-		event.preventDefault();
+	const registerHandler = () => {
 		apiConsumer.register({
 			name: username,
 			email,
@@ -37,86 +30,83 @@ const RegisterPage = () => {
 			creditCard
 		})
 			.then(res => {
-				setShow(true);
 				authSingleton.logout();
 				authSingleton.login(res.headers.authorization);
-				// history.push("/", {showAlert:"success"});
-
+				redirectTo("/", {showAlert:"registered"});
 			})
 			.catch(err => {
 				console.error("register error: ", err);
 				console.error("register error response: ", err.response);
-				// history.push("/login", {showAlert:"danger"});
-
-				setErrorReg(true);
+				redirectTo("/login", {showAlert:true});
 			})
 	}
 
+	const redirectTo = (path, props = null) => {
+		setPassword("");
+		setTimeout(() => {history.push(path, props)}, 5);
+	}
+
 	return (<>
-		{show && <Alert variant="success" onClose={() => setShow(false)} dismissible>
-			<Alert.Heading>Welcome!</Alert.Heading>
-			<p> Your account has been Registered</p>
-		</Alert>}
-		{errorReg && <Alert variant="danger" onClose={() => setErrorReg(false)} dismissible>
-			<Alert.Heading>Sorry!</Alert.Heading>
-			<p> Your account has not been Registered
-				</p>
-		</Alert>}
-		<div id="pseudoBodyLogReg">
-			<div id="containerLoginRegister">
-				<div id="columnIzqLoginRegister">
-				</div>
-				<div id="columnLoginRegister">
-					<div id="containerFormRegister">
-						<div id="containerLogoLoginRegister">
-							<Image src={logo} id="logoLoginRegister" thumbnail />
-							<br />
+			<div id="pseudoBodyLogReg">
+				<div id="containerLoginRegister">
+					<div id="columnIzqLoginRegister">
+					</div>
+					<div id="columnLoginRegister">
+						<div id="containerFormRegister">
+							<div id="containerLogoLoginRegister">
+								<Image src={logo} id="logoLoginRegister" thumbnail />
+								<br />
+							</div>
+							<Form method="post">
+								<Form.Group controlId="formBasicEmail">
+									<Form.Label type="email">Email:</Form.Label>
+									<Form.Control type="email"
+												  className="inputLoginRegister"
+												  placeholder="myemail@mail.com"
+												  value={email}
+												  onChange={emailChangeHandler} required />
+									<Form.Label type="text">Name:</Form.Label>
+									<Form.Control type="text"
+												  className="inputLoginRegister"
+												  placeholder="Input your Name"
+												  value={username}
+												  onChange={usernameChangeHandler} required />
+									<Form.Label type="pass">Password:</Form.Label>
+									<Form.Control type="password"
+												  className="inputLoginRegister"
+												  placeholder="Input your Password"
+												  value={password}
+												  onChange={passwordChangeHandler} required />
+									<Form.Label type="url">Imagelink:</Form.Label>
+									<Form.Control type="url"
+												  className="inputLoginRegister"
+												  placeholder="Input your image url"
+												  value={image}
+												  onChange={imageChangeHandler} required />
+									<Form.Label type="text">Credit Card:</Form.Label>
+									<Form.Control type="text"
+												  className="inputLoginRegister"
+												  placeholder="1234 1234 1234 1234"
+												  value={creditCard}
+												  onChange={creditCardChangeHandler} required />
+									<Button variant="danger"
+											id="botonForm"
+											className="buttonLoginRegister shadow-lg bg-black rounded mt-3"
+											onClick={registerHandler}
+									>Register</Button>
+									<Button variant="danger"
+											id="vosSosUnBoton"
+											className="buttonLoginRegister shadow-lg bg-black rounded ml-3 mt-3"
+											onClick={() => redirectTo("/login")}
+									>Back</Button>
+								</Form.Group>
+							</Form>
 						</div>
-						<Form onSubmit={registerHandler} method="post">
-							<Form.Group controlId="formBasicEmail">
-								<Form.Label type="email">Email:</Form.Label>
-								<Form.Control type="email"
-									className="inputLoginRegister"
-									placeholder="myemail@mail.com"
-									value={email}
-									onChange={emailChangeHandler} required />
-								<Form.Label type="text">Name:</Form.Label>
-								<Form.Control type="text"
-									className="inputLoginRegister"
-									placeholder="Input your Name"
-									value={username}
-									onChange={usernameChangeHandler} required />
-								<Form.Label type="pass">Password:</Form.Label>
-								<Form.Control type="password"
-									className="inputLoginRegister"
-									placeholder="Input your Password"
-									value={password}
-									onChange={passwordChangeHandler} required />
-								<Form.Label type="url">Imagelink:</Form.Label>
-								<Form.Control type="url"
-									className="inputLoginRegister"
-									placeholder="Input your image url"
-									value={image}
-									onChange={imageChangeHandler} required />
-								<Form.Label type="text">Credit Card:</Form.Label>
-								<Form.Control type="text"
-									className="inputLoginRegister"
-									placeholder="1234 1234 1234 1234"
-									value={creditCard}
-									onChange={creditCardChangeHandler} required />
-								<Button variant="primary"
-									id="botonForm"
-									className="buttonLoginRegister shadow-lg bg-black rounded"
-									type="submit">Register</Button> <br />
-								<Link to="/login" className="anchorLoginRegister">Back</Link>
-							</Form.Group>
-						</Form>
 					</div>
 				</div>
+				<Footer />
 			</div>
-			<Footer />
-		</div>
-	</>
+		</>
 	);
 }
 
